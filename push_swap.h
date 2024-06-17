@@ -28,5 +28,11 @@ void	ft_swap_ss(int *stack_a, int *stack_b, int size_a, int size_b);
 int		ft_push(int **stack_1, int **stack_2, int *size_1, int *size_2);
 int		ft_push_a(int **stack_a, int **stack_b, int *size_a, int *size_b);
 int		ft_push_b(int **stack_b, int **stack_a, int *size_b, int *size_a);
+int		ft_rotate_a(int **my_stack, int *size);
+int		ft_rotate_b(int **my_stack, int *size);
+int		ft_rotate_rr(int **my_stack_a, int **my_stack_b, int *size_a, int *size_b);
+int		ft_rev_rotate_a(int **my_stack, int *size);
+int		ft_rev_rotate_b(int **my_stack, int *size);
+int		ft_rev_rotate_rrr(int **my_stack_a, int **my_stack_b, int *size_a, int *size_b);
 
 #endif
