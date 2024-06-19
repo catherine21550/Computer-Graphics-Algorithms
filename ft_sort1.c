@@ -44,7 +44,7 @@ int find_min_index(int **arr, int *size)
     return (i);
 }
 
-int	ft_sort(int **stack, int *size);
+int	ft_sort1(int **stack, int *size)
 {
 	int	index_min;
 	int	i;
@@ -70,11 +70,12 @@ int	ft_sort(int **stack, int *size);
 	}
 	else
 	{
-	i = *size - index_min;
+		i = *size - index_min;
         while (i > 0)
 		{
             ft_rev_rotate_a(stack, size);
             i--;
         }
 	}
+	return (1);
 }

@@ -20,6 +20,7 @@
 int		ft_new_atoi(char *str);
 int		ft_if_valid(char *str);
 int		*create_stack_a(int ac, char *av[]);
+int	    ft_sort1(int **stack, int *size);
 
 void	ft_swap(int *my_stack, int size);
 void	ft_swap_a(int *my_stack, int size);
