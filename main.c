@@ -4,14 +4,9 @@
 int	main(int ac, char *av[])
 {
 	int	*my_stack;
-    int *my_stack2 = (int *) malloc(sizeof(int) * 3);
-    if (!my_stack2)
-		  return (1);
-    my_stack2[0] = 5;
-    my_stack2[1] = 6;
-    my_stack2[2] = 7;
+    int *my_stack2 = NULL;
     int size_1 = ac - 1;
-    int size_2 = 3;
+    int size_2 = 0;
 
 	my_stack = create_stack_a(ac, av);
 	if (!my_stack)

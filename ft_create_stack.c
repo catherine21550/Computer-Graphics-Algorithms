@@ -79,18 +79,54 @@ int	ft_new_atoi(char *str)
 	return (res * sign);
 }
 
+static size_t	ft_counter(const char *str, char delc)
+{
+	size_t	count1;
+	size_t	i;
+	int		f;
+
+	i = 0;
+	count1 = 0;
+	while (str[i] != 0)
+	{
+		f = 0;
+		while (str[i] == delc && str[i] != 0)
+			i++;
+		while (str[i] != delc && str[i] != 0)
+		{
+			if (f == 0)
+			{
+				f = 1;
+				count1++;
+			}
+			i++;
+		}
+	}
+	return (count1);
+}
+
 int	*create_stack_a(int ac, char *av[])
 {
 	int	*my_stack;
 	int	n;
 	int	i;
+	char	*str;
 
-	n = ac - 1;
+	if (ac == 1)
+		
+	if (ac == 2)
+	{
+		str = ft_strjoin("first ", av[1]);
+		n = ft_counter(str, " ") - 1;
+		av = ft_split(str, " ");
+	}
+	else
+		n = ac - 1;
 	i = 0;
 	my_stack = (int *)malloc(n * sizeof(int));
 	if (!my_stack)
 		return (NULL);
-	if (!ft_check_double(ac, av))
+	if (!ft_check_double(n + 1, av))
 	{
 		ft_printf("%s\n", "Error");
 		return (free(my_stack), NULL);
