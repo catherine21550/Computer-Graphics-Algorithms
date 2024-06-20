@@ -4,9 +4,9 @@
 int	main(int ac, char *av[])
 {
 	int	*my_stack;
-    int *my_stack2 = NULL;
+   // int *my_stack2 = NULL;
     int size_1 = ac - 1;
-    int size_2 = 0;
+    /* int size_2 = 0; */
 
 	my_stack = create_stack_a(ac, av);
 	if (!my_stack)
@@ -16,7 +16,11 @@ int	main(int ac, char *av[])
 	for (int i = 0; i < size_1; i++)
 		ft_printf("%i\n", my_stack[i]);
 	ft_printf("---------------------\n");
-	ft_push_a(&my_stack, &my_stack2, &size_1, &size_2);
+	if (is_sorted(&my_stack, &size_1))
+		ft_printf("Stack a is sorted");
+	else
+		ft_printf("Stack a is NOT sorted");
+	/* ft_push_a(&my_stack, &my_stack2, &size_1, &size_2);
 	for (int i = 0; i < size_1; i++)
 		ft_printf("%i\n", my_stack[i]);
 	ft_printf("---------------------\n");
@@ -28,8 +32,8 @@ int	main(int ac, char *av[])
 		ft_printf("%i\n", my_stack[i]);
 	ft_printf("---------------------\n");
 	for (int i = 0; i < size_2; i++)
-		ft_printf("%i\n", my_stack2[i]);
+		ft_printf("%i\n", my_stack2[i]); */
 	free (my_stack);
-	free (my_stack2);
+	/* free (my_stack2); */
 	return (0);
 }

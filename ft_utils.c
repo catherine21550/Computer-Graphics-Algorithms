@@ -59,3 +59,17 @@ size_t	ft_counter(const char *str, char delc)
 	}
 	return (count1);
 }
+
+int	is_sorted(int **stack, int *size)
+{
+	int	i;
+
+	i = 0;
+	while (i < *size - 1)
+	{
+		if ((*stack)[i] > (*stack)[i + 1])
+			return (0);
+		i++;
+	}
+	return (1);
+}

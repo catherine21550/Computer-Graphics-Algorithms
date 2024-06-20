@@ -36,5 +36,6 @@ int		ft_rev_rotate_a(int **my_stack, int *size);
 int		ft_rev_rotate_b(int **my_stack, int *size);
 int		ft_rev_rotate_rrr(int **my_stack_a, int **my_stack_b, int *size_a, int *size_b);
 size_t  ft_counter(const char *str, char delc);
+int		is_sorted(int **stack, int *size);
 
 #endif

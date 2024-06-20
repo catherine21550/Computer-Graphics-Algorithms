@@ -91,16 +91,14 @@ int	ft_fillarray(char **str_arr, int *arr, int size, int ac)
 	return (1);
 }
 
-void process_argv(const char *av[], int ) 
+void	process_argv(char *av[], int *n) 
 {
 	char *str;
-	size_t n;
 	
 	str = ft_strjoin("first ", av[1]);
-	if (str == NULL) {
+	if (str == NULL)
 		return ;
-	}
-	n = ft_counter(str, ' ') - 1;
+	*n = ft_counter(str, ' ') - 1;
 	av = ft_split(str, ' ');
 	free(str);
 }
@@ -118,6 +116,7 @@ int	*create_stack_a(int ac, char *av[])
 		n = ft_counter(str, ' ') - 1;
 		av = ft_split(str, ' ');
 		free(str);
+		//process_argv(av, &n);
 	}
 	my_stack = (int *)malloc(n * sizeof(int));
 	if (!my_stack)
@@ -128,7 +127,7 @@ int	*create_stack_a(int ac, char *av[])
 			free_split(av);
 		return (ft_printf("%s\n", "Error"), free(my_stack), NULL);
 	}
-	if (! ft_fillarray(av, my_stack, n, ac))
+	if (!ft_fillarray(av, my_stack, n, ac))
 		return (NULL);
 	if (ac == 2)
 		free_split(av);
