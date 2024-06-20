@@ -53,7 +53,7 @@ int	ft_sort1(int **stack, int *size)
 
 	size_b = 0;
 	if ((*stack)[0] > (*stack)[1])
-		ft_swap_a(stack, size);
+		ft_swap_a(*stack, *size);
 	while ((*stack)[0] > (*stack)[*size - 1])
 		ft_rev_rotate_a(stack, size);
 	index_min = find_min_index(stack, size);

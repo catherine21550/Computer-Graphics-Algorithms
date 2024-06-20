@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 15:14:10 by khuk              #+#    #+#             */
-/*   Updated: 2024/06/16 20:56:18 by khuk             ###   ########.fr       */
+/*   Updated: 2024/06/20 15:48:24 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,6 @@ int		ft_rotate_rr(int **my_stack_a, int **my_stack_b, int *size_a, int *size_b);
 int		ft_rev_rotate_a(int **my_stack, int *size);
 int		ft_rev_rotate_b(int **my_stack, int *size);
 int		ft_rev_rotate_rrr(int **my_stack_a, int **my_stack_b, int *size_a, int *size_b);
+size_t  ft_counter(const char *str, char delc);
 
 #endif

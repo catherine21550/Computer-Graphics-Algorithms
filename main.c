@@ -11,13 +11,15 @@ int	main(int ac, char *av[])
 	my_stack = create_stack_a(ac, av);
 	if (!my_stack)
 		return (1);
-	for (int i = 0; i < ac - 1; i++)
-		ft_printf("%i\n", my_stack[i]);
-	ft_printf("---------------------\n");
-	/* ft_push_a(&my_stack, &my_stack2, &size_1, &size_2);
+	if (ac == 2)
+		size_1 = ft_counter(av[1], ' ');
 	for (int i = 0; i < size_1; i++)
 		ft_printf("%i\n", my_stack[i]);
-	ft_printf("---------------------\n"); */
+	ft_printf("---------------------\n");
+	ft_push_a(&my_stack, &my_stack2, &size_1, &size_2);
+	for (int i = 0; i < size_1; i++)
+		ft_printf("%i\n", my_stack[i]);
+	ft_printf("---------------------\n");
 	for (int i = 0; i < size_2; i++)
 		ft_printf("%i\n", my_stack2[i]);
 	ft_printf("---------------------\n");

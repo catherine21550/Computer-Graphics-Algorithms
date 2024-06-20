@@ -6,7 +6,7 @@
 /*   By: khuk <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 15:41:34 by khuk              #+#    #+#             */
-/*   Updated: 2024/06/17 14:23:14 by khuk             ###   ########.fr       */
+/*   Updated: 2024/06/20 15:50:34 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	ft_check_double(int ac, char *av[])
 {
 	int	i;
 	int	j;
-	int last;
+	int	last;
 
 	i = 1;
 	last = ac - 1;
@@ -32,7 +32,7 @@ static int	ft_check_double(int ac, char *av[])
 		i++;
 	}
 	return (1);
-} 
+}
 
 int	ft_if_valid(char *str)
 {
@@ -57,89 +57,80 @@ int	ft_if_valid(char *str)
 	return (1);
 }
 
-int	ft_new_atoi(char *str)
+static void	free_split(char **arr)
 {
-	long	i;
-	long	res;
-	long	sign;
+	int	j;
 
-	i = 0;
-	res = 0;
-	sign = 1;
-	if (str[i] == '-')
+	j = 0;
+	while (arr[j])
 	{
-		sign = -1;
-		i++;
+		free (arr[j]);
+		j++;
 	}
-	while ((str[i] >= '0' && str[i] <= '9') && str[i])
-	{
-		res = res * 10 + (str[i] - 48);
-		i++;
-	}
-	return (res * sign);
+	free(arr);
 }
 
-static size_t	ft_counter(const char *str, char delc)
+int	ft_fillarray(char **str_arr, int *arr, int size, int ac)
 {
-	size_t	count1;
-	size_t	i;
-	int		f;
-
+	int	i;
+	
 	i = 0;
-	count1 = 0;
-	while (str[i] != 0)
+	while (i < size)
 	{
-		f = 0;
-		while (str[i] == delc && str[i] != 0)
-			i++;
-		while (str[i] != delc && str[i] != 0)
+		if (!ft_if_valid(str_arr[1 + i]))
 		{
-			if (f == 0)
-			{
-				f = 1;
-				count1++;
-			}
-			i++;
+			ft_printf("%s\n", "Error");
+			if (ac == 2)
+				free_split(str_arr);
+			free (arr);
+			return (0);
 		}
+		arr[i] = ft_new_atoi(str_arr[1 + i]);
+		i++;
 	}
-	return (count1);
+	return (1);
+}
+
+void process_argv(const char *av[], int ) 
+{
+	char *str;
+	size_t n;
+	
+	str = ft_strjoin("first ", av[1]);
+	if (str == NULL) {
+		return ;
+	}
+	n = ft_counter(str, ' ') - 1;
+	av = ft_split(str, ' ');
+	free(str);
 }
 
 int	*create_stack_a(int ac, char *av[])
 {
-	int	*my_stack;
-	int	n;
-	int	i;
+	int		*my_stack;
+	int		n;
 	char	*str;
 
-	if (ac == 1)
-		
+	n = ac - 1;
 	if (ac == 2)
 	{
 		str = ft_strjoin("first ", av[1]);
-		n = ft_counter(str, " ") - 1;
-		av = ft_split(str, " ");
+		n = ft_counter(str, ' ') - 1;
+		av = ft_split(str, ' ');
+		free(str);
 	}
-	else
-		n = ac - 1;
-	i = 0;
 	my_stack = (int *)malloc(n * sizeof(int));
 	if (!my_stack)
 		return (NULL);
 	if (!ft_check_double(n + 1, av))
 	{
-		ft_printf("%s\n", "Error");
-		return (free(my_stack), NULL);
+		if (ac == 2)
+			free_split(av);
+		return (ft_printf("%s\n", "Error"), free(my_stack), NULL);
 	}
-	while (i < n)
-	{
-		if (!ft_if_valid(av[1 + i]))
-		{
-			ft_printf("%s\n", "Error");
-			return (free(my_stack), NULL);
-		}
-		my_stack[i] = ft_new_atoi(av[1 + i]);
-		i++;
-	}
+	if (! ft_fillarray(av, my_stack, n, ac))
+		return (NULL);
+	if (ac == 2)
+		free_split(av);
 	return (my_stack);
 }
