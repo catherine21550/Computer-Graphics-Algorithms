@@ -12,51 +12,6 @@
 
 #include "push_swap.h"
 
-static int	ft_check_double(int ac, char *av[])
-{
-	int	i;
-	int	j;
-	int	last;
-
-	i = 1;
-	last = ac - 1;
-	while (i < last)
-	{
-		j = i + 1;
-		while (j <= last)
-		{
-			if (ft_atoi(av[i]) == ft_atoi(av[j]))
-				return (0);
-			j++;
-		}
-		i++;
-	}
-	return (1);
-}
-
-int	ft_if_valid(char *str)
-{
-	int	i;
-
-	i = 0;
-	if (!str)
-		return (0);
-	if (str[0] == '-' && str[1] == '0')
-		return (0);
-	if (str[i] == '-')
-		i++;
-	while (str[i])
-	{
-		if (str[i] >= '0' && str[i] <= '9')
-		{
-			i++;
-		}
-		else
-			return (0);
-	}
-	return (1);
-}
-
 static void	free_split(char **arr)
 {
 	int	j;
@@ -77,7 +32,7 @@ int	ft_fillarray(char **str_arr, int *arr, int size, int ac)
 	i = 0;
 	while (i < size)
 	{
-		if (!ft_if_valid(str_arr[1 + i]))
+		if (!ft_if_valid(str_arr[1 + i]) || !ft_check_limits(str_arr[1 + i]))
 		{
 			ft_printf("%s\n", "Error");
 			if (ac == 2)

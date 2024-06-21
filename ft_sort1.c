@@ -44,7 +44,22 @@ int find_min_index(int **arr, int *size)
     return (i);
 }
 
-int	ft_sort1(int **stack, int *size)
+int	find_midvalue(int *arr, int	size)
+{
+	int		i;
+	long	mid;
+
+	i = 0;
+	mid = 0;
+	while (i <= (size - 1))
+	{
+		mid += arr[i];
+		i++;
+	}
+	return (mid / size);
+}
+
+/* int	ft_sort1(int **stack, int *size)
 {
 	int	index_min;
 	int	i;
@@ -78,4 +93,33 @@ int	ft_sort1(int **stack, int *size)
         }
 	}
 	return (1);
+}
+ */
+
+int	sort_in_two(int	**stack_a, int **stack_b, int *size_a, int *size_b)
+{
+	int	mid_a;
+	int	halfsize;
+
+	halfsize = *size_a / 2;
+	while (*size_a > halfsize)
+	{
+		mid_a = find_midvalue(*stack_a, *size_a);
+		if ((*stack_a)[0] < mid_a)
+		{
+			if (!ft_push_b(stack_b, stack_a, size_b, size_a))
+				return (0);
+		}
+		else
+		{
+			if (!ft_rotate_a(stack_a, size_a))
+				return (0);
+		}
+	}
+	return (1);
+}
+
+int	simple_sort_a(char	**stack_a, int *size_a)
+{
+	
 }
