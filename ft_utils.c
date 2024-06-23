@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khuk <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: khuk <khuk@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 17:03:18 by khuk              #+#    #+#             */
-/*   Updated: 2024/06/20 17:03:22 by khuk             ###   ########.fr       */
+/*   Updated: 2024/06/23 17:19:50 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,32 @@ int	is_sorted(int **stack, int *size)
 		if ((*stack)[i] > (*stack)[i + 1])
 			return (0);
 		i++;
+	}
+	return (1);
+}
+
+int	ft_is_sorted_before(int **stack, int begin, int end)
+{ 
+	if (begin == end)
+		return (1);
+	while (begin < end)
+	{
+		if ((*stack)[begin] < (*stack)[begin + 1])
+			return (0);
+		begin++;
+	}
+	return (1);
+}
+
+int	ft_is_sorted_after(int **stack, int begin, int end)
+{
+	if (begin == end)
+		return (1);
+	while (begin < end)
+	{
+		if ((*stack)[begin] > (*stack)[begin + 1])
+			return (0);
+		begin++;
 	}
 	return (1);
 }

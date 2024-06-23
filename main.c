@@ -21,6 +21,25 @@ int	main(int ac, char *av[])
 	for (int i = 0; i < size_2; i++)
 		ft_printf("%i\n", my_stack2[i]);
 	ft_printf("---------------------\n");
+	/*
+	// check rra ra and sa
+	ft_rev_rotate_a(&my_stack, &size_1);
+	printf("My stack_a after rra:\n");
+	for (int i = 0; i < size_1; i++)
+		ft_printf("%i\n", my_stack[i]);
+	ft_printf("---------------------\n");
+	ft_rotate_a(&my_stack, &size_1);
+	printf("My stack_a after ra:\n");
+	for (int i = 0; i < size_1; i++)
+		ft_printf("%i\n", my_stack[i]);
+	ft_printf("---------------------\n");
+	ft_swap_a(my_stack, size_1);
+	printf("My stack_a after sa:\n");
+	for (int i = 0; i < size_1; i++)
+		ft_printf("%i\n", my_stack[i]);
+	ft_printf("---------------------\n");
+	//end
+	*/
 	sort_in_two(&my_stack, &my_stack2, &size_1, &size_2);
 		printf("My stack_a after merging:\n");
 	for (int i = 0; i < size_1; i++)
@@ -29,6 +48,11 @@ int	main(int ac, char *av[])
 	printf("My stack_b after merging:\n");
 	for (int i = 0; i < size_2; i++)
 		ft_printf("%i\n", my_stack2[i]);
+	ft_printf("---------------------\n");
+	sort_small(&my_stack, &size_1);
+	printf("My stack_a sorted:\n");
+	for (int i = 0; i < size_1; i++)
+		ft_printf("%i\n", my_stack[i]);
 	ft_printf("---------------------\n");
 	free (my_stack);
 	free (my_stack2);
