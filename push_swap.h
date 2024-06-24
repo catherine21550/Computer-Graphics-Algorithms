@@ -31,7 +31,10 @@ int		find_midvalue(int *arr, int	size);
 int		find_min_index(int **arr, int *size);
 int		find_max_index(int **arr, int *size);
 int		sort_in_two(int	**stack_a, int **stack_b, int *size_a, int *size_b);
-void	sort_small(int **arr, int *size);
+void	sort_five(int **arr, int *size);
+void	sort_three(int **arr, int *size);
+void	sort_four(int **arr_a, int **arr_b, int *size_a, int *size_b);
+void	sort_small(int **arr_a, int **arr_b, int *size_a, int *size_b);
 //rules
 void	ft_swap(int *my_stack, int size);
 void	ft_swap_a(int *my_stack, int size);
@@ -46,6 +49,5 @@ int		ft_rotate_rr(int **my_stack_a, int **my_stack_b, int *size_a, int *size_b);
 int		ft_rev_rotate_a(int **my_stack, int *size);
 int		ft_rev_rotate_b(int **my_stack, int *size);
 int		ft_rev_rotate_rrr(int **my_stack_a, int **my_stack_b, int *size_a, int *size_b);
-
 
 #endif
