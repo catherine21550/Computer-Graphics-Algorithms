@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_closest.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khuk <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: khuk <khuk@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 21:26:52 by khuk              #+#    #+#             */
-/*   Updated: 2024/06/24 21:26:57 by khuk             ###   ########.fr       */
+/*   Updated: 2024/06/25 12:16:43 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 int	*find_closest(int *arr_a, int *arr_b, int size_a, int size_b)
 {
-	int	i;
-	int *calc;
+	int			i;
+	inf_node	*calc;
 
-	calc = (int *)malloc(size_b * sizeof(int));
+	calc = (inf_node *)malloc(sizeof(inf_node) * size_b);
 	if (!calc)
 		return (NULL);
 	i = 0;
 	while (i < size_b)
 	{
-		calc[i] = ind_of_next(arr_a, size_a, arr_b[i]);
+		calc[i].ind_clos = ind_of_next(arr_a, size_a, arr_b[i]);
 		i++;
 	}
 	return (calc);

@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 15:14:10 by khuk              #+#    #+#             */
-/*   Updated: 2024/06/23 17:40:05 by khuk             ###   ########.fr       */
+/*   Updated: 2024/06/25 12:16:34 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,16 @@
 # include <stdlib.h>
 # include "printf/ft_printf.h"
 # include <limits.h>
+
+typedef struct	g_inf
+{
+	int	closest;
+	int	ind_clos;
+	int	nb;
+	int	clos_ontop;
+	int nb_ontop;
+	int	res_mvs;
+}	inf_node;
 
 int		ft_new_atoi(char *str);
 int		ft_if_valid(char *str);

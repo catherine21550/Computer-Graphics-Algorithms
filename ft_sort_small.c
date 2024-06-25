@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 11:32:14 by khuk              #+#    #+#             */
-/*   Updated: 2024/06/23 17:39:33 by khuk             ###   ########.fr       */
+/*   Updated: 2024/06/25 10:55:22 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	sort_five(int **arr, int *size)
 	{
 		if ((*arr)[0] < (*arr)[*size - 1])
 			ft_rev_rotate_a(arr, size);
-		else if (find_max_index(arr, size) == 0 
+		else if (find_max_index(arr, size) == 0
 				&& ft_is_sorted_after(arr, 1, *size - 1))
 			ft_rotate_a(arr, size);
 		else if ((*arr)[0] > (*arr)[1])
