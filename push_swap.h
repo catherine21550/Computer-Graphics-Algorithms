@@ -18,7 +18,7 @@
 # include "printf/ft_printf.h"
 # include <limits.h>
 
-typedef struct	g_inf
+typedef struct	count_information
 {
 	int	closest;
 	int	ind_clos;
