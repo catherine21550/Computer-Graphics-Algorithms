@@ -1,31 +1,5 @@
 #include "push_swap.h"
-/*
-int	find_second_min(int **arr, int *size)
-{
-	int min;
-	int	min_2;
-	int	i;
 
-	min = (*arr)[find_min_index(arr, size)];
-	if (find_min_index(arr, size) != 0)
-	{
-		min_2 = (*arr)[0];
-		i = 1;
-	}
-	else
-	{
-		min_2 = (*arr)[1];
-		i = 2;
-	}
-	while (i < (*size - 1))
-	{
-		if (min_2 > (*arr)[i] && min_2 != min)
-			min_2 = (*arr)[i];
-		i++;
-	}
-	return (i);
-}
-*/
 int find_min_index(int **arr, int *size)
 {
     int min;
@@ -34,7 +8,8 @@ int find_min_index(int **arr, int *size)
 
 	i = 0;
     min = (*arr)[i];
-    while (i < (*size - 1))
+	i_min = 0;
+    while (i <= (*size - 1))
     {
         if (min > (*arr)[i])
         {
@@ -54,7 +29,8 @@ int find_max_index(int **arr, int *size)
 
 	i = 0;
     max = (*arr)[i];
-    while (i < (*size - 1))
+	i_max = 0;
+    while (i <= (*size - 1))
     {
         if (max < (*arr)[i])
         {
@@ -64,4 +40,25 @@ int find_max_index(int **arr, int *size)
         i++;
     }
     return (i_max);
+}
+
+int find_min_mvs(inf_node *inf_arr, int size)
+{
+	int	i;
+	int	min;
+	int i_min;
+
+	i = 0;
+	min = inf_node[0].res_mvs;
+	i_min = 0;
+	while (i < size)
+	{
+		if (min > inf_node[i].res_mvs)
+		{
+			min = inf_node[i].res_mvs;
+			i_min = i;
+		}
+		i++;
+	}
+	return (i_min);
 }
