@@ -1,32 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fill_the_list.c                                    :+:      :+:    :+:   */
+/*   fill_info.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khuk <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: khuk <khuk@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 17:05:59 by khuk              #+#    #+#             */
-/*   Updated: 2024/06/25 17:06:03 by khuk             ###   ########.fr       */
+/*   Updated: 2024/06/27 10:56:03 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ind_of_next(int *arr, int size, int nb)
+int	ind_of_next(int *arr_a, int size_a, int nb)
 {
-	int	res;
 	int	i;
-	int index;
-	int check;
+	int umin;
+	int	res;
 
-	
 	i = 0;
-	res = 0;
-	while (i < size)
+	umin = arr_a[i] - nb;
+	if (umin < 0)
 	{
-		res = arr[i] - nb;
-		if (res)
+		while (umin < 0 && ++i < size_a)
+			umin = arr_a[i] - nb;
 	}
+	res = i;
+	while (i < size_a)
+	{
+		if (umin > (arr_a[i] - nb))
+		{
+			umin = arr_a[i] - nb;
+			res = i;
+		}
+		i++;
+	}
+	return (res);
 }
 
 inf_node	*find_closest(int *arr_a, int *arr_b, int size_a, int size_b)
