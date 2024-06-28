@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 15:14:10 by khuk              #+#    #+#             */
-/*   Updated: 2024/06/27 19:53:14 by khuk             ###   ########.fr       */
+/*   Updated: 2024/06/28 16:33:34 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,10 @@
 
 typedef struct	count_information
 {
+	int	nb;
+	int nb_index;
 	int	closest;
 	int	ind_clos;
-	int	nb;
 	int	clos_ontop;
 	int nb_ontop;
 	int	res_mvs;
@@ -42,10 +43,14 @@ int			find_min_index(int **arr, int *size);
 int			find_max_index(int **arr, int *size);
 int			find_min_mvs(inf_node *inf_arr, int size);
 int			sort_in_two(int	**stack_a, int **stack_b, int *size_a, int *size_b);
+//sort small
 void		sort_five(int **arr, int *size);
 void		sort_three(int **arr, int *size);
 void		sort_four(int **arr_a, int **arr_b, int *size_a, int *size_b);
 void		sort_small(int **arr_a, int **arr_b, int *size_a, int *size_b);
+//sort big
+void	clos_ontop(int **stack_a, int *size_a, int index_clos);
+void	nb_ontop(int **stack_b, int *size_b, int index_nb);
 //create the array of struct with information
 int			ind_of_next(int *arr, int size, int nb);
 inf_node	*find_closest(int *arr_a, int *arr_b, int size_a, int size_b);

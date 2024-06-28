@@ -49,13 +49,13 @@ int find_min_mvs(inf_node *inf_arr, int size)
 	int i_min;
 
 	i = 0;
-	min = inf_node[0].res_mvs;
+	min = inf_arr[0].res_mvs;
 	i_min = 0;
 	while (i < size)
 	{
-		if (min > inf_node[i].res_mvs)
+		if (min > inf_arr[i].res_mvs)
 		{
-			min = inf_node[i].res_mvs;
+			min = inf_arr[i].res_mvs;
 			i_min = i;
 		}
 		i++;

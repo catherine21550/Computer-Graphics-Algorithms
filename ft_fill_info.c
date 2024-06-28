@@ -93,6 +93,7 @@ void	fill_two(inf_node *inf_arr, int *stack_b, int size_arr)
 			inf_arr[i].clos_ontop = inf_arr[i].ind_clos;
 		else
 			inf_arr[i].clos_ontop = size_arr - inf_arr[i].ind_clos;
+		inf_arr[i].nb_index = i;
 		i++;
 	}
 	i = 0;
