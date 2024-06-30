@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 15:14:10 by khuk              #+#    #+#             */
-/*   Updated: 2024/06/28 16:33:34 by khuk             ###   ########.fr       */
+/*   Updated: 2024/06/30 19:12:58 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void		sort_five(int **arr, int *size);
 void		sort_three(int **arr, int *size);
 void		sort_four(int **arr_a, int **arr_b, int *size_a, int *size_b);
 void		sort_small(int **arr_a, int **arr_b, int *size_a, int *size_b);
-int		ft_sort_big(int *stack_a, int size_a, int *stack_b, int size_b);
+int		ft_sort_big(int **stack_a, int *size_a, int **stack_b, int *size_b);
 //sort big
 void	clos_ontop(int **stack_a, int *size_a, int index_clos);
 void	nb_ontop(int **stack_b, int *size_b, int index_nb);

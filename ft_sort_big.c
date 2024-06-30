@@ -50,7 +50,7 @@ void	nb_ontop(int **stack_b, int *size_b, int index_nb)
 	}
 }
 
-int	ft_sort_big(int *stack_a, int size_a, int *stack_b, int size_b)
+int	ft_sort_big(int **stack_a, int *size_a, int **stack_b, int *size_b)
 {
 	inf_node	*inf;
 	int			size_arr;
@@ -58,16 +58,24 @@ int	ft_sort_big(int *stack_a, int size_a, int *stack_b, int size_b)
 
 	inf = NULL;
 	size_arr = 0;
-	i = size_b;
+	i = *size_b;
 	while (i != 0)
 	{
-		size_arr = size_b;
-		inf = find_closest(stack_a, stack_b, size_a, size_b);
-		fill_one(inf, stack_a, size_arr);
-		fill_two(inf, stack_b, size_arr);
-		clos_ontop(&stack_a, &size_a, inf[find_min_mvs(inf, size_arr)].ind_clos);
-		nb_ontop(&stack_b, &size_b, find_min_mvs(inf, size_arr));
-		if(!ft_push_a(&stack_a, &stack_b, &size_a, &size_b))
+		size_arr = *size_b;
+		inf = find_closest(*stack_a, *stack_b, *size_a, *size_b);
+		fill_one(inf, *stack_a, size_arr);
+		fill_two(inf, *stack_b, size_arr);
+		/* ft_printf("My stack_a sorted:\n");
+		for (int j = 0; j < size_a; j++)
+			ft_printf("%i\n", stack_a[j]);
+		ft_printf("My arr of struct:\n");
+		for (int j = 0; j < size_arr; j++)
+			ft_printf("Nb:%i, index: %i, closest: %i, ind_clos: %i, mvs: %i\n", inf[j].nb, 
+			inf[j].nb_index, inf[j].closest, inf[j].ind_clos, inf[j].res_mvs);
+		ft_printf("---------------------\n"); */
+		clos_ontop(stack_a, size_a, inf[find_min_mvs(inf, size_arr)].ind_clos);
+		nb_ontop(stack_b, size_b, find_min_mvs(inf, size_arr));
+		if(!ft_push_a(stack_a, stack_b, size_a, size_b))
 			return (0);
 		free(inf);
 		i--;

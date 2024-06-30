@@ -31,7 +31,7 @@ int	sort_in_two(int	**stack_a, int **stack_b, int *size_a, int *size_b)
 {
 	int	mid_a;
 
-	while (*size_a > 4 )
+	while (*size_a > 5 )
 	{
 		mid_a = find_midvalue(*stack_a, *size_a);
 		if ((*stack_a)[0] < mid_a)

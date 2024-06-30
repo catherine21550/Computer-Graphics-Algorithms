@@ -13,27 +13,34 @@ int	main(int ac, char *av[])
 		return (1);
 	if (ac == 2)
 		size_1 = ft_counter(av[1], ' ');
-	printf("My stack_a:\n");
+	/* printf("My stack_a:\n");
 	for (int i = 0; i < size_1; i++)
 		ft_printf("%i\n", my_stack[i]);
 	ft_printf("---------------------\n");
 	printf("My stack_b:\n");
 	for (int i = 0; i < size_2; i++)
 		ft_printf("%i\n", my_stack2[i]);
-	ft_printf("---------------------\n");
-	if (size_1 > 4)
+	ft_printf("---------------------\n"); */
+	if (size_1 > 5)
 		sort_in_two(&my_stack, &my_stack2, &size_1, &size_2);
 	sort_small(&my_stack, &my_stack2, &size_1, &size_2);
-	printf("My stack_a sorted:\n");
+	/* printf("My stack_a sorted:\n");
 	for (int i = 0; i < size_1; i++)
 		ft_printf("%i\n", my_stack[i]);
-	ft_printf("---------------------\n");
-	ft_sort_big(my_stack, size_1, my_stack2, size_2);
-	printf("My stack_a sorted:\n");
+	ft_printf("---------------------\n"); */
+	ft_sort_big(&my_stack, &size_1, &my_stack2, &size_2);
+	while (!is_sorted(&my_stack, &size_1))
+	{
+		if (find_min_index(&my_stack, &size_1) < (size_1 / 2))
+			ft_rotate_a(&my_stack, &size_1);
+		else
+			ft_rev_rotate_a(&my_stack, &size_1);
+	}
+	/* ft_printf("My stack_a result:\n");
 	for (int i = 0; i < size_1; i++)
 		ft_printf("%i\n", my_stack[i]);
-	ft_printf("---------------------\n");
+	ft_printf("---------------------\n"); */
 	free (my_stack);
-	free (my_stack2);
+	//free (my_stack2);
 	return (0);
 }

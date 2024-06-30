@@ -28,7 +28,7 @@ int	ind_of_next(int *arr_a, int size_a, int nb)
 	res = i;
 	while (i < size_a)
 	{
-		if (umin > (arr_a[i] - nb))
+		if (umin > (arr_a[i] - nb) && (arr_a[i] - nb) > 0)
 		{
 			umin = arr_a[i] - nb;
 			res = i;
