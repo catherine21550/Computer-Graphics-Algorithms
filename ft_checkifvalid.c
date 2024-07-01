@@ -36,9 +36,9 @@ int	ft_check_double(int ac, char *av[])
 
 int	ft_check_limits(char *str)
 {
-	int		i;
+	int			i;
 	long long	nb;
-	int		sign;
+	int			sign;
 
 	i = 0;
 	sign = 1;

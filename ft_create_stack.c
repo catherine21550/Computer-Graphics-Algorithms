@@ -28,7 +28,7 @@ static void	free_split(char **arr)
 int	ft_fillarray(char **str_arr, int *arr, int size, int ac)
 {
 	int	i;
-	
+
 	i = 0;
 	while (i < size)
 	{
@@ -46,32 +46,33 @@ int	ft_fillarray(char **str_arr, int *arr, int size, int ac)
 	return (1);
 }
 
-void	process_argv(char *av[], int *n) 
+char	**process_argv(char *av[], int *n)
 {
-	char *str;
-	
+	char	*str;
+	char	**new;
+
 	str = ft_strjoin("first ", av[1]);
-	if (str == NULL)
-		return ;
+	if (!str)
+		return (NULL);
 	*n = ft_counter(str, ' ') - 1;
-	av = ft_split(str, ' ');
+	new = ft_split(str, ' ');
+	if (!av)
+		return (0);
 	free(str);
+	return (new);
 }
 
 int	*create_stack_a(int ac, char *av[])
 {
 	int		*my_stack;
 	int		n;
-	char	*str;
+	char	**new_av;
 
 	n = ac - 1;
 	if (ac == 2)
 	{
-		str = ft_strjoin("first ", av[1]);
-		n = ft_counter(str, ' ') - 1;
-		av = ft_split(str, ' ');
-		free(str);
-		//process_argv(av, &n);
+		new_av = process_argv(&av[1], &n);
+		av = new_av;
 	}
 	my_stack = (int *)malloc(n * sizeof(int));
 	if (!my_stack)

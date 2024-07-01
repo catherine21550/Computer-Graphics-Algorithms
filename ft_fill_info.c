@@ -15,7 +15,7 @@
 int	ind_of_next(int *arr_a, int size_a, int nb)
 {
 	int	i;
-	int umin;
+	int	umin;
 	int	res;
 
 	i = 0;
@@ -38,12 +38,12 @@ int	ind_of_next(int *arr_a, int size_a, int nb)
 	return (res);
 }
 
-inf_node	*find_closest(int *arr_a, int *arr_b, int size_a, int size_b)
+t_node	*find_closest(int *arr_a, int *arr_b, int size_a, int size_b)
 {
 	int			i;
-	inf_node	*calc;
+	t_node	*calc;
 
-	calc = (inf_node *)malloc(sizeof(inf_node) * size_b);
+	calc = (t_node *)malloc(sizeof(t_node) * size_b);
 	if (!calc)
 		return (NULL);
 	i = 0;
@@ -55,9 +55,9 @@ inf_node	*find_closest(int *arr_a, int *arr_b, int size_a, int size_b)
 	return (calc);
 }
 
-void	fill_one(inf_node *inf_arr, int *stack_a, int size_arr)
+void	fill_one(t_node *inf_arr, int *stack_a, int size_arr)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < size_arr)
@@ -76,7 +76,7 @@ void	fill_one(inf_node *inf_arr, int *stack_a, int size_arr)
 	}
 }
 
-void	fill_two(inf_node *inf_arr, int *stack_b, int size_arr)
+void	fill_two(t_node *inf_arr, int *stack_b, int size_arr)
 {
 	int	i;
 

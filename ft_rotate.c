@@ -47,7 +47,7 @@ int	ft_rotate_b(int **my_stack, int *size)
 
 int	ft_rotate_rr(int **my_stack_a, int **my_stack_b, int *size_a, int *size_b)
 {
-	if (*size_a <= 0 || !(*my_stack_a) || *size_b <= 0 || !(*my_stack_a) )
+	if (*size_a <= 0 || !(*my_stack_a) || *size_b <= 0 || !(*my_stack_a))
 		return (0);
 	ft_rotate(my_stack_a, size_a);
 	ft_rotate(my_stack_b, size_b);

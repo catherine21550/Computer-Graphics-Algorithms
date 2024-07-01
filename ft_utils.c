@@ -75,7 +75,7 @@ int	is_sorted(int **stack, int *size)
 }
 
 int	ft_is_sorted_before(int **stack, int begin, int end)
-{ 
+{
 	if (begin == end)
 		return (1);
 	while (begin < end)

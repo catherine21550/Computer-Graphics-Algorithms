@@ -23,7 +23,7 @@ int	ft_push(int **stack_1, int **stack_2, int *size_1, int *size_2)
 		return (0);
 	temp_2 = (int *)malloc(sizeof(int) * (*size_2 - 1));
 	if (!temp_2)
-		return (0);
+		return (ft_free(&temp_1), 0);
 	temp_1[0] = *stack_2[0];
 	i = *size_1 - 1 + 1;
 	while (--i >= 0)
@@ -42,7 +42,7 @@ int	ft_push_a(int **stack_a, int **stack_b, int *size_a, int *size_b)
 	if (!*stack_b || *size_b <= 0)
 		return (0);
 	if (!ft_push(stack_a, stack_b, size_a, size_b))
-		return (0);
+		return (ft_free(stack_a), ft_free(stack_b), 0);
 	write(1, "pa\n", 3);
 	return (1);
 }
@@ -52,7 +52,7 @@ int	ft_push_b(int **stack_b, int **stack_a, int *size_b, int *size_a)
 	if (!*stack_a || *size_a <= 0)
 		return (0);
 	if (!ft_push(stack_b, stack_a, size_b, size_a))
-		return (0);
+		return (ft_free(stack_a), ft_free(stack_b), 0);
 	write(1, "pb\n", 3);
 	return (1);
 }
