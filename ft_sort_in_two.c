@@ -27,7 +27,7 @@ int	find_midvalue(int *arr, int size)
 	return (mid / size);
 }
 
-int	sort_in_two(int	**stack_a, int **stack_b, int *size_a, int *size_b)
+int	sort_in_two(int	*stack_a, int *stack_b, int size_a, int size_b)
 {
 	int	mid_a;
 
