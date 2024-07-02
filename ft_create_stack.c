@@ -17,6 +17,8 @@ static void	free_split(char **arr)
 	int	j;
 
 	j = 0;
+	if (arr == NULL)
+        return ;
 	while (arr[j])
 	{
 		free (arr[j]);
@@ -25,67 +27,105 @@ static void	free_split(char **arr)
 	free(arr);
 }
 
-int	ft_fillarray(char **str_arr, int *arr, int size, int ac)
+int	ft_fillarray(char **str_arr, t_stack *arr, int ac)
 {
 	int	i;
 
 	i = 0;
-	while (i < size)
+	while (i < arr->size)
 	{
 		if (!ft_if_valid(str_arr[1 + i]) || !ft_check_limits(str_arr[1 + i]))
 		{
 			ft_printf("%s\n", "Error");
 			if (ac == 2)
 				free_split(str_arr);
-			free (arr);
+			free (arr->stack);
 			return (0);
 		}
-		arr[i] = ft_new_atoi(str_arr[1 + i]);
+		arr->stack[i] = ft_new_atoi(str_arr[1 + i]);
 		i++;
 	}
 	return (1);
 }
 
-char	**process_argv(char *av[], int *n)
+char	**process_argv(char *str, int *n)
 {
-	char	*str;
+	char	*str_new;
 	char	**new;
 
-	str = ft_strjoin("first ", av[1]);
-	if (!str)
+	if (*str == '\0')
+		str = "empty";
+	str_new = ft_strjoin("first ", str);
+	if (!str_new)
 		return (NULL);
-	*n = ft_counter(str, ' ') - 1;
-	new = ft_split(str, ' ');
-	if (!av)
-		return (0);
-	free(str);
+	*n = ft_counter(str_new, ' ') - 1;
+	new = ft_split(str_new, ' ');
+	if (!new)
+		return (free(str_new), NULL);
+	free(str_new);
 	return (new);
 }
 
-int	*create_stack_a(int ac, char *av[])
+int	ft_new_stack(t_stack *new_stack, int size)
 {
-	int		*my_stack;
+	if (size == 0)
+		return (0);
+	else
+	{
+		new_stack->size = size;
+		new_stack->stack = (int *)malloc(sizeof(int) * size);
+		if (!new_stack->stack)
+			return (0);
+	}
+	return (1);
+}
+
+int	create_stack_a(t_stack *my_stack, int ac, char *av[])
+{
 	int		n;
 	char	**new_av;
 
 	n = ac - 1;
 	if (ac == 2)
 	{
-		new_av = process_argv(&av[1], &n);
+		new_av = process_argv(av[1], &n);
+		if (!new_av)
+			return (ft_printf("%s\n", "Error"), 0);
 		av = new_av;
 	}
-	my_stack = (int *)malloc(n * sizeof(int));
-	if (!my_stack)
-		return (NULL);
+	if (!ft_new_stack(my_stack, n))
+	{
+		if (new_av)
+			free_split(new_av);
+		return (0);
+	}
 	if (!ft_check_double(n + 1, av))
 	{
 		if (ac == 2)
-			free_split(av);
-		return (ft_printf("%s\n", "Error"), free(my_stack), NULL);
+			free (av);
+		return (ft_printf("%s\n", "Error"), 0);
 	}
-	if (!ft_fillarray(av, my_stack, n, ac))
-		return (NULL);
-	if (ac == 2)
-		free_split(av);
-	return (my_stack);
+	if (!ft_fillarray(av, my_stack, ac))
+		return (0);
+	return (1);
 }
+/* 
+int	main(int ac, char *av[])
+{
+	t_stack	my_stack;
+	int 	i;
+	
+	if (ac < 2)
+		return 1;
+	if (!create_stack_a(&my_stack, ac, av))
+		return (1);
+	i = 0;
+	ft_printf("Size is: %i\n", my_stack.size);
+	while (i < my_stack.size)
+	{
+		ft_printf("%i\n", my_stack.stack[i]);
+		i++;
+	}
+	free(my_stack.stack);
+	return (0);
+} */

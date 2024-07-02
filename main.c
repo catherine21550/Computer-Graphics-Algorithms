@@ -15,13 +15,13 @@
 
 int	main(int ac, char *av[])
 {
-	int	*my_stack;
+	t_stack		my_stack;
 	int *my_stack2 = NULL;
     int size_1 = ac - 1;
     int size_2 = 0;
 	
-	my_stack = create_stack_a(ac, av);
-	if (!my_stack)
+	my_stack.stack = create_stack_a(ac, av);
+	if (!my_stack.stack)
 		return (1);
 	if (ac == 2)
 		size_1 = ft_counter(av[1], ' ');

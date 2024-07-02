@@ -29,13 +29,21 @@ typedef struct count_information
 	int	res_mvs;
 }	t_node;
 
+typedef struct stack_struct
+{
+	int	*stack;
+	int size;
+}	t_stack;
+
 int			ft_new_atoi(char *str);
 int			ft_if_valid(char *str);
 int			ft_check_limits(char *str);
 int			ft_check_double(int ac, char *av[]);
-int			*create_stack_a(int ac, char *av[]);
+//create stack A
+int			create_stack_a(t_stack *my_stack, int ac, char *av[]);
+int			ft_fillarray(char **str_arr, t_stack *arr, int ac);
 void		ft_free(int **content);
-char		**process_argv(char *av[], int *n);//changed
+char		**process_argv(char *str, int *n);//changed
 size_t		ft_counter(const char *str, char delc);
 int			is_sorted(int **stack, int *size);
 int			ft_is_sorted_before(int **stack, int begin, int end);
