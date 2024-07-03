@@ -12,10 +12,10 @@
 
 #include "push_swap.h"
 
-void	ft_free(int **content)
+void	ft_free(int *content)
 {
-	if (!*content || *content == NULL)
+	if (!content || content == NULL)
 		return ;
-	free(*content);
-	*content = NULL;
+	free(content);
+	content = NULL;
 }

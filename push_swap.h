@@ -43,7 +43,7 @@ int			ft_check_double(int ac, char *av[]);
 int			create_stack_a(t_stack *my_stack, int ac, char *av[]);
 int		ft_new_stack(t_stack *new_stack, int size);
 int			ft_fillarray(char **str_arr, t_stack *arr, int ac);
-void		ft_free(int **content);
+void		ft_free(int *content);
 char		**process_argv(char *str, int *n);//changed
 size_t	ft_counter(const char *str, char delc);
 int		is_sorted(t_stack *my_stack);
