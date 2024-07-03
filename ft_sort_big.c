@@ -12,26 +12,26 @@
 
 #include "push_swap.h"
 
-void	clos_ontop(int **stack_a, int *size_a, int index_clos)
+void	clos_ontop(t_stack *stack_a, int index_clos)
 {
 	int		i;
 
 	i = 1;
-	if (index_clos < (*size_a / 2))
+	if (index_clos < (stack_a->size / 2))
 		i = index_clos;
 	else
-		i = *size_a - index_clos;
+		i = stack_a->size - index_clos;
 	while (i != 0)
 	{
-		if (index_clos < (*size_a / 2))
-			ft_rotate_a(stack_a, size_a);
+		if (index_clos < (stack_a->size / 2))
+			ft_rotate_a(stack_a);
 		else
-			ft_rev_rotate_a(stack_a, size_a);
+			ft_rev_rotate_a(stack_a);
 		i--;
 	}
 }
 
-void	nb_ontop(int **stack_b, int stack_b->size, int index_nb)
+void	nb_ontop(t_stack *stack_b, int index_nb)
 {
 	int	i;
 
@@ -43,14 +43,14 @@ void	nb_ontop(int **stack_b, int stack_b->size, int index_nb)
 	while (i != 0)
 	{
 		if (index_nb < (stack_b->size / 2))
-			ft_rotate_b(stack_b, size_b);
+			ft_rotate_b(stack_b);
 		else
-			ft_rev_rotate_b(stack_b, size_b);
+			ft_rev_rotate_b(stack_b);
 		i--;
 	}
 }
 
-void	ft_sort_big(t_stack *stack_a, t_stack *stack_b)
+int	ft_sort_big(t_stack *stack_a, t_stack *stack_b)
 {
 	t_node	*inf;
 	int		size_arr;
@@ -61,17 +61,16 @@ void	ft_sort_big(t_stack *stack_a, t_stack *stack_b)
 	i = stack_b->size;
 	inf = (t_node *)malloc(sizeof(t_node) * stack_b->size);
 	if (!inf)
-		return (NULL);
+		return (0);
 	while (i != 0)
 	{
 		size_arr = stack_b->size;
 		find_closest(stack_a, stack_b, inf);
 		fill_one(inf, stack_a->stack, size_arr);
-		fill_two(inf, stack_b->stack, size_arr);//last
-		clos_ontop(stack_a, size_a, inf[find_min_mvs(inf, size_arr)].ind_clos);
-		nb_ontop(stack_b, size_b, find_min_mvs(inf, size_arr));
-		if (!ft_push_a(stack_a, stack_b, size_a, size_b))
-			return (free(inf), ft_free(stack_a), ft_free(stack_b), 0);
+		fill_two(inf, stack_b->stack, size_arr);
+		clos_ontop(stack_a, inf[find_min_mvs(inf, size_arr)].ind_clos);
+		nb_ontop(stack_b, find_min_mvs(inf, size_arr));
+		ft_push_a(stack_a, stack_b);
 		i--;
 	}
 	return (free(inf), 1);

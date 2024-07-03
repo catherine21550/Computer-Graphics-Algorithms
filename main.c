@@ -11,31 +11,50 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "printf/ft_printf.h"
+#include <stdio.h>
 
 int	main(int ac, char *av[])
 {
-	t_stack	my_stack;
-	t_stack	my_stack2;
+	t_stack	stack_a;
+	t_stack	stack_b;
 	
-	my_stack.stack = create_stack_a(ac, av);
-	if (!my_stack.stack)
+	if (!create_stack_a(&stack_a, ac, av))
 		return (1);
+	printf("1:\n");
 	if (ac == 2)
-		my_stack.size = ft_counter(av[1], ' ');
-	if (!ft_new_stack(&my_stack2, my_stack.size));
-		return (free(my_stack.stack), 1);
-	if (my_stack.size > 4)
-		sort_in_two(&my_stack, &my_stack2);
-	sort_small(&my_stack, &my_stack2);//last
-	if (!ft_sort_big(&my_stack, &size_1, &my_stack2, &size_2))
-		return (ft_free(&my_stack), ft_free(&my_stack2), 1);
-	while (!is_sorted(&my_stack, &size_1))
+		stack_a.size = ft_counter(av[1], ' ');
+	printf("2:\n");
+	if (!ft_new_stack(&stack_b, stack_a.size))
+		return (free(stack_a.stack), 1);
+	printf("3:\n");
+	if (stack_a.size > 4)
+		sort_in_two(&stack_a, &stack_b);
+	printf("4:\n");
+	sort_small(&stack_a, &stack_b);
+	printf("5:\n");
+	printf("Stack A:\n");
+	for(int i = 0; i < stack_a.size; i++)
+			printf("%i\n", stack_a.stack[i]);
+	printf("Stack B:\n");
+	for(int i = 0; i < stack_b.size; i++)
+		printf("%i\n", stack_b.stack[i]);
+	printf("6:\n");
+	if (!ft_sort_big(&stack_a, &stack_b))
+		return (free(stack_a.stack), free(stack_b.stack), 1);
+	printf("7:\n");
+	while (!is_sorted(&stack_a))
 	{
-		if (find_min_index(&my_stack, &size_1) < (size_1 / 2))
-			ft_rotate_a(&my_stack, &size_1);
+		if (find_min_index(&stack_a.stack, &stack_a.size)
+			< (stack_a.size / 2))
+			ft_rotate_a(&stack_a);
 		else
-			ft_rev_rotate_a(&my_stack, &size_1);
+			ft_rev_rotate_a(&stack_a);
 	}
-	return (free(my_stack.stack), free(my_stack2.stack), 0);
+	printf("Stack A rotate:\n");
+	for(int i = 0; i < stack_a.size; i++)
+		printf("%i\n", stack_a.stack[i]);
+	printf("Stack B rotate:\n");
+	for(int i = 0; i < stack_b.size; i++)
+		printf("%i\n", stack_b.stack[i]);
+	return (free(stack_a.stack), free(stack_b.stack), 0);
 }

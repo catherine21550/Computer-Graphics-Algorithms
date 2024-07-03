@@ -41,6 +41,7 @@ int			ft_check_limits(char *str);
 int			ft_check_double(int ac, char *av[]);
 //create stack A
 int			create_stack_a(t_stack *my_stack, int ac, char *av[]);
+int		ft_new_stack(t_stack *new_stack, int size);
 int			ft_fillarray(char **str_arr, t_stack *arr, int ac);
 void		ft_free(int **content);
 char		**process_argv(char *str, int *n);//changed
@@ -56,9 +57,9 @@ void	sort_three(t_stack *stack_a);
 void	sort_four(t_stack *stack_a, t_stack *stack_b);
 void	sort_small(t_stack *stack_a, t_stack *stack_b);
 //sort big
-void		clos_ontop(int **stack_a, int *size_a, int index_clos);
-void		nb_ontop(int **stack_b, int *size_b, int index_nb);
-int			ft_sort_big(int **stack_a, int *size_a, int **stack_b, int *size_b);
+void	clos_ontop(t_stack *stack_a, int index_clos);
+void	nb_ontop(t_stack *stack_b, int index_nb);
+int		ft_sort_big(t_stack *stack_a, t_stack *stack_b);
 //create the array of struct with information
 int			ind_of_next(int *arr, int size, int nb);
 void 	find_closest(t_stack *stack_a, t_stack *stack_b, t_node *inf);

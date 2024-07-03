@@ -43,7 +43,7 @@ static void	push_min_four(t_stack *stack_a, t_stack *stack_b)
 {
 	int	i_min;
 
-	i_min = find_min_index(stack_a->stack, stack_a->size);
+	i_min = find_min_index(&stack_a->stack, &stack_a->size);
 	if (i_min == 0)
 		ft_push_b(stack_a, stack_b);
 	else if (i_min == 1)
@@ -63,7 +63,7 @@ void	sort_four(t_stack *stack_a, t_stack *stack_b)
 {
 	int	i_min;
 
-	i_min = find_min_index(stack_a->stack, stack_a->size);
+	i_min = find_min_index(&stack_a->stack, &stack_a->size);
 	if (i_min == 0 || i_min == 1 || i_min == 2)
 		push_min_four(stack_a, stack_b);
 	else
