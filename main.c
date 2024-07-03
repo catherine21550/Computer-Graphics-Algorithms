@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khuk <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: khuk <khuk@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 21:56:47 by khuk              #+#    #+#             */
-/*   Updated: 2024/07/01 21:56:51 by khuk             ###   ########.fr       */
+/*   Updated: 2024/07/03 23:17:52 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	main(int ac, char *av[])
 	t_stack	stack_a;
 	t_stack	stack_b;
 	
+	stack_a.stack = NULL;
+	stack_b.stack = NULL;
 	if (ac == 1)
 		return (1);
 	if (!create_stack_a(&stack_a, ac, av))
@@ -31,7 +33,7 @@ int	main(int ac, char *av[])
 		sort_in_two(&stack_a, &stack_b);
 	sort_small(&stack_a, &stack_b);
 	if (!ft_sort_big(&stack_a, &stack_b))
-		return (free(stack_a.stack), free(stack_b.stack), 1);
+		return (ft_free(stack_a.stack), ft_free(stack_b.stack), 1);
 	while (!is_sorted(&stack_a))
 	{
 		if (find_min_index(&stack_a.stack, &stack_a.size)

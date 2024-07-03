@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khuk <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: khuk <khuk@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 18:07:47 by khuk              #+#    #+#             */
-/*   Updated: 2024/07/01 18:08:09 by khuk             ###   ########.fr       */
+/*   Updated: 2024/07/03 23:00:55 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_free(int *content)
 {
-	if (!content || content == NULL)
+	if (content == NULL)
 		return ;
 	free(content);
 	content = NULL;

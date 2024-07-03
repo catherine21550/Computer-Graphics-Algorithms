@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_create_stack.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khuk <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: khuk <khuk@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 15:41:34 by khuk              #+#    #+#             */
-/*   Updated: 2024/06/20 15:50:34 by khuk             ###   ########.fr       */
+/*   Updated: 2024/07/03 23:53:44 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,17 @@ int	ft_fillarray(char **str_arr, t_stack *arr, int ac)
 {
 	int	i;
 
+	(void)ac;
 	i = 0;
 	while (i < arr->size)
 	{
 		if (!ft_if_valid(str_arr[1 + i]) || !ft_check_limits(str_arr[1 + i]))
 		{
 			ft_printf("%s\n", "Error");
-			if (ac == 2)
-				free_split(str_arr);
+			//if (ac == 2)
+				//free_split(str_arr);
 			free (arr->stack);
+			arr->stack = NULL;
 			return (0);
 		}
 		arr->stack[i] = ft_new_atoi(str_arr[1 + i]);
@@ -85,6 +87,7 @@ int	create_stack_a(t_stack *my_stack, int ac, char *av[])
 	int		n;
 	char	**new_av;
 
+	new_av = NULL;
 	n = ac - 1;
 	if (ac == 2)
 	{
@@ -102,11 +105,17 @@ int	create_stack_a(t_stack *my_stack, int ac, char *av[])
 	if (!ft_check_double(n + 1, av))
 	{
 		if (ac == 2)
-			free (av);
+			free_split(av);
 		return (ft_printf("%s\n", "Error"), 0);
 	}
 	if (!ft_fillarray(av, my_stack, ac))
+	{
+		if (new_av)
+			free_split(new_av);
 		return (0);
+	}
+	if (new_av)
+		free_split(new_av);	
 	return (1);
 }
 /* 
