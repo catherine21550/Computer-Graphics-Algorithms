@@ -31,18 +31,18 @@ void	clos_ontop(int **stack_a, int *size_a, int index_clos)
 	}
 }
 
-void	nb_ontop(int **stack_b, int *size_b, int index_nb)
+void	nb_ontop(int **stack_b, int stack_b->size, int index_nb)
 {
 	int	i;
 
 	i = 1;
-	if (index_nb < (*size_b / 2))
+	if (index_nb < (stack_b->size / 2))
 		i = index_nb;
 	else
-		i = *size_b - index_nb;
+		i = stack_b->size - index_nb;
 	while (i != 0)
 	{
-		if (index_nb < (*size_b / 2))
+		if (index_nb < (stack_b->size / 2))
 			ft_rotate_b(stack_b, size_b);
 		else
 			ft_rev_rotate_b(stack_b, size_b);
@@ -50,29 +50,29 @@ void	nb_ontop(int **stack_b, int *size_b, int index_nb)
 	}
 }
 
-int	ft_sort_big(int **stack_a, int *size_a, int **stack_b, int *size_b)
+void	ft_sort_big(t_stack *stack_a, t_stack *stack_b)
 {
 	t_node	*inf;
-	int			size_arr;
-	int			i;
+	int		size_arr;
+	int		i;
 
 	inf = NULL;
 	size_arr = 0;
-	i = *size_b;
+	i = stack_b->size;
+	inf = (t_node *)malloc(sizeof(t_node) * stack_b->size);
+	if (!inf)
+		return (NULL);
 	while (i != 0)
 	{
-		size_arr = *size_b;
-		inf = find_closest(*stack_a, *stack_b, *size_a, *size_b);
-		if (!inf)
-			return (0);
-		fill_one(inf, *stack_a, size_arr);
-		fill_two(inf, *stack_b, size_arr);
+		size_arr = stack_b->size;
+		find_closest(stack_a, stack_b, inf);
+		fill_one(inf, stack_a->stack, size_arr);
+		fill_two(inf, stack_b->stack, size_arr);//last
 		clos_ontop(stack_a, size_a, inf[find_min_mvs(inf, size_arr)].ind_clos);
 		nb_ontop(stack_b, size_b, find_min_mvs(inf, size_arr));
 		if (!ft_push_a(stack_a, stack_b, size_a, size_b))
 			return (free(inf), ft_free(stack_a), ft_free(stack_b), 0);
-		free(inf);
 		i--;
 	}
-	return (1);
+	return (free(inf), 1);
 }

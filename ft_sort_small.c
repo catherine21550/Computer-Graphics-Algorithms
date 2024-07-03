@@ -12,114 +12,97 @@
 
 #include "push_swap.h"
 
-void	sort_five(int **arr, int *size)
+void	sort_three(t_stack *stack_a)
 {
-	while (!is_sorted(arr, size))
+	if (stack_a->stack[0] > stack_a->stack[1] && stack_a->stack[0]
+		> stack_a->stack[2] && stack_a->stack[1] > stack_a->stack[2])
 	{
-		if ((*arr)[0] < (*arr)[*size - 1])
-			ft_rev_rotate_a(arr, size);
-		else if (find_max_index(arr, size) == 0
-			&& ft_is_sorted_after(arr, 1, *size - 1))
-			ft_rotate_a(arr, size);
-		else if ((*arr)[0] > (*arr)[1])
-			ft_swap_a(*arr, *size);
-		else
-			ft_rotate_a(arr, size);
+		ft_swap_a(stack_a);
+		ft_rev_rotate_a(stack_a);
 	}
-}
-
-void	sort_three(int **arr, int *size)
-{
-	if ((*arr)[0] > (*arr)[1] && (*arr)[0] > (*arr)[2]
-		&& (*arr)[1] > (*arr)[2])
+	else if (stack_a->stack[1] > stack_a->stack[0] && stack_a->stack[1]
+		> stack_a->stack[2] && stack_a->stack[0] > stack_a->stack[2])
+		ft_rev_rotate_a(stack_a);
+	else if (stack_a->stack[1] > stack_a->stack[0] && stack_a->stack[1]
+		> stack_a->stack[2] && stack_a->stack[0] < stack_a->stack[2])
 	{
-		ft_swap_a(*arr, *size);
-		ft_rev_rotate_a(arr, size);
+		ft_swap_a(stack_a);
+		ft_rotate_a(stack_a);
 	}
-	else if ((*arr)[1] > (*arr)[0] && (*arr)[1] > (*arr)[2]
-			&& (*arr)[0] > (*arr)[2])
-		ft_rev_rotate_a(arr, size);
-	else if ((*arr)[1] > (*arr)[0] && (*arr)[1] > (*arr)[2]
-			&& (*arr)[0] < (*arr)[2])
-	{
-		ft_swap_a(*arr, *size);
-		ft_rotate_a(arr, size);
-	}
-	else if ((*arr)[0] > (*arr)[1] && (*arr)[0] > (*arr)[2]
-			&& (*arr)[1] < (*arr)[2])
-		ft_rotate_a(arr, size);
-	else if ((*arr)[2] > (*arr)[1] && (*arr)[2] > (*arr)[0]
-			&& (*arr)[1] < (*arr)[0])
-		ft_swap_a(*arr, *size);
+	else if (stack_a->stack[0] > stack_a->stack[1] && stack_a->stack[0]
+		> stack_a->stack[2] && stack_a->stack[1] < stack_a->stack[2])
+		ft_rotate_a(stack_a);
+	else if (stack_a->stack[2] > stack_a->stack[1] && stack_a->stack[2]
+		> stack_a->stack[0] && stack_a->stack[1] < stack_a->stack[0])
+		ft_swap_a(stack_a);
 	else
 		return ;
 }
 
-int	push_min_four(int **arr_a, int **arr_b, int *size_a, int *size_b)
+static void	push_min_four(t_stack *stack_a, t_stack *stack_b)
 {
 	int	i_min;
 
-	i_min = find_min_index(arr_a, size_a);
+	i_min = find_min_index(stack_a->stack, stack_a->size);
 	if (i_min == 0)
-	{
-		if (!ft_push_b(arr_b, arr_a, size_b, size_a))
-			return (ft_free(arr_b), ft_free(arr_a), 0);
-	}
+		ft_push_b(stack_a, stack_b);
 	else if (i_min == 1)
 	{
-		ft_rotate_a(arr_a, size_a);
-		if (!ft_push_b(arr_b, arr_a, size_b, size_a))
-			return (ft_free(arr_b), ft_free(arr_a), 0);
+		ft_rotate_a(stack_a);
+		ft_push_b(stack_a, stack_b);
 	}
 	else if (i_min == 2)
 	{
-		ft_rev_rotate_a(arr_a, size_a);
-		ft_rev_rotate_a(arr_a, size_a);
-		if (!ft_push_b(arr_b, arr_a, size_b, size_a))
-			return (ft_free(arr_b), ft_free(arr_a), 0);
+		ft_rev_rotate_a(stack_a);
+		ft_rev_rotate_a(stack_a);
+		ft_push_b(stack_a, stack_b);
 	}
-	return (1);
 }
 
-int	sort_four(int **arr_a, int **arr_b, int *size_a, int *size_b)
+void	sort_four(t_stack *stack_a, t_stack *stack_b)
 {
 	int	i_min;
 
-	i_min = find_min_index(arr_a, size_a);
+	i_min = find_min_index(stack_a->stack, stack_a->size);
 	if (i_min == 0 || i_min == 1 || i_min == 2)
-	{
-		if (!push_min_four(arr_a, arr_b, size_a, size_b))
-			return (ft_free(arr_b), ft_free(arr_a), 0);
-	}
+		push_min_four(stack_a, stack_b);
 	else
 	{
-		ft_rev_rotate_a(arr_a, size_a);
-		if (!ft_push_b(arr_b, arr_a, size_b, size_a))
-			return (ft_free(arr_b), ft_free(arr_a), 0);
+		ft_rev_rotate_a(stack_a);
+		ft_push_b(stack_a, stack_b);
 	}
-	sort_three(arr_a, size_a);
-	if (!ft_push_a(arr_a, arr_b, size_a, size_b))
-		return (ft_free(arr_b), ft_free(arr_a), 0);
-	return (1);
+	sort_three(stack_a);
+	ft_push_a(stack_a, stack_b);
 }
 
-int	sort_small(int **arr_a, int **arr_b, int *size_a, int *size_b)
+void	sort_small(t_stack *stack_a, t_stack *stack_b)
 {
-	if (is_sorted(arr_a, size_a))
-		return (1);
-	else if (*size_a == 2)
+	if (is_sorted(stack_a))
+		return ;
+	else if (stack_a->size == 2)
 	{
-		if ((*arr_a)[0] > (*arr_a)[1])
-			ft_swap_a(*arr_a, *size_a);
+		if (stack_a->stack[0] > stack_a->stack[1])
+			ft_swap_a(stack_a);
 	}
-	else if (*size_a == 3)
-		sort_three(arr_a, size_a);
-	else if (*size_a == 4)
-	{
-		if (!sort_four(arr_a, arr_b, size_a, size_b))
-			return (ft_free(arr_b), ft_free(arr_a), 0);
-	}
-	else
-		sort_five(arr_a, size_a);
-	return (1);
+	else if (stack_a->size == 3)
+		sort_three(stack_a);
+	else if (stack_a->size == 4)
+		sort_four(stack_a, stack_b);
 }
+	
+/* void	sort_five(int **arr, int *size)
+{
+	while (!is_sorted(stack_a))
+	{
+		if (stack_a->stack[0] < stack_a->stack[*size - 1])
+			ft_rev_rotate_a(stack_a);
+		else if (find_max_index(stack_a) == 0
+			&& ft_is_sorted_after(arr, 1, *size - 1))
+			ft_rotate_a(stack_a);
+		else if (stack_a->stack[0] > stack_a->stack[1])
+			ft_swap_a(stack_a);
+		else
+			ft_rotate_a(stack_a);
+	}
+}
+ */

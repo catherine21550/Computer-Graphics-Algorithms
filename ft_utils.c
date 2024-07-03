@@ -60,20 +60,20 @@ size_t	ft_counter(const char *str, char delc)
 	return (count1);
 }
 
-int	is_sorted(int **stack, int *size)
+int	is_sorted(t_stack *my_stack)
 {
 	int	i;
 
 	i = 0;
-	while (i < *size - 1)
+	while (i < (my_stack->size - 2))
 	{
-		if ((*stack)[i] > (*stack)[i + 1])
+		if (my_stack->stack[i] > my_stack->stack[i + 1])
 			return (0);
 		i++;
 	}
 	return (1);
 }
-
+/* 
 int	ft_is_sorted_before(int **stack, int begin, int end)
 {
 	if (begin == end)
@@ -99,3 +99,4 @@ int	ft_is_sorted_after(int **stack, int begin, int end)
 	}
 	return (1);
 }
+ */

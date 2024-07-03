@@ -24,10 +24,10 @@ int	main(int ac, char *av[])
 	if (ac == 2)
 		my_stack.size = ft_counter(av[1], ' ');
 	if (!ft_new_stack(&my_stack2, my_stack.size));
-		return (1);
+		return (free(my_stack.stack), 1);
 	if (my_stack.size > 4)
-		sort_in_two(&my_stack.stack, &my_stack2.stack, &my_stack.size, &my_stack2.size);
-	sort_small(&my_stack, &my_stack2, &size_1, &size_2);
+		sort_in_two(&my_stack, &my_stack2);
+	sort_small(&my_stack, &my_stack2);//last
 	if (!ft_sort_big(&my_stack, &size_1, &my_stack2, &size_2))
 		return (ft_free(&my_stack), ft_free(&my_stack2), 1);
 	while (!is_sorted(&my_stack, &size_1))
@@ -37,6 +37,5 @@ int	main(int ac, char *av[])
 		else
 			ft_rev_rotate_a(&my_stack, &size_1);
 	}
-	free (my_stack);
-	return (0);
+	return (free(my_stack.stack), free(my_stack2.stack), 0);
 }

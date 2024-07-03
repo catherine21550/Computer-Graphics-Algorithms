@@ -44,45 +44,38 @@ int			create_stack_a(t_stack *my_stack, int ac, char *av[]);
 int			ft_fillarray(char **str_arr, t_stack *arr, int ac);
 void		ft_free(int **content);
 char		**process_argv(char *str, int *n);//changed
-size_t		ft_counter(const char *str, char delc);
-int			is_sorted(int **stack, int *size);
-int			ft_is_sorted_before(int **stack, int begin, int end);
-int			ft_is_sorted_after(int **stack, int begin, int end);
+size_t	ft_counter(const char *str, char delc);
+int		is_sorted(t_stack *my_stack);
 int			find_midvalue(int *arr, int size);
 int			find_min_index(int **arr, int *size);
 int			find_max_index(int **arr, int *size);
 int			find_min_mvs(t_node *inf_arr, int size);
-int			sort_in_two(int	**stack_a, int **stack_b, int *size_a, int *size_b);
+void	sort_in_two(t_stack	*stack_a, t_stack *stack_b);
 //sort small
-void		sort_five(int **arr, int *size);
-void		sort_three(int **arr, int *size);
-int			push_min_four(int **arr_a, int **arr_b, int *size_a, int *size_b);
-int			sort_four(int **arr_a, int **arr_b, int *size_a, int *size_b);
-int			sort_small(int **arr_a, int **arr_b, int *size_a, int *size_b);
+void	sort_three(t_stack *stack_a);
+void	sort_four(t_stack *stack_a, t_stack *stack_b);
+void	sort_small(t_stack *stack_a, t_stack *stack_b);
 //sort big
 void		clos_ontop(int **stack_a, int *size_a, int index_clos);
 void		nb_ontop(int **stack_b, int *size_b, int index_nb);
 int			ft_sort_big(int **stack_a, int *size_a, int **stack_b, int *size_b);
 //create the array of struct with information
 int			ind_of_next(int *arr, int size, int nb);
-t_node		*find_closest(int *arr_a, int *arr_b, int size_a, int size_b);
+void 	find_closest(t_stack *stack_a, t_stack *stack_b, t_node *inf);
 void		fill_one(t_node *inf_arr, int *stack_a, int size_arr);
 void		fill_two(t_node *inf_arr, int *stack_b, int size_arr);
 //rules
-void		ft_swap(int *my_stack, int size);
-void		ft_swap_a(int *my_stack, int size);
-void		ft_swap_b(int *my_stack, int size);
-void		ft_swap_ss(int *stack_a, int *stack_b, int size_a, int size_b);
-int			ft_push(int **stack_1, int **stack_2, int *size_1, int *size_2);
-int			ft_push_a(int **stack_a, int **stack_b, int *size_a, int *size_b);
-int			ft_push_b(int **stack_b, int **stack_a, int *size_b, int *size_a);
-int			ft_rotate_a(int **my_stack, int *size);
-int			ft_rotate_b(int **my_stack, int *size);
-int			ft_rotate_rr(int **my_stack_a, int **my_stack_b, int *size_a,
-				int *size_b);
-int			ft_rev_rotate_a(int **my_stack, int *size);
-int			ft_rev_rotate_b(int **my_stack, int *size);
-int			ft_rev_rotate_rrr(int **my_stack_a, int **my_stack_b, int *size_a,
-				int *size_b);
+void		ft_swap(t_stack *my_stack);
+void		ft_swap_a(t_stack *stack_a);
+void		ft_swap_b(t_stack *stack_b);
+void		ft_swap_ss(t_stack *stack_a, t_stack *stack_b);
+void		ft_push_a(t_stack *stack_a, t_stack *stack_b);
+void		ft_push_b(t_stack *stack_a, t_stack *stack_b);
+void		ft_rotate_a(t_stack *stack_a);
+void		ft_rotate_b(t_stack *stack_b);
+void		ft_rotate_rr(t_stack *stack_a, t_stack *stack_b);
+void		ft_rev_rotate_a(t_stack *stack_a);
+void		ft_rev_rotate_b(t_stack *stack_b);
+void		ft_rev_rotate_rrr(t_stack *stack_a, t_stack *stack_b);
 
 #endif

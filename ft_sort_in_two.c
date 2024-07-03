@@ -27,23 +27,16 @@ int	find_midvalue(int *arr, int size)
 	return (mid / size);
 }
 
-int	sort_in_two(int	*stack_a, int *stack_b, int size_a, int size_b)
+void	sort_in_two(t_stack	*stack_a, t_stack *stack_b)
 {
 	int	mid_a;
 
-	while (*size_a > 4)
+	while (stack_a->size > 4)
 	{
-		mid_a = find_midvalue(*stack_a, *size_a);
-		if ((*stack_a)[0] < mid_a)
-		{
-			if (!ft_push_b(stack_b, stack_a, size_b, size_a))
-				return (0);
-		}
+		mid_a = find_midvalue(stack_a->stack, stack_a->size);
+		if (stack_a->stack[0] < mid_a)
+			ft_push_b(stack_a, stack_b);
 		else
-		{
-			if (!ft_rotate_a(stack_a, size_a))
-				return (0);
-		}
+			ft_rotate_a(stack_a);
 	}
-	return (1);
 }

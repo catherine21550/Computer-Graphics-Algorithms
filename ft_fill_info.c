@@ -38,21 +38,17 @@ int	ind_of_next(int *arr_a, int size_a, int nb)
 	return (res);
 }
 
-t_node	*find_closest(int *arr_a, int *arr_b, int size_a, int size_b)
+void find_closest(t_stack *stack_a, t_stack *stack_b, t_node *inf)
 {
 	int			i;
-	t_node	*calc;
 
-	calc = (t_node *)malloc(sizeof(t_node) * size_b);
-	if (!calc)
-		return (NULL);
 	i = 0;
-	while (i < size_b)
+	while (i < stack_b->size)
 	{
-		calc[i].ind_clos = ind_of_next(arr_a, size_a, arr_b[i]);
+		inf[i].ind_clos = ind_of_next(stack_a->stack, stack_a->size, 
+							stack_b->stack[i]);
 		i++;
 	}
-	return (calc);
 }
 
 void	fill_one(t_node *inf_arr, int *stack_a, int size_arr)

@@ -12,45 +12,42 @@
 
 #include "push_swap.h"
 
-static void	ft_rotate(int **my_stack, int *size)
+static void	ft_rotate(t_stack *my_stack)
 {
 	int	temp;
 	int	i;
 
-	temp = (*my_stack)[0];
+	temp = my_stack->stack[0];
 	i = 0;
-	while (i <= (*size - 1 - 1))
+	while (i <= (my_stack->size - 1 - 1))
 	{
-		(*my_stack)[i] = (*my_stack)[i + 1];
+		my_stack->stack[i] = my_stack->stack[i + 1];
 		i++;
 	}
-	(*my_stack)[*size - 1] = temp;
+	my_stack->stack[my_stack->size - 1] = temp;
 }
 
-int	ft_rotate_a(int **my_stack, int *size)
+void	ft_rotate_a(t_stack *stack_a)
 {
-	if (*size <= 0 || *my_stack == NULL)
-		return (0);
-	ft_rotate(my_stack, size);
+	if (stack_a->size <= 0 || stack_a->stack == NULL)
+		return ;
+	ft_rotate(stack_a);
 	write(1, "ra\n", 3);
-	return (1);
 }
 
-int	ft_rotate_b(int **my_stack, int *size)
+void	ft_rotate_b(t_stack *stack_b)
 {
-	if (*size <= 0 || *my_stack == NULL)
-		return (0);
-	ft_rotate(my_stack, size);
+	if (stack_b->size <= 0 || stack_b->stack == NULL)
+		return ;
+	ft_rotate(stack_b);
 	write(1, "rb\n", 3);
-	return (1);
 }
 
-int	ft_rotate_rr(int **my_stack_a, int **my_stack_b, int *size_a, int *size_b)
+void	ft_rotate_rr(t_stack *stack_a, t_stack *stack_b)
 {
-	if (*size_a <= 0 || !(*my_stack_a) || *size_b <= 0 || !(*my_stack_a))
-		return (0);
-	ft_rotate(my_stack_a, size_a);
-	ft_rotate(my_stack_b, size_b);
+	if (stack_a->size <= 0 || !stack_a->stack || stack_b->size <= 0 || !stack_b->stack)
+		return ;
+	ft_rotate_a(stack_a);
+	ft_rotate_b(stack_b);
 	write(1, "rr\n", 3);
-	return (1);
 }

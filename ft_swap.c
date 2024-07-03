@@ -12,32 +12,32 @@
 
 #include "push_swap.h"
 
-void	ft_swap(int *my_stack, int size)
+void	ft_swap(t_stack *my_stack)
 {
 	int	temp;
 
-	if (size <= 1 || my_stack == NULL)
+	if (my_stack->size <= 1 || my_stack->stack == NULL)
 		return ;
-	temp = my_stack[0];
-	my_stack[0] = my_stack[1];
-	my_stack[1] = temp;
+	temp = my_stack->stack[0];
+	my_stack->stack[0] = my_stack->stack[1];
+	my_stack->stack[1] = temp;
 }
 
-void	ft_swap_a(int *my_stack, int size)
+void	ft_swap_a(t_stack *stack_a)
 {
-	ft_swap(my_stack, size);
+	ft_swap(stack_a);
 	write(1, "sa\n", 3);
 }
 
-void	ft_swap_b(int *my_stack, int size)
+void	ft_swap_b(t_stack *stack_b)
 {
-	ft_swap(my_stack, size);
+	ft_swap(stack_b);
 	write(1, "sb\n", 3);
 }
 
-void	ft_swap_ss(int *stack_a, int *stack_b, int size_a, int size_b)
+void	ft_swap_ss(t_stack *stack_a, t_stack *stack_b)
 {
-	ft_swap(stack_a, size_a);
-	ft_swap(stack_b, size_b);
+	ft_swap(stack_a);
+	ft_swap(stack_b);
 	write(1, "ss\n", 3);
 }
