@@ -52,6 +52,7 @@ int			find_min_index(int **arr, int *size);
 int			find_max_index(int **arr, int *size);
 int			find_min_mvs(t_node *inf_arr, int size);
 void	sort_in_two(t_stack	*stack_a, t_stack *stack_b);
+void	final_rotate(t_stack *stack_a);
 //sort small
 void	sort_three(t_stack *stack_a);
 void	sort_four(t_stack *stack_a, t_stack *stack_b);

@@ -34,13 +34,6 @@ int	main(int ac, char *av[])
 	sort_small(&stack_a, &stack_b);
 	if (!ft_sort_big(&stack_a, &stack_b))
 		return (ft_free(stack_a.stack), ft_free(stack_b.stack), 1);
-	while (!is_sorted(&stack_a))
-	{
-		if (find_min_index(&stack_a.stack, &stack_a.size)
-			< (stack_a.size / 2))
-			ft_rotate_a(&stack_a);
-		else
-			ft_rev_rotate_a(&stack_a);
-	}
+	final_rotate(&stack_a);
 	return (free(stack_a.stack), free(stack_b.stack), 0);
 }

@@ -73,6 +73,18 @@ int	is_sorted(t_stack *my_stack)
 	}
 	return (1);
 }
+
+void	final_rotate(t_stack *stack_a)
+{
+	while (!is_sorted(stack_a))
+	{
+		if (find_min_index(&stack_a->stack, &stack_a->size)
+			< (stack_a->size / 2))
+			ft_rotate_a(stack_a);
+		else
+			ft_rev_rotate_a(stack_a);
+	}
+}
 /* 
 int	ft_is_sorted_before(int **stack, int begin, int end)
 {
