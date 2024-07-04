@@ -38,15 +38,15 @@ int	ind_of_next(int *arr_a, int size_a, int nb)
 	return (res);
 }
 
-void find_closest(t_stack *stack_a, t_stack *stack_b, t_node *inf)
+void	find_closest(t_stack *stack_a, t_stack *stack_b, t_node *inf)
 {
 	int			i;
 
 	i = 0;
 	while (i < stack_b->size)
 	{
-		inf[i].ind_clos = ind_of_next(stack_a->stack, stack_a->size, 
-							stack_b->stack[i]);
+		inf[i].ind_clos = ind_of_next(stack_a->stack, stack_a->size,
+				stack_b->stack[i]);
 		i++;
 	}
 }

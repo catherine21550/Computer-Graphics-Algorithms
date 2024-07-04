@@ -18,7 +18,7 @@ static void	free_split(char **arr)
 
 	j = 0;
 	if (arr == NULL)
-        return ;
+		return ;
 	while (arr[j])
 	{
 		free (arr[j]);
@@ -95,11 +95,7 @@ int	create_stack_a(t_stack *my_stack, int ac, char *av[])
 		av = new_av;
 	}
 	if (!ft_new_stack(my_stack, n))
-	{
-		if (new_av)
-			free_split(new_av);
-		return (0);
-	}
+		return (free_split(new_av), 0);
 	if (!ft_check_double(n + 1, av))
 	{
 		if (ac == 2)
@@ -107,14 +103,8 @@ int	create_stack_a(t_stack *my_stack, int ac, char *av[])
 		return (ft_printf("%s\n", "Error"), 0);
 	}
 	if (!ft_fillarray(av, my_stack, ac))
-	{
-		if (new_av)
-			free_split(new_av);
-		return (0);
-	}
-	if (new_av)
-		free_split(new_av);	
-	return (1);
+		return (free_split(new_av), 0);
+	return (free_split(new_av), 1);
 }
 /*
 int	main(int ac, char *av[])

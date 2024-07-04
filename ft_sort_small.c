@@ -89,7 +89,7 @@ void	sort_small(t_stack *stack_a, t_stack *stack_b)
 	else if (stack_a->size == 4)
 		sort_four(stack_a, stack_b);
 }
-	
+
 /* void	sort_five(int **arr, int *size)
 {
 	while (!is_sorted(stack_a))

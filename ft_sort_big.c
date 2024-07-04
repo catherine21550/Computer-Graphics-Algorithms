@@ -14,7 +14,7 @@
 
 void	clos_ontop(t_stack *stack_a, int index_clos)
 {
-	int		i;
+	int	i;
 
 	i = 1;
 	if (index_clos < (stack_a->size / 2))

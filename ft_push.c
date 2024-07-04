@@ -14,7 +14,7 @@
 
 void	ft_push_a(t_stack *stack_a, t_stack *stack_b)
 {
-	int i;
+	int	i;
 
 	stack_a->size = stack_a->size + 1;
 	i = stack_a->size - 2;
@@ -36,7 +36,7 @@ void	ft_push_a(t_stack *stack_a, t_stack *stack_b)
 
 void	ft_push_b(t_stack *stack_a, t_stack *stack_b)
 {
-	int i;
+	int	i;
 
 	stack_b->size = stack_b->size + 1;
 	i = stack_b->size - 2;

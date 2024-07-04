@@ -45,7 +45,8 @@ void	ft_rotate_b(t_stack *stack_b)
 
 void	ft_rotate_rr(t_stack *stack_a, t_stack *stack_b)
 {
-	if (stack_a->size <= 0 || !stack_a->stack || stack_b->size <= 0 || !stack_b->stack)
+	if (stack_a->size <= 0 || !stack_a->stack || stack_b->size <= 0
+		|| !stack_b->stack)
 		return ;
 	ft_rotate_a(stack_a);
 	ft_rotate_b(stack_b);

@@ -11,13 +11,12 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
 
 int	main(int ac, char *av[])
 {
 	t_stack	stack_a;
 	t_stack	stack_b;
-	
+
 	stack_a.stack = NULL;
 	stack_b.stack = NULL;
 	if (ac == 1)
