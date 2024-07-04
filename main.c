@@ -25,6 +25,8 @@ int	main(int ac, char *av[])
 		return (ft_free(stack_a.stack), 1);
 	if (ac == 2)
 		stack_a.size = ft_counter(av[1], ' ');
+	if (is_sorted(&stack_a))
+		return (ft_free(stack_a.stack), 1);
 	if (!ft_new_stack(&stack_b, stack_a.size))
 		return (ft_free(stack_a.stack), 1);
 	stack_b.size = 0;
