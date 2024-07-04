@@ -92,10 +92,31 @@ void	fill_two(t_node *inf_arr, int *stack_b, int size_arr)
 		inf_arr[i].nb_index = i;
 		i++;
 	}
+}
+
+void	fill_three(t_node *n, t_stack *A, t_stack *B)
+{
+	int	i;
+
 	i = 0;
-	while (i < size_arr)
+	while (i < B->size)
 	{
-		inf_arr[i].res_mvs = inf_arr[i].clos_ontop + inf_arr[i].nb_ontop;
+		if (n[i].ind_clos < (A->size / 2) && n[i].nb_index < (B->size / 2))
+		{
+			if (n[i].ind_clos < n[i].nb_index)
+				n[i].res_mvs = n[i].nb_index;
+			else
+				n[i].res_mvs = n[i].ind_clos;
+		}
+		else if (n->ind_clos >= (A->size / 2) && n->nb_index >= (B->size / 2))
+		{
+			if ((A->size - n->ind_clos) < (B->size - n->nb_index))
+				n[i].res_mvs = (B->size - n->nb_index);
+			else
+				n[i].res_mvs = (A->size - n->ind_clos);
+		}
+		else
+			n[i].res_mvs = n[i].clos_ontop + n[i].nb_ontop;
 		i++;
 	}
 }

@@ -58,14 +58,18 @@ void	sort_three(t_stack *stack_a);
 void	sort_four(t_stack *stack_a, t_stack *stack_b);
 void	sort_small(t_stack *stack_a, t_stack *stack_b);
 //sort big
+void	rotate_two(t_stack *A, t_stack *B, t_node *inf);
+void	rev_rotate_two(t_stack *A, t_stack *B, t_node *n);
 void	clos_ontop(t_stack *stack_a, int index_clos);
 void	nb_ontop(t_stack *stack_b, int index_nb);
+void	rotate_ontop(t_stack *A, t_stack *B, t_node *n);
 int		ft_sort_big(t_stack *stack_a, t_stack *stack_b);
 //create the array of struct with information
 int		ind_of_next(int *arr, int size, int nb);
 void	find_closest(t_stack *stack_a, t_stack *stack_b, t_node *inf);
 void	fill_one(t_node *inf_arr, int *stack_a, int size_arr);
 void	fill_two(t_node *inf_arr, int *stack_b, int size_arr);
+void	fill_three(t_node *n, t_stack *A, t_stack *B);
 //rules
 void	ft_swap(t_stack *my_stack);
 void	ft_swap_a(t_stack *stack_a);
