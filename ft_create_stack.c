@@ -37,7 +37,7 @@ int	ft_fillarray(char **str_arr, t_stack *arr, int ac)
 	{
 		if (!ft_if_valid(str_arr[1 + i]) || !ft_check_limits(str_arr[1 + i]))
 		{
-			ft_printf("%s\n", "Error");
+			ft_putstr_fd("Error\n", 2);
 			free (arr->stack);
 			arr->stack = NULL;
 			return (0);
@@ -91,7 +91,7 @@ int	create_stack_a(t_stack *my_stack, int ac, char *av[])
 	{
 		new_av = process_argv(av[1], &n);
 		if (!new_av)
-			return (ft_printf("%s\n", "Error"), 0);
+			return (ft_putstr_fd("Error\n", 2), 0);
 		av = new_av;
 	}
 	if (!ft_new_stack(my_stack, n))
@@ -100,7 +100,7 @@ int	create_stack_a(t_stack *my_stack, int ac, char *av[])
 	{
 		if (ac == 2)
 			free_split(av);
-		return (ft_printf("%s\n", "Error"), 0);
+		return (ft_putstr_fd("Error\n", 2), 0);
 	}
 	if (!ft_fillarray(av, my_stack, ac))
 		return (free_split(new_av), 0);

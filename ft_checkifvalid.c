@@ -43,6 +43,8 @@ int	ft_check_limits(char *str)
 	i = 0;
 	sign = 1;
 	nb = 0;
+	if (ft_strlen(str) > 11)
+		return (0);
 	if (str[0] == '-')
 	{
 		sign = -1;
@@ -67,6 +69,8 @@ int	ft_if_valid(char *str)
 
 	i = 0;
 	if (!str)
+		return (0);
+	if (ft_strlen(str) > 11)
 		return (0);
 	if (str[0] == '-' && str[1] == '0')
 		return (0);

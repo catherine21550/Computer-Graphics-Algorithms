@@ -15,7 +15,8 @@
 int	find_midvalue(int *arr, int size)
 {
 	int		i;
-	long	mid;
+	long	mid_2;
+	long long	mid;
 
 	i = 0;
 	mid = 0;
@@ -24,7 +25,8 @@ int	find_midvalue(int *arr, int size)
 		mid += arr[i];
 		i++;
 	}
-	return (mid / size);
+	mid_2 = (int)(mid / size);
+	return (mid_2);
 }
 
 void	sort_in_two(t_stack	*stack_a, t_stack *stack_b)

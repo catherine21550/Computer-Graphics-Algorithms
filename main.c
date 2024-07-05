@@ -20,13 +20,13 @@ int	main(int ac, char *av[])
 	stack_a.stack = NULL;
 	stack_b.stack = NULL;
 	if (ac == 1)
-		return (1);
+		return (0);
 	if (!create_stack_a(&stack_a, ac, av))
 		return (ft_free(stack_a.stack), 1);
 	if (ac == 2)
 		stack_a.size = ft_counter(av[1], ' ');
 	if (is_sorted(&stack_a))
-		return (ft_free(stack_a.stack), 1);
+		return (ft_free(stack_a.stack), 0);
 	if (!ft_new_stack(&stack_b, stack_a.size))
 		return (ft_free(stack_a.stack), 1);
 	stack_b.size = 0;
@@ -36,5 +36,7 @@ int	main(int ac, char *av[])
 	if (!ft_sort_big(&stack_a, &stack_b))
 		return (ft_free(stack_a.stack), ft_free(stack_b.stack), 1);
 	final_rotate(&stack_a);
+/* 	for (int i = 0; i < stack_a.size; i++)
+		ft_printf("%i\n", stack_a.stack[i]); */
 	return (free(stack_a.stack), free(stack_b.stack), 0);
 }
