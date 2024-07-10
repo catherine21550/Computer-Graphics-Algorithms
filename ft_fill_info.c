@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fill_info.c                                        :+:      :+:    :+:   */
+/*   ft_fill_info.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: khuk <khuk@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 17:05:59 by khuk              #+#    #+#             */
-/*   Updated: 2024/06/27 10:56:03 by khuk             ###   ########.fr       */
+/*   Updated: 2024/07/11 00:04:47 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,26 @@
 
 int	ind_of_next(int *arr_a, int size_a, int nb)
 {
-	int	i;
-	int	umin;
-	int	res;
+	int			i;
+	long long	umin;
+	long long	tmp;
+	int			res;
 
 	i = 0;
+	res = 0;
 	umin = arr_a[i] - nb;
 	if (umin < 0)
 	{
 		while (umin < 0 && ++i < size_a)
-			umin = arr_a[i] - nb;
+			umin = (long long int)(arr_a[i]) - (long long int)(nb);
 	}
 	res = i;
 	while (i < size_a)
 	{
-		if (umin > (arr_a[i] - nb) && (arr_a[i] - nb) > 0)
+		tmp = (long long int)(arr_a[i]) - (long long int)(nb);
+		if (umin > tmp && tmp > 0)
 		{
-			umin = arr_a[i] - nb;
+			umin = tmp;
 			res = i;
 		}
 		i++;

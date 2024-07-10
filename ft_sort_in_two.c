@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 15:11:53 by khuk              #+#    #+#             */
-/*   Updated: 2024/06/27 15:54:58 by khuk             ###   ########.fr       */
+/*   Updated: 2024/07/11 00:05:28 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	find_midvalue(int *arr, int size)
 {
-	int		i;
-	long	mid_2;
+	int			i;
+	long		mid_2;
 	long long	mid;
 
 	i = 0;

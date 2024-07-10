@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 21:56:47 by khuk              #+#    #+#             */
-/*   Updated: 2024/07/03 23:17:52 by khuk             ###   ########.fr       */
+/*   Updated: 2024/07/11 00:05:48 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,5 @@ int	main(int ac, char *av[])
 	if (!ft_sort_big(&stack_a, &stack_b))
 		return (ft_free(stack_a.stack), ft_free(stack_b.stack), 1);
 	final_rotate(&stack_a);
-/* 	for (int i = 0; i < stack_a.size; i++)
-		ft_printf("%i\n", stack_a.stack[i]); */
 	return (free(stack_a.stack), free(stack_b.stack), 0);
 }
