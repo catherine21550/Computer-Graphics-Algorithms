@@ -72,7 +72,7 @@ int	ft_if_valid(char *str)
 		return (0);
 	if (ft_strlen(str) > 11)
 		return (0);
-	if (str[0] == '-' && str[1] == '0')
+	if (str[0] == '-' && str[1] == '\0')
 		return (0);
 	if (str[i] == '-')
 		i++;

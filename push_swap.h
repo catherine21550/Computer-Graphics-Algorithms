@@ -39,6 +39,7 @@ int		ft_new_atoi(char *str);
 int		ft_if_valid(char *str);
 int		ft_check_limits(char *str);
 int		ft_check_double(int ac, char *av[]);
+int		check_ifspace(char *str);
 //create stack A
 int		create_stack_a(t_stack *my_stack, int ac, char *av[]);
 int		ft_new_stack(t_stack *new_stack, int size);

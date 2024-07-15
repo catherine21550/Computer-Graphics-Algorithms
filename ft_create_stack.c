@@ -53,7 +53,11 @@ char	**process_argv(char *str, int *n)
 	char	*str_new;
 	char	**new;
 
-	if (*str == '\0' || *str == ' ')
+	if (!check_ifspace(str))
+		str = "empty";
+	if (ft_strlen(str) == 1 && *str == ' ')
+		str = "empty";
+	if (*str == '\0')
 		str = "empty";
 	str_new = ft_strjoin("first ", str);
 	if (!str_new)

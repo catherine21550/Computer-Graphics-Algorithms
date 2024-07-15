@@ -85,6 +85,20 @@ void	final_rotate(t_stack *stack_a)
 			ft_rev_rotate_a(stack_a);
 	}
 }
+
+int	check_ifspace(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] != ' ')
+			return (1);
+		i++;
+	}
+	return (0);
+}
 /* 
 int	ft_is_sorted_before(int **stack, int begin, int end)
 {
