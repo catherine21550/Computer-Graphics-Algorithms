@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 15:41:34 by khuk              #+#    #+#             */
-/*   Updated: 2024/07/03 23:53:44 by khuk             ###   ########.fr       */
+/*   Updated: 2024/07/11 12:19:46 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char	**process_argv(char *str, int *n)
 	char	*str_new;
 	char	**new;
 
-	if (*str == '\0')
+	if (*str == '\0' || *str == ' ')
 		str = "empty";
 	str_new = ft_strjoin("first ", str);
 	if (!str_new)
