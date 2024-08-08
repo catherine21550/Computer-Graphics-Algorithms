@@ -1,32 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/08 13:42:19 by khuk              #+#    #+#             */
-/*   Updated: 2024/08/08 17:09:09 by khuk             ###   ########.fr       */
+/*   Created: 2024/08/08 13:55:17 by khuk              #+#    #+#             */
+/*   Updated: 2024/08/08 17:06:40 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#ifndef FDF_H
+# define FDF_H
 
-int	main()
-{
-	void	*connection;
-	void	*my_window;
+# include <mlx.h>
+# include <math.h>
+#include <stdlib.h>
+# include "GNL/get_next_line_bonus.h"
 
-	connection = mlx_init ();
-	if (!connection)
-		return (-1);
-	my_window = mlx_new_window(connection, 250, 250, "FdF");
-	if (!my_window)
-	{
-		mlx_destroy_window(connection, my_window);
-		return (free(connection), -1);
-	}
-	mlx_loop(my_window);
-//	mlx_string_put(connection, my_window, 10, 25, 225, "Fdf");
-//	return (0);
-}
+#endif
