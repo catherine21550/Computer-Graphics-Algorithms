@@ -6,7 +6,7 @@
 #    By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/08 17:25:51 by khuk              #+#    #+#              #
-#    Updated: 2024/08/08 17:42:35 by khuk             ###   ########.fr        #
+#    Updated: 2024/08/09 16:05:24 by khuk             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME= fdf
 
 SRCS= test.c
 
-OBJS= $(SRCS: .c=.o)
+OBJS= $(SRCS:.c=.o)
 
 MLXFLAGS= -lmlx -lXext -lX11
 
@@ -27,22 +27,21 @@ LIB= GNL/libftprintfgnl.a
 all: $(NAME)
 
 $(LIB):
+	make -C GNL/ re
 
 $(NAME): $(OBJS) $(LIB)
-		$(CC) $(CFLAGS) $(MLXFLAGS) $(OBJ1) $(LIB) -o $(NAME1)
+		$(CC) $(CFLAGS) $(MLXFLAGS) $(OBJS) $(LIB) -o $(NAME)
 
 %.o: %.c
-	mkdir objs
-	cd objs
-	cc $(CFLAGS) $(MLXFLAGS) -o $@ -c ../$<
+	cc -c $(CFLAGS) -Imlx -o $@ -c $<
 
 clean:
-	make clean -C printf/
-	rm -f $(OBJ1) $(OBJ2) $(OBJ3) $(OBJ4)
+	make clean -C GNL/
+	rm -f $(OBJS)
 
 fclean: clean
-	make fclean -C printf/
-	rm -f $(NAME1) $(NAME2) $(NAME1_BONUS) $(NAME2_BONUS)
+	make fclean -C GNL/
+	rm -f $(NAME) 
 
 re: fclean all
 
