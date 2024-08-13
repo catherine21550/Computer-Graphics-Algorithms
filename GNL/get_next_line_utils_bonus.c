@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: khuk <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 14:50:59 by khuk              #+#    #+#             */
-/*   Updated: 2024/05/30 12:42:48 by khuk             ###   ########.fr       */
+/*   Updated: 2024/08/12 16:42:13 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*ft_strchr(const char *str, int c)
 	return (NULL);
 }
 
-size_t	ft_strlen(const char *str)
+size_t	ft_strlen_gnl(const char *str)
 {
 	size_t	len;
 
@@ -40,7 +40,7 @@ size_t	ft_strlen(const char *str)
 	return (len);
 }
 
-void	*ft_calloc(size_t nmemb, size_t size)
+void	*ft_calloc_gnl(size_t nmemb, size_t size)
 {
 	unsigned char	*res;
 	size_t			i;
@@ -68,7 +68,7 @@ char	*ft_strndup(const char *str, size_t size)
 
 	if (!str)
 		return (NULL);
-	newstr = ft_calloc(size + 1, sizeof(char));
+	newstr = ft_calloc_gnl(size + 1, sizeof(char));
 	if (!newstr)
 		return (NULL);
 	i = 0;
@@ -81,7 +81,7 @@ char	*ft_strndup(const char *str, size_t size)
 	return ((char *)newstr);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*ft_strjoin_new(char *s1, char *s2)
 {
 	char	*res;
 	char	*ptr;
@@ -89,10 +89,10 @@ char	*ft_strjoin(char *s1, char *s2)
 	if (!s1 && !s2)
 		return (NULL);
 	if (!s1)
-		return (ft_strndup(s2, ft_strlen(s2)));
+		return (ft_strndup(s2, ft_strlen_gnl(s2)));
 	if (!s2)
-		return (ft_strndup(s1, ft_strlen(s1)));
-	res = (char *)ft_calloc ((ft_strlen(s1) + ft_strlen(s2) + 1), sizeof(char));
+		return (ft_strndup(s1, ft_strlen_gnl(s1)));
+	res = (char *)ft_calloc_gnl ((ft_strlen_gnl(s1) + ft_strlen_gnl(s2) + 1), sizeof(char));
 	if (!res)
 		return (res = NULL, NULL);
 	ptr = res;

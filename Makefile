@@ -6,13 +6,13 @@
 #    By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/08 17:25:51 by khuk              #+#    #+#              #
-#    Updated: 2024/08/09 16:05:24 by khuk             ###   ########.fr        #
+#    Updated: 2024/08/12 18:12:45 by khuk             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME= fdf
 
-SRCS= test.c
+SRCS= fdf_count.c fdf_get_map.c
 
 OBJS= $(SRCS:.c=.o)
 
@@ -33,7 +33,7 @@ $(NAME): $(OBJS) $(LIB)
 		$(CC) $(CFLAGS) $(MLXFLAGS) $(OBJS) $(LIB) -o $(NAME)
 
 %.o: %.c
-	cc -c $(CFLAGS) -Imlx -o $@ -c $<
+	cc -c $(CFLAGS) -Imlx -I$(LIB) -o $@ -c $<
 
 clean:
 	make clean -C GNL/

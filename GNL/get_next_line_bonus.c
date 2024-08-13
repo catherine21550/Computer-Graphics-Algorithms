@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: khuk <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 18:14:30 by khuk              #+#    #+#             */
-/*   Updated: 2024/05/30 12:37:07 by khuk             ###   ########.fr       */
+/*   Updated: 2024/08/12 16:41:30 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static char	*ft_createnewbuff(int fd, char *buff, ssize_t *readchr)
 	char	*tmp;
 	char	*readtmp;
 
-	readtmp = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+	readtmp = ft_calloc_gnl(BUFFER_SIZE + 1, sizeof(char));
 	if (!readtmp)
 		return (free(readtmp), free(buff), tmp = NULL,
 			readtmp = NULL, buff = NULL, NULL);
@@ -27,7 +27,7 @@ static char	*ft_createnewbuff(int fd, char *buff, ssize_t *readchr)
 			free(buff), buff = NULL, NULL);
 	else if (*readchr == 0)
 		return (free(readtmp), readtmp = NULL, buff);
-	tmp = ft_strjoin(buff, readtmp);
+	tmp = ft_strjoin_new(buff, readtmp);
 	return (free(readtmp), free(buff), buff = NULL, readtmp = NULL, tmp);
 }
 
@@ -60,7 +60,7 @@ static char	*ft_clean_buffer(char *buffer)
 	if (newline)
 	{
 		newline++;
-		tmp = ft_strndup(newline, ft_strlen(newline));
+		tmp = ft_strndup(newline, ft_strlen_gnl(newline));
 		free(buffer);
 		buffer = NULL;
 		if (!tmp)
