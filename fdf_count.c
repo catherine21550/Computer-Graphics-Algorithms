@@ -22,10 +22,10 @@ int	ft_isendornewl(char c)
 	return (c == '\0' || c == '\n');
 }
 
-size_t	str_width(char *str)
+long	str_width(char *str)
 {
 	int		in_word;
-	size_t	num;
+	long	num;
 
 	num = 0;
 	while (!ft_isendornewl(*str))
@@ -47,7 +47,7 @@ size_t	str_width(char *str)
 	return (num);
 }
 
-int	count_lines(int fd, int *nums)
+long	count_lines(int fd, long *nums)
 {
 	int		lines;
 	char	*new_line;
@@ -67,10 +67,10 @@ int	count_lines(int fd, int *nums)
 	return (lines);
 }
 
-int	lines_number(int ac, char *av[], int *nums)
+long	lines_number(int ac, char *av[], long *nums)
 {
-	int	fd;
-	int	lines;
+	int		fd;
+	long	lines;
 
 	fd = open(av[1], O_RDONLY);
 	if (ac != 2)

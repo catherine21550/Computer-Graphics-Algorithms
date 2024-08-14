@@ -15,16 +15,17 @@
 
 typedef struct s_map
 {
-    int **map;
-    int strlen;
-}   t_map;
+	long **map;
+	long strlen;
+	long arrlen;
+}	t_map;
 
 //Count of lines and q-ty of the numbers in line
-int	ft_isnum(char c);
-int	ft_isendornewl(char c);
-size_t	str_width(char *str);
-int	count_lines(int fd, int *nums);
-int	lines_number(int ac, char *av[], int *nums);
+int	    ft_isnum(char c);
+int	    ft_isendornewl(char c);
+long	str_width(char *str);
+long	count_lines(int fd, long *nums);
+long	lines_number(int ac, char *av[], long *nums);
 //Saving the map
 
 # include <mlx.h>

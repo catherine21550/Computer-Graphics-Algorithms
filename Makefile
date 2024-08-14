@@ -18,9 +18,9 @@ OBJS= $(SRCS:.c=.o)
 
 MLXFLAGS= -lmlx -lXext -lX11
 
-CFLAGS= -Wall -Wextra -Werror
+CFLAGS= -g -Wall -Wextra -Werror
 
-CC= cc
+CC= cc 
 
 LIB= GNL/libftprintfgnl.a
 
