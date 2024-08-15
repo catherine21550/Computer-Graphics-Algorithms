@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf_inputstore.c                                   :+:      :+:    :+:   */
+/*   fdf_count.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 17:44:21 by khuk              #+#    #+#             */
-/*   Updated: 2024/08/12 18:34:46 by khuk             ###   ########.fr       */
+/*   Updated: 2024/08/15 18:15:26 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,11 @@ long	count_lines(int fd, long *nums)
 
 	lines = 0;
 	new_line = get_next_line(fd);
-	*nums = str_width(new_line);
 	if (!new_line)
-		return (new_line = NULL, 0);
+		return (0);
+	*nums = str_width(new_line);
+	if (!nums)
+		return (free(new_line), 0);
 	free (new_line);
 	while (new_line != NULL)
 	{
@@ -64,6 +66,7 @@ long	count_lines(int fd, long *nums)
 		free (new_line);
 		lines++;
 	}
+	new_line = NULL;
 	return (lines);
 }
 
@@ -73,7 +76,7 @@ long	lines_number(int ac, char *av[], long *nums)
 	long	lines;
 
 	fd = open(av[1], O_RDONLY);
-	if (ac != 2)
+	if (ac != 2 || fd < 0)
 		return (0);
 	lines = count_lines(fd, nums);
 	close(fd);
