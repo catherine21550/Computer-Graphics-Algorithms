@@ -30,10 +30,20 @@ int	handle_key(int key, t_data *data)
 	return (0);
 }
 
+int	mouse_handling(int button, int x, int y, t_data *data)
+{
+	(void)x;
+	(void)y;
+	(void)data;
+	if (button == 1)
+		ft_printf("Left click\n");
+	else
+		ft_printf("Other click\n");
+	return (0);
+}
+
 int	main()
 {
-//	void	*connection;
-//	void	*my_window;
 	t_data	my_data;
 
 	my_data.mlx_ptr = mlx_init ();
@@ -45,13 +55,10 @@ int	main()
 		mlx_destroy_window(my_data.mlx_ptr, my_data.win_ptr);
 		return (free(my_data.mlx_ptr), -1);
 	}
-//	mlx_mouse_hook(my_window, );
-//	mlx_string_put(connection, my_window, 10, 25, 225, "Fdf");
 	mlx_key_hook(my_data.win_ptr, &handle_key, &my_data);
-//	while (1)
-//		;
+	mlx_mouse_hook(my_data.win_ptr, &mouse_handling, &my_data);
 	mlx_loop(my_data.mlx_ptr);
 	mlx_destroy_window(my_data.mlx_ptr, my_data.win_ptr);
-	mlx_destroy_display(my_data.mlx_ptr);
+	mlx_destroy_display(my_data.win_ptr);
 	return (0);
 }
