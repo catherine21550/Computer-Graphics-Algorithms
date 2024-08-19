@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 13:55:17 by khuk              #+#    #+#             */
-/*   Updated: 2024/08/15 20:30:34 by khuk             ###   ########.fr       */
+/*   Updated: 2024/08/18 17:27:43 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,17 @@ typedef struct s_map
 	long	strlen;
 	long	arrlen;
 }	t_map;
+
+typedef struct	s_img
+{
+	void	*img_ptr;
+	int		size_line;
+	int		width;
+	int		height;
+	int		endian;
+	int		bits_per_pixel;
+	char	*ptr_imgbit;
+}	t_img;
 
 //Count of lines and q-ty of the numbers in line
 int		ft_isnum(char c);
