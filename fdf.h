@@ -25,7 +25,7 @@ typedef struct s_map
 	int		**map;
 	long	strlen;
 	long	arrlen;
-}	t_map;
+}			t_map;
 
 typedef struct	s_img
 {
@@ -36,7 +36,14 @@ typedef struct	s_img
 	int		endian;
 	int		bits_per_pixel;
 	char	*ptr_imgbit;
-}	t_img;
+}			t_img;
+
+typedef struct s_data
+{
+	void	*mlx_ptr;
+	void	*win_ptr;
+	t_img	img;
+}			t_data;
 
 //Count of lines and q-ty of the numbers in line
 int		ft_isnum(char c);
