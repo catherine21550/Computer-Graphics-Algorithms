@@ -12,11 +12,11 @@
 
 NAME= fdf
 
-SRCS= fdf_count.c fdf_get_map.c
+SRCS= test.c fdf_count.c fdf_get_map.c fdf_mem_clean.c
 
 OBJS= $(SRCS:.c=.o)
 
-MLXFLAGS= -lmlx -lXext -lX11
+MLXFLAGS= -lmlx -lXext -lX11 -lm
 
 CFLAGS= -g -Wall -Wextra -Werror
 
@@ -41,7 +41,7 @@ clean:
 
 fclean: clean
 	make fclean -C GNL/
-	rm -f $(NAME) 
+	rm -f $(NAME)
 
 re: fclean all
 

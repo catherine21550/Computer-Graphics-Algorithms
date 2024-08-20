@@ -12,23 +12,23 @@
 
 #include "get_next_line_bonus.h"
 
-static char	*ft_createnewbuff(int fd, char *buff, ssize_t *readchr)
+static char	*ft_createnewbuff(int fd, char **buff, ssize_t *readchr)
 {
 	char	*tmp;
 	char	*readtmp;
 
 	readtmp = ft_calloc_gnl(BUFFER_SIZE + 1, sizeof(char));
 	if (!readtmp)
-		return (free(readtmp), free(buff), tmp = NULL,
-			readtmp = NULL, buff = NULL, NULL);
+		return (free(readtmp), free(*buff), tmp = NULL,
+			readtmp = NULL, *buff = NULL, NULL);
 	*readchr = read(fd, readtmp, BUFFER_SIZE);
 	if (*readchr == -1)
 		return (free(readtmp), readtmp = NULL,
-			free(buff), buff = NULL, NULL);
+			free(*buff), *buff = NULL, NULL);
 	else if (*readchr == 0)
-		return (free(readtmp), readtmp = NULL, buff);
-	tmp = ft_strjoin_new(buff, readtmp);
-	return (free(readtmp), free(buff), buff = NULL, readtmp = NULL, tmp);
+		return (free(readtmp), readtmp = NULL, *buff);
+	tmp = ft_strjoin_new(*buff, readtmp);
+	return (free(readtmp), free(*buff), *buff = NULL, readtmp = NULL, tmp);
 }
 
 static char	*ft_getline(char *buff)
@@ -83,7 +83,11 @@ char	*get_next_line(int fd)
 		return (free(readbuffs[fd]), readbuffs[fd] = NULL, NULL);
 	readres = BUFFER_SIZE;
 	while (!ft_strchr(readbuffs[fd], '\n') && (readres == BUFFER_SIZE))
-		readbuffs[fd] = ft_createnewbuff(fd, readbuffs[fd], &readres);
+	{
+		readbuffs[fd] = ft_createnewbuff(fd, &readbuffs[fd], &readres);
+		if (readbuffs[fd] == NULL)
+			return (NULL);
+	}
 	new_line = ft_getline(readbuffs[fd]);
 	if (!new_line)
 		return (free(readbuffs[fd]), readbuffs[fd] = NULL, NULL);

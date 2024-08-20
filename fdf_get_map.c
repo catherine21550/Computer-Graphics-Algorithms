@@ -58,10 +58,10 @@ int	get_map(int ac, char *av[], t_map *map)
 		free_split(str_arr);
 		free(line);
 	}
-	return (cl_gnl(i[0]), close(i[0]), 1);
+	return (cl_gnl(i[0]) , close(i[0]), 1);
 }
-/* 
-int	main(int ac, char *av[])
+
+/* int	main(int ac, char *av[])
 {
 	t_map	map;
 

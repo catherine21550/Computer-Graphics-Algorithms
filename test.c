@@ -83,17 +83,29 @@ void make_dots(t_data *data, int ac, char *av[])
 		i[1] = -1;
 		while (++i[1] < map[0].strlen)
 		{
+			//Not isometric
 /* 			map[1].map[i[0]][i[1]] = i[1] + (cos(25) * map[0].map[i[0]][i[1]]);
 			ft_printf("destination x: %d, ", map[1].map[i[0]][i[1]]);
 			map[2].map[i[0]][i[1]] = i[0] + (sin(25) * map[0].map[i[0]][i[1]]);
 			ft_printf("destination y: %d\n", map[2].map[i[0]][i[1]] ); */
-			ft_printf("Before calculation\n");
-			map[1].map[i[0]][i[1]] = (i[1] * (cos(25))) + (i[0] * (cos(25 + 2))) + (map[0].map[i[0]][i[1]] * cos(25 - 2));
+			// Some isometric projections
+/* 			ft_printf("Before calculation\n");
+			map[1].map[i[0]][i[1]] = (i[1] * (cos(125))) + (i[0] * (cos(125 + 2))) + (map[0].map[i[0]][i[1]] * cos(125 - 2)) + 100;
 			ft_printf("destination x: %d, ", map[1].map[i[0]][i[1]]);
-			map[2].map[i[0]][i[1]] = (i[1] * (sin(25))) + (i[0] * (sin(25 + 2))) + (map[0].map[i[0]][i[1]] * sin(25 - 2));
+			map[2].map[i[0]][i[1]] = (i[1] * (sin(125))) + (i[0] * (sin(125 + 2))) + (map[0].map[i[0]][i[1]] * sin(125 - 2)) + 80;
 			ft_printf("destination y: %d\n", map[2].map[i[0]][i[1]] );
-		//	my_put_pixel(&data->img, (map[1].map[i[0]][i[1]] * 5), (map[2].map[i[0]][i[1]] * 5), 0xFF0000);
-		
+			my_put_pixel(&data->img, (map[1].map[i[0]][i[1]] * 5), (map[2].map[i[0]][i[1]] * 5), 0xFF0000); */
+/* 			ft_printf("Before calculation\n");
+			map[1].map[i[0]][i[1]] = (i[1] * (sqrt(2) / 2)) - (i[0] * (sqrt(2) / 2)) + 100;
+			ft_printf("destination x: %d, ", map[1].map[i[0]][i[1]]);
+			map[2].map[i[0]][i[1]] = (i[1] * (sqrt(2) / 2)) + (i[0] * (sqrt(2) / 2)) + (map[0].map[i[0]][i[1]] * (sqrt(2) / 2)) + 20;
+			ft_printf("destination y: %d\n", map[2].map[i[0]][i[1]] );
+			my_put_pixel(&data->img, (map[1].map[i[0]][i[1]] * 5), (map[2].map[i[0]][i[1]] * 5), 0x000000); */
+			map[1].map[i[0]][i[1]] = i[1]  * cos(100) - map[0].map[i[0]][i[1]] * sin(100) * cos(100) + i[0] * sin(100)*sin(100) + 30;
+			ft_printf("destination x: %d, ", map[1].map[i[0]][i[1]]);
+			map[2].map[i[0]][i[1]] = i[1] * sin(100) + map[0].map[i[0]][i[1]] * cos(100)*cos(100) - i[0] * cos(100)*sin(100) + 20;
+			ft_printf("destination y: %d\n", map[2].map[i[0]][i[1]] );
+			my_put_pixel(&data->img, (map[1].map[i[0]][i[1]] * 10), (map[2].map[i[0]][i[1]] * 10), 0x000000);
 		}
 	}
 	ft_printf("My x coordinates:\n");
@@ -112,6 +124,19 @@ void make_dots(t_data *data, int ac, char *av[])
 	}
 }
 
+int	exit_function(t_data *data)
+{
+	mlx_loop_end (data->mlx_ptr);
+	return (0);
+}
+
+int	key_function(int key, t_data *data)
+{
+	(void)key;
+	mlx_loop_end (data->mlx_ptr);
+	return (0);
+}
+
 int	main(int ac, char *av[])
 {
 	t_data	data;
@@ -119,17 +144,19 @@ int	main(int ac, char *av[])
 	data.mlx_ptr = mlx_init();
 	if (!data.mlx_ptr)
 		return (-1);
-	data.win_ptr = mlx_new_window(data.mlx_ptr, 360, 250, "FdF");
+	data.win_ptr = mlx_new_window(data.mlx_ptr, 1000, 1000, "FdF");
 	if (!data.win_ptr)
 		return (free(data.mlx_ptr), -1);
 	mlx_mouse_hook(data.win_ptr, &mouse_handling, &data);
-	data.img.img_ptr = mlx_new_image(data.mlx_ptr, 360, 250);
+	data.img.img_ptr = mlx_new_image(data.mlx_ptr, 1000, 1000);
 	data.img.ptr_imgbit = mlx_get_data_addr(data.img.img_ptr, &data.img.bits_per_pixel, &data.img.size_line, &data.img.endian);
 	print_data(&data.img);
-	solid_color(&data.img, 360, 250);
+	solid_color(&data.img, 1000, 1000);
 	make_dots(&data, ac, av);
 	mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, data.img.img_ptr, 0, 0);
-	mlx_key_hook(data.win_ptr, &handle_key, &data);
+	//mlx_key_hook(data.win_ptr, &handle_key, &data);
+	//mlx_hook(data.win_ptr, 17, (1L<<0), &exit_function, &data);
+	mlx_hook(data.win_ptr, 2, (1L<<0), &key_function, &data);
 	mlx_loop(data.mlx_ptr);
 	mlx_destroy_image(data.mlx_ptr, data.img.img_ptr);
 	mlx_destroy_window(data.mlx_ptr, data.win_ptr);
