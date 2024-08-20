@@ -12,9 +12,9 @@
 
 #include "fdf.h"
 
-int	handle_key(int key, t_data *data, t_img *img)
+/* int	handle_key(int key, t_data *data, t_img *img)
 {
-	ft_printf("The key %d is pressed\n", key);
+	
 	if (key == XK_Escape)
 	{
 		(void)img;
@@ -22,7 +22,7 @@ int	handle_key(int key, t_data *data, t_img *img)
 		return (1);
 	}
 	return (0);
-}
+} */
 
 int	mouse_handling(int button, int x, int y, t_data *data)
 {
@@ -62,6 +62,27 @@ void solid_color(t_img *img, int x, int y)
 		i[1] = -1;
 		while (++i[1] < x)
 			my_put_pixel(img, i[1], i[0], 0xFFFFFF);
+	}
+}
+// i[0] - x, i[1] - y, i[2] - dx, i[3] -dy
+// j[0] - incx, j[1] - incy new x = i[2], new y = i[3]
+void	connect_dots(t_map **coord)
+{
+	int	i[5];
+	int j[2];
+
+	i[1] = 0;
+	while (++i[1] < coord[1]->arrlen)
+	{
+		i[0] = 0;
+		while (++i[0] < coord[1]->strlen)
+		{
+			i[2] = coord[1]->map[i[0]][i[1]] - coord[1]->map[i[0] - 1][i[1] - 1];
+			i[3] = coord[2]->map[i[0]][i[1]] - coord[2]->map[i[0] - 1][i[1] - 1];
+			i[4] = i[3];
+			if (i[2] > i[3])
+				i[4] = i[2];
+		}
 	}
 }
 
@@ -122,6 +143,7 @@ void make_dots(t_data *data, int ac, char *av[])
 			ft_printf("%d ", map[2].map[i][j]);
 		ft_printf("\n");
 	}
+	connect_dots(&map);
 }
 
 int	exit_function(t_data *data)
@@ -132,8 +154,9 @@ int	exit_function(t_data *data)
 
 int	key_function(int key, t_data *data)
 {
-	(void)key;
-	mlx_loop_end (data->mlx_ptr);
+	ft_printf("The key %d is pressed\n", key);
+	if (key == XK_Escape)
+		mlx_loop_end (data->mlx_ptr);
 	return (0);
 }
 
@@ -155,7 +178,7 @@ int	main(int ac, char *av[])
 	make_dots(&data, ac, av);
 	mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, data.img.img_ptr, 0, 0);
 	//mlx_key_hook(data.win_ptr, &handle_key, &data);
-	//mlx_hook(data.win_ptr, 17, (1L<<0), &exit_function, &data);
+	mlx_hook(data.win_ptr, 17, (1L<<0), &exit_function, &data);
 	mlx_hook(data.win_ptr, 2, (1L<<0), &key_function, &data);
 	mlx_loop(data.mlx_ptr);
 	mlx_destroy_image(data.mlx_ptr, data.img.img_ptr);
