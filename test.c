@@ -48,6 +48,8 @@ void	my_put_pixel(t_img *img, int x, int y, int color)
 {
 	int		i;
 
+	if (x < 0 || y < 0 || x > 1000 || y > 1000)
+		return ;
 	i = (img->size_line * y) + ((img->bits_per_pixel / 8) * x);
 	*((unsigned int *)(i + img->ptr_imgbit)) = color;
 }
@@ -64,25 +66,84 @@ void solid_color(t_img *img, int x, int y)
 			my_put_pixel(img, i[1], i[0], 0xFFFFFF);
 	}
 }
-// i[0] - x, i[1] - y, i[2] - dx, i[3] -dy
-// j[0] - incx, j[1] - incy new x = i[2], new y = i[3]
-void	connect_dots(t_map **coord)
+
+int	ft_abs(int i)
+{
+	int j;
+
+	j = i;
+	if (i < 0)
+		j *= -1;
+	return (j);
+}
+
+void	connect_dots2(t_map *x, t_map *y, t_data *data)
 {
 	int	i[5];
-	int j[2];
+	int j[3];
 
-	i[1] = 0;
-	while (++i[1] < coord[1]->arrlen)
+	i[1] = -1;
+	while (++i[1] < (x)->strlen)
 	{
 		i[0] = 0;
-		while (++i[0] < coord[1]->strlen)
+		while (++i[0] < (y)->arrlen)
 		{
-			i[2] = coord[1]->map[i[0]][i[1]] - coord[1]->map[i[0] - 1][i[1] - 1];
-			i[3] = coord[2]->map[i[0]][i[1]] - coord[2]->map[i[0] - 1][i[1] - 1];
+			i[2] = ft_abs(x->map[i[0]][i[1]] - x->map[i[0] - 1][i[1]]);
+			i[3] = ft_abs(y->map[i[0]][i[1]] - y->map[i[0] - 1][i[1]]);
 			i[4] = i[3];
 			if (i[2] > i[3])
 				i[4] = i[2];
+			if (i[4] > 0)
+			{
+				j[0] = i[2] / i[4];
+				j[1] = i[3] / i[4];
+				j[2] = -1;
+				i[2] = x->map[i[0] - 1][i[1]];
+				i[3] = y->map[i[0] - 1][i[1]];
+				while (i[2] <= x->map[i[0]][i[1]] && i[3] <= y->map[i[0]][i[1]])
+				{
+					i[2] += j[0];
+					i[3] += j[1];
+					my_put_pixel(&data->img, i[2], i[3], 0x000000);
+				}
+			}
 		}
+	}
+}
+// i[0] - counter, i[1] - counter, i[2] - dx, i[3] -dy i[4] - step
+// j[0] - incx, j[1] - incy new x = i[2], new y = i[3], j[2] - index for steps
+void	connect_dots(t_map *x, t_map *y, t_data *data)
+{
+	ft_printf("Connect_dots\n");
+	int	i[5];
+	int j[3];
+
+	i[0] = -1;
+	while (++i[0] < (y)->arrlen)
+	{
+		i[1] = 0;
+		while (++i[1] < (x)->strlen)
+		{
+			i[2] = ft_abs(x->map[i[0]][i[1]] - x->map[i[0]][i[1] - 1]);
+			i[3] = ft_abs(y->map[i[0]][i[1]] - y->map[i[0]][i[1] - 1]);
+			i[4] = i[3];
+			if (i[2] > i[3])
+				i[4] = i[2];
+			if (i[4] > 0)
+			{
+				j[0] = i[2] / i[4];
+				j[1] = i[3] / i[4];
+				j[2] = -1;
+				i[2] = x->map[i[0]][i[1] - 1];
+				i[3] = y->map[i[0]][i[1] - 1];
+				while (i[2] <= x->map[i[0]][i[1]] && i[3] <= y->map[i[0]][i[1]])
+				{
+					i[2] += j[0];
+					i[3] += j[1];
+					my_put_pixel(&data->img, i[2], i[3], 0x000000);
+				}
+			}
+ 		}
 	}
 }
 
@@ -105,34 +166,36 @@ void make_dots(t_data *data, int ac, char *av[])
 		while (++i[1] < map[0].strlen)
 		{
 			//Not isometric
-/* 			map[1].map[i[0]][i[1]] = i[1] + (cos(25) * map[0].map[i[0]][i[1]]);
+			map[1].map[i[0]][i[1]] = (i[1] + (cos(25) * map[0].map[i[0]][i[1]])) * 10;
 			ft_printf("destination x: %d, ", map[1].map[i[0]][i[1]]);
-			map[2].map[i[0]][i[1]] = i[0] + (sin(25) * map[0].map[i[0]][i[1]]);
-			ft_printf("destination y: %d\n", map[2].map[i[0]][i[1]] ); */
+			map[2].map[i[0]][i[1]] = (i[0] + (sin(25) * map[0].map[i[0]][i[1]])) * 10;
+			ft_printf("destination y: %d\n", map[2].map[i[0]][i[1]] );
+			my_put_pixel(&data->img, (map[1].map[i[0]][i[1]]), (map[2].map[i[0]][i[1]]), 0x000000);
 			// Some isometric projections
 /* 			ft_printf("Before calculation\n");
-			map[1].map[i[0]][i[1]] = (i[1] * (cos(125))) + (i[0] * (cos(125 + 2))) + (map[0].map[i[0]][i[1]] * cos(125 - 2)) + 100;
+			map[1].map[i[0]][i[1]] = ((i[1] * (cos(45))) + (i[0] * (cos(45 + 2))) + (map[0].map[i[0]][i[1]] * cos(45 - 2)) + 30) * 10;
 			ft_printf("destination x: %d, ", map[1].map[i[0]][i[1]]);
-			map[2].map[i[0]][i[1]] = (i[1] * (sin(125))) + (i[0] * (sin(125 + 2))) + (map[0].map[i[0]][i[1]] * sin(125 - 2)) + 80;
+			map[2].map[i[0]][i[1]] = ((i[1] * (sin(45))) + (i[0] * (sin(45 + 2))) + (map[0].map[i[0]][i[1]] * sin(45 - 2)) + 20) * 10;
 			ft_printf("destination y: %d\n", map[2].map[i[0]][i[1]] );
-			my_put_pixel(&data->img, (map[1].map[i[0]][i[1]] * 5), (map[2].map[i[0]][i[1]] * 5), 0xFF0000); */
+			my_put_pixel(&data->img, (map[1].map[i[0]][i[1]]), (map[2].map[i[0]][i[1]]), 0x0000FF); */
 /* 			ft_printf("Before calculation\n");
-			map[1].map[i[0]][i[1]] = (i[1] * (sqrt(2) / 2)) - (i[0] * (sqrt(2) / 2)) + 100;
+			map[1].map[i[0]][i[1]] = ((i[1] * (sqrt(2) / 2)) - (i[0] * (sqrt(2) / 2)) + 20) * 10;
 			ft_printf("destination x: %d, ", map[1].map[i[0]][i[1]]);
-			map[2].map[i[0]][i[1]] = (i[1] * (sqrt(2) / 2)) + (i[0] * (sqrt(2) / 2)) + (map[0].map[i[0]][i[1]] * (sqrt(2) / 2)) + 20;
+			map[2].map[i[0]][i[1]] = ((i[1] * (sqrt(2) / 2)) + (i[0] * (sqrt(2) / 2)) + (map[0].map[i[0]][i[1]] * (sqrt(2) / 2)) + 20) * 10;
 			ft_printf("destination y: %d\n", map[2].map[i[0]][i[1]] );
-			my_put_pixel(&data->img, (map[1].map[i[0]][i[1]] * 5), (map[2].map[i[0]][i[1]] * 5), 0x000000); */
-			map[1].map[i[0]][i[1]] = i[1]  * cos(100) - map[0].map[i[0]][i[1]] * sin(100) * cos(100) + i[0] * sin(100)*sin(100) + 30;
+			my_put_pixel(&data->img, (map[1].map[i[0]][i[1]]), (map[2].map[i[0]][i[1]]), 0x000000); */
+/* 			map[1].map[i[0]][i[1]] = i[1]  * cos(100) - map[0].map[i[0]][i[1]] * sin(100) * cos(100) + i[0] * sin(100)*sin(100) + 30;
 			ft_printf("destination x: %d, ", map[1].map[i[0]][i[1]]);
 			map[2].map[i[0]][i[1]] = i[1] * sin(100) + map[0].map[i[0]][i[1]] * cos(100)*cos(100) - i[0] * cos(100)*sin(100) + 20;
 			ft_printf("destination y: %d\n", map[2].map[i[0]][i[1]] );
-			my_put_pixel(&data->img, (map[1].map[i[0]][i[1]] * 10), (map[2].map[i[0]][i[1]] * 10), 0x000000);
+			my_put_pixel(&data->img, (map[1].map[i[0]][i[1]]), (map[2].map[i[0]][i[1]]), 0x000000); */
 		}
 	}
-	ft_printf("My x coordinates:\n");
+/* 	ft_printf("My x coordinates:\n");
 	for(int i = 0; i < map[1].arrlen; i++)
 	{
-		for(int j = 0; j < map[1].strlen; j++)
+		for(int j = 0; j < map[1].strlen; j++)make
+
 			ft_printf("%d ", map[1].map[i][j]);
 		ft_printf("\n");
 	}
@@ -142,8 +205,9 @@ void make_dots(t_data *data, int ac, char *av[])
 		for(int j = 0; j < map[2].strlen; j++)
 			ft_printf("%d ", map[2].map[i][j]);
 		ft_printf("\n");
-	}
-	connect_dots(&map);
+	} */
+	connect_dots(&map[1], &map[2], data);
+	connect_dots2(&map[1], &map[2], data);
 }
 
 int	exit_function(t_data *data)
@@ -173,7 +237,7 @@ int	main(int ac, char *av[])
 	mlx_mouse_hook(data.win_ptr, &mouse_handling, &data);
 	data.img.img_ptr = mlx_new_image(data.mlx_ptr, 1000, 1000);
 	data.img.ptr_imgbit = mlx_get_data_addr(data.img.img_ptr, &data.img.bits_per_pixel, &data.img.size_line, &data.img.endian);
-	print_data(&data.img);
+	//print_data(&data.img);
 	solid_color(&data.img, 1000, 1000);
 	make_dots(&data, ac, av);
 	mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, data.img.img_ptr, 0, 0);
