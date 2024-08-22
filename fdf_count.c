@@ -12,9 +12,9 @@
 
 #include "fdf.h"
 
-int	ft_isnum(char c)
+int	ft_isspace(char c)
 {
-	return (c >= '0' && c <= '9');
+	return (c == ' ');
 }
 
 int	ft_isendornewl(char c)
@@ -31,9 +31,9 @@ long	str_width(char *str)
 	while (!ft_isendornewl(*str))
 	{
 		in_word = 0;
-		while (!ft_isnum(*str) && !ft_isendornewl(*str))
+		while (ft_isspace(*str) && !ft_isendornewl(*str))
 			str++;
-		while (ft_isnum(*str) && !ft_isendornewl(*str))
+		while (!ft_isspace(*str) && !ft_isendornewl(*str))
 		{
 			if (!in_word)
 			{

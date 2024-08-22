@@ -76,51 +76,36 @@ int	ft_abs(int i)
 		j *= -1;
 	return (j);
 }
+/* void	data_init(double *i, int *j, ) */
 
 void	connect_dots2(t_map *x, t_map *y, t_data *data)
 {
 	double	i[5];
 	int 	j[3];
-/* 
-	ft_printf("My x coordinates:\n");
-	for(int i = 0; i < y->arrlen; i++)
-	{
-		for(int j = 0; j < x->strlen; j++)
-			ft_printf("%d ", x->map[i][j]);
-		ft_printf("\n");
-	}
-	ft_printf("My y coordinates:\n");
-	for(int i = 0; i < y->arrlen; i++)
-	{
-		for(int j = 0; j < y->strlen; j++)
-			ft_printf("%d ", y->map[i][j]);
-		ft_printf("\n");
-	}
- */
+
 	j[0] = 0;
 	while (++j[0] < y->arrlen)
 	{
 		j[1] = -1;
 		while (++j[1] < x->strlen)
 		{
-			i[0] = ft_abs(x->map[j[0]][j[1]] - x->map[j[0] - 1][j[1]]);
-			i[1] = ft_abs(y->map[j[0]][j[1]] - y->map[j[0] - 1][j[1]]);
-			i[2] = i[1];
-			if (i[0] > i[1])
-				i[2] = i[0];
-			if (i[2] > 0)
+			i[0] = x->map[j[0]][j[1]] - x->map[j[0] - 1][j[1]];
+			i[1] = y->map[j[0]][j[1]] - y->map[j[0] - 1][j[1]];
+			i[2] = ft_abs(i[1]);
+			if (ft_abs(i[0]) > ft_abs(i[1]))
+				i[2] = ft_abs(i[0]);
+			if (i[2] != 0)
 			{
 				i[3] = i[0] / i[2];
 				i[4] = i[1] / i[2];
 				i[0] = x->map[j[0] - 1][j[1]];
 				i[1] = y->map[j[0] - 1][j[1]];
-				j[3] = 0;
-				printf("MD2 Connect this one: %f, %f and %d, %d, step %f, %f\n", i[0], i[1], x->map[j[0]][j[1]], y->map[j[0]][j[1]], i[3], i[4]);
-				while (++j[3] <= i[2])
+				j[2] = 0;
+				while (++j[2] <= i[2])
 				{
-					my_put_pixel(&data->img, (int)i[0], (int)i[1], 0xFF0000);
 					i[0] += i[3];
 					i[1] += i[4];
+					my_put_pixel(&data->img, (int)i[0], (int)i[1], 0xFF0000);
 				}
 			}
 		}
@@ -130,7 +115,6 @@ void	connect_dots2(t_map *x, t_map *y, t_data *data)
 // j[0] - incx, j[1] - incy new x = i[2], new y = i[3], j[2] - index for steps
 void	connect_dots(t_map *x, t_map *y, t_data *data)
 {
-	ft_printf("Connect_dots\n");
 	double	i[5];
 	int		j[3];
 
@@ -140,24 +124,23 @@ void	connect_dots(t_map *x, t_map *y, t_data *data)
 		j[1] = 0;
 		while (++j[1] < (x)->strlen)
 		{
-			i[0] = ft_abs(x->map[j[0]][j[1]] - x->map[j[0]][j[1] - 1]);
-			i[1] = ft_abs(y->map[j[0]][j[1]] - y->map[j[0]][j[1] - 1]);
-			i[2] = i[1];
-			if (i[0] > i[1])
-				i[2] = i[0];
+			i[0] = x->map[j[0]][j[1]] - x->map[j[0]][j[1] - 1];
+			i[1] = y->map[j[0]][j[1]] - y->map[j[0]][j[1] - 1];
+			i[2] = ft_abs(i[1]);
+			if (ft_abs(i[0]) > ft_abs(i[1]))
+				i[2] = ft_abs(i[0]);
 			if (i[2] > 0)
 			{
 				i[3] = i[0] / i[2];
 				i[4] = i[1] / i[2];
 				i[0] = x->map[j[0]][j[1] - 1];
 				i[1] = y->map[j[0]][j[1] - 1];
-				j[3] = 0;
-				printf("MD1 Connect this one: %f, %f and %d, %d, step %f, %f\n", i[0], i[1], x->map[j[0]][j[1]], y->map[j[0]][j[1]], i[3], i[4]);
-				while (++j[3] <= i[2])
+				j[2] = 0;
+				while (++j[2] <= i[2])
 				{
 					i[0] += i[3];
 					i[1] += i[4];
-					my_put_pixel(&data->img, (int)i[0], (int)i[1], 0x000000);
+					my_put_pixel(&data->img, (int)i[0], (int)i[1], 0x0000FF);
 				}
 			}
  		}
@@ -183,18 +166,19 @@ void make_dots(t_data *data, int ac, char *av[])
 		while (++i[1] < map[0].strlen)
 		{
 			//Not isometric
-/* 			map[1].map[i[0]][i[1]] = (i[1] + (cos(25) * map[0].map[i[0]][i[1]])) * 20;
+/* 			map[1].map[i[0]][i[1]] = (i[1] + (cos(145) * map[0].map[i[0]][i[1]])) * 20;
 			ft_printf("destination x: %d, ", map[1].map[i[0]][i[1]]);
-			map[2].map[i[0]][i[1]] = (i[0] + (sin(25) * map[0].map[i[0]][i[1]])) * 20;
+			map[2].map[i[0]][i[1]] = (i[0] + (sin(145
+		) * map[0].map[i[0]][i[1]])) * 20;
 			ft_printf("destination y: %d\n", map[2].map[i[0]][i[1]] );
 			my_put_pixel(&data->img, (map[1].map[i[0]][i[1]]), (map[2].map[i[0]][i[1]]), 0x000000); */
 			// Some isometric projections
 			ft_printf("Before calculation\n");
-			map[1].map[i[0]][i[1]] = ((i[1] * (cos(45))) + (i[0] * (cos(45 + 2))) + (map[0].map[i[0]][i[1]] * cos(45 - 2)) + 30) * 15;
-			ft_printf("destination x: %d, ", map[1].map[i[0]][i[1]]);
-			map[2].map[i[0]][i[1]] = ((i[1] * (sin(45))) + (i[0] * (sin(45 + 2))) + (map[0].map[i[0]][i[1]] * sin(45 - 2)) + 20) * 15;
-			ft_printf("destination y: %d\n", map[2].map[i[0]][i[1]] );
-			my_put_pixel(&data->img, (map[1].map[i[0]][i[1]]), (map[2].map[i[0]][i[1]]), 0x0000FF);
+			map[1].map[i[0]][i[1]] = ((i[1] * (cos(145))) + (i[0] * (cos(145 + 2))) + (map[0].map[i[0]][i[1]] * cos(145 - 2)) + 30) * 15;
+			//ft_printf("destination x: %d, ", map[1].map[i[0]][i[1]]);
+			map[2].map[i[0]][i[1]] = ((i[1] * (sin(145))) + (i[0] * (sin(145 + 2))) + (map[0].map[i[0]][i[1]] * sin(145 - 2)) + 20) * 15;
+			//ft_printf("destination y: %d\n", map[2].map[i[0]][i[1]] );
+			my_put_pixel(&data->img, (map[1].map[i[0]][i[1]]), (map[2].map[i[0]][i[1]]), 0x000000);
 /* 			ft_printf("Before calculation\n");
 			map[1].map[i[0]][i[1]] = ((i[1] * (sqrt(2) / 2)) - (i[0] * (sqrt(2) / 2)) + 20) * 10;
 			ft_printf("destination x: %d, ", map[1].map[i[0]][i[1]]);
@@ -208,7 +192,7 @@ void make_dots(t_data *data, int ac, char *av[])
 			my_put_pixel(&data->img, (map[1].map[i[0]][i[1]]), (map[2].map[i[0]][i[1]]), 0x000000); */
 		}
 	}
-	ft_printf("My x coordinates:\n");
+/* 	ft_printf("My x coordinates:\n");
 	for(int i = 0; i < map[1].arrlen; i++)
 	{
 		for(int j = 0; j < map[1].strlen; j++)
@@ -222,9 +206,9 @@ void make_dots(t_data *data, int ac, char *av[])
 		for(int j = 0; j < map[2].strlen; j++)
 			ft_printf("%d ", map[2].map[i][j]);
 		ft_printf("\n");
-	}
+	} */
 	connect_dots(&map[1], &map[2], data);
-	ft_printf("a\n\n\n");
+
 	connect_dots2(&map[1], &map[2], data);
 }
 
@@ -241,6 +225,9 @@ int	key_function(int key, t_data *data)
 		mlx_loop_end (data->mlx_ptr);
 	return (0);
 }
+/* 
+int	fdf_winwidth()
+{} */
 
 int	main(int ac, char *av[])
 {
