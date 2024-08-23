@@ -22,7 +22,6 @@
 # include <stdint.h>
 # include "printf/ft_printf.h"
 
-
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1024
 # endif

@@ -12,12 +12,12 @@
 
 #include "fdf.h"
 
-int	create_struct(int ac, char *av[], t_map *my_map)
+int	create_struct(int ac, char *av[], t_map *my_map, t_data *data)
 {
 	long	i[2];
 
 	my_map->strlen = 0;
-	my_map->arrlen = lines_number(ac, av, &my_map->strlen);
+	my_map->arrlen = lines_number(ac, av, &my_map->strlen, data);
 	my_map->map = ft_calloc(sizeof(int *), (my_map->arrlen + 1));
 	if (!my_map->map)
 		return (0);
@@ -32,13 +32,13 @@ int	create_struct(int ac, char *av[], t_map *my_map)
 	return (1);
 }
 
-int	get_map(int ac, char *av[], t_map *map)
+int	get_map(int ac, char *av[], t_map *map, t_data *data)
 {
 	char	*line;
 	char	**str_arr;
 	int		i[3];
 
-	if (!create_struct(ac, av, map))
+	if (!create_struct(ac, av, map, data))
 		return (free_map(map), 0);
 	i[0] = open(av[1], O_RDONLY);
 	if (i[0] <= 0)
@@ -58,7 +58,7 @@ int	get_map(int ac, char *av[], t_map *map)
 		free_split(str_arr);
 		free(line);
 	}
-	return (cl_gnl(i[0]) , close(i[0]), 1);
+	return (cl_gnl(i[0]), close(i[0]), 1);
 }
 
 /* int	main(int ac, char *av[])

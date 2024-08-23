@@ -92,7 +92,8 @@ char	*ft_strjoin_new(char *s1, char *s2)
 		return (ft_strndup(s2, ft_strlen_gnl(s2)));
 	if (!s2)
 		return (ft_strndup(s1, ft_strlen_gnl(s1)));
-	res = (char *)ft_calloc_gnl ((ft_strlen_gnl(s1) + ft_strlen_gnl(s2) + 1), sizeof(char));
+	res = (char *)ft_calloc_gnl ((ft_strlen_gnl(s1)
+				+ ft_strlen_gnl(s2) + 1), sizeof(char));
 	if (!res)
 		return (res = NULL, NULL);
 	ptr = res;

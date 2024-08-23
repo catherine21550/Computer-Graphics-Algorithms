@@ -43,6 +43,12 @@ void	free_map(t_map *map)
 	}
 	free(map->map);
 }
+void	free_data(t_data *data)
+{
+	free_map(&data->map);
+	free_map(&data->x);
+	free_map(&data->y);
+}
 
 void	cl_gnl(int fd)
 {

@@ -70,14 +70,18 @@ long	count_lines(int fd, long *nums)
 	return (lines);
 }
 
-long	lines_number(int ac, char *av[], long *nums)
+long	lines_number(int ac, char *av[], long *nums, t_data *data)
 {
 	int		fd;
 	long	lines;
 
-	fd = open(av[1], O_RDONLY);
-	if (ac != 2 || fd < 0)
-		return (0);
+	(void)ac;
+	if ((fd = open(av[1], O_RDONLY)) == -1)
+	{
+		ft_printf("Error occurred: %s\n", strerror(errno));
+		destroy_evrth(data);
+		exit (1);
+	}
 	lines = count_lines(fd, nums);
 	close(fd);
 	return (lines);
