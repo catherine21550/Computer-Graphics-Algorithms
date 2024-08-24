@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 13:42:19 by khuk              #+#    #+#             */
-/*   Updated: 2024/08/22 00:26:49 by khuk             ###   ########.fr       */
+/*   Updated: 2024/08/24 01:55:03 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,37 +46,11 @@ void	destroy_evrth(t_data *data)
 	free(data->mlx_ptr);
 }
 
-int	init_funct(t_data *data, int ac, char *av[])
-{
-	if (ac < 2 || ac > 4)
-		return (0);
-	data->mlx_ptr = mlx_init();
-	if (!data->mlx_ptr)
-		return (0);
-	if (ac == 2)
-	{
-		av[2] = "1200";
-		av[3] = "1000";
-	}
-	if (ft_atoi(av[2]) < 100 || !str_isnum(av[2]))
-		av[2] = "1200";
-	if (ft_atoi(av[3]) < 100 || !str_isnum(av[3]))
-		av[3] = "1000";
-	data->win_w = ft_atoi(av[2]);
-	data->win_h = ft_atoi(av[3]);
-	data->win_ptr = mlx_new_window(data->mlx_ptr, ft_atoi(av[2]),
-				ft_atoi(av[3]), "FdF");
-	if (!data->win_ptr)
-		return (free(data->mlx_ptr), 0);
-	return (1);
-}
-
 int	main(int ac, char *av[])
 {
 	t_data	data;
 	
-	if (!init_funct(&data, ac, av))
-		return (1);
+	init_func(&data, ac, av);
 	mlx_mouse_hook(data.win_ptr, &mouse_handling, &data);
 	data.img.img_ptr = mlx_new_image(data.mlx_ptr, data.win_w, data.win_h);
 	data.img.ptr_imgbit = mlx_get_data_addr(data.img.img_ptr, &data.img.bits_per_pixel, &data.img.size_line, &data.img.endian);

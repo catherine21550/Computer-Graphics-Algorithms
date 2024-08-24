@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 17:12:07 by khuk              #+#    #+#             */
-/*   Updated: 2024/08/23 17:04:55 by khuk             ###   ########.fr       */
+/*   Updated: 2024/08/24 11:40:12 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,12 +101,10 @@ int	make_dots(t_data *data, int ac, char *av[])
 		{
 			data->x.map[i[0]][i[1]] = ((i[1] * (cos(145))) + (i[0]
 						* (cos(145 + 2))) + (data->map.map[i[0]][i[1]]
-						* cos(145 - 2)) + 30) * 12;
+						* cos(145 - 2)));
 			data->y.map[i[0]][i[1]] = ((i[1] * (sin(145))) + (i[0]
 						* (sin(145 + 2))) + (data->map.map[i[0]][i[1]]
-						* sin(145 - 2)) + 20) * 12;
-			my_put_pixel(data, (data->x.map[i[0]][i[1]]),
-				(data->y.map[i[0]][i[1]]), 0x000000);
+						* sin(145 - 2)));
 		}
 	}
 	connect_dots(data);

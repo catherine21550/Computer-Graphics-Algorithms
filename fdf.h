@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 13:55:17 by khuk              #+#    #+#             */
-/*   Updated: 2024/08/18 17:27:43 by khuk             ###   ########.fr       */
+/*   Updated: 2024/08/24 01:54:45 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,7 @@ int		make_dots(t_data *data, int ac, char *av[]);
 //Helper functions
 int		ft_abs(int i);
 int		str_isnum(char	*str);
+//
+void	input_check(int ac, char *av[]);
+void	init_func(t_data *data, int ac, char *av[]);
 #endif
