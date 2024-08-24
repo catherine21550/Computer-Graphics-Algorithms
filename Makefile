@@ -12,8 +12,8 @@
 
 NAME= fdf
 
-SRCS= test.c fdf_count.c fdf_get_map.c fdf_mem_clean.c fdf_utils.c \
-	fdf_draw_img.c \
+SRCS= main.c fdf_count.c fdf_get_map.c fdf_mem_clean.c fdf_utils.c \
+	fdf_draw_img.c fdf_init.c \
 
 OBJS= $(SRCS:.c=.o)
 

@@ -57,6 +57,14 @@ void	solid_color(t_data *d, int x, int y)
 			my_put_pixel(d, i[1], i[0], 0x000000);
 	}
 }
+
+void	fdf_center(t_data *data, int *shift_x, int *shift_y)
+{
+	data->img.width = data->x.map[data->x.arrlen - 1][data->x.strlen - 1] - data->x.map[0][0];
+	data->img.height = data->y.map[data->y.arrlen - 1][data->y.strlen - 1] - data->y.map[0][0];
+	*shift_x = (data->win_w - data->img.width) / 2;
+	*shift_y = (data->win_h - data->img.height) / 2;
+}
 /* 
 int main(int ac, char *av[])
 {

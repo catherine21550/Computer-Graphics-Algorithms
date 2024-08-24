@@ -43,6 +43,7 @@ void	init_func(t_data *data, int ac, char *av[])
 	input_check(ac, av);
 	data->win_w = ft_atoi(av[2]);
 	data->win_h = ft_atoi(av[3]);
+	data->scale = 2;
 	data->mlx_ptr = mlx_init();
 	if (!data->mlx_ptr)
 		exit (1);
@@ -53,4 +54,6 @@ void	init_func(t_data *data, int ac, char *av[])
 		free(data->mlx_ptr);
 		exit (1);
 	}
+	data->ac = ac;
+	data->av = av;
 }

@@ -46,6 +46,9 @@ typedef struct s_data
 	void	*win_ptr;
 	int		win_w;
 	int		win_h;
+	int		scale;
+	int		ac;
+	char	**av;
 	t_img	img;
 	t_map	map;
 	t_map	x;
@@ -61,6 +64,7 @@ long	lines_number(int ac, char *av[], long *nums, t_data *data);
 //Saving the map
 int		create_struct(int ac, char *av[], t_map *my_map, t_data *data);
 int		get_map(int ac, char *av[], t_map *map, t_data *data);
+int		memalloc_coord(t_data *data, int ac, char *av[]);
 //Clean memory
 void	free_split(char **arr);
 void	free_map(t_map *map);
@@ -70,7 +74,9 @@ void	free_data(t_data *data);
 //Drawing functions
 void	my_put_pixel(t_data *d, int x, int y, int color);
 void	solid_color(t_data *d, int x, int y);
-int		make_dots(t_data *data, int ac, char *av[]);
+void	draw_img(t_data *data, int ac, char *av[]);
+void	fdf_center(t_data *data, int *shift_x, int *shift_y);
+void	fdf_redraw_img(t_data *data, int ac, char *av[]);
 //Helper functions
 int		ft_abs(int i);
 int		str_isnum(char	*str);

@@ -12,6 +12,28 @@
 
 #include "fdf.h"
 
+void	shift_img(t_data *data)
+{
+	int	shift[2];
+	int	j[2];
+	int temp;
+
+	temp = 0;
+	fdf_center(data, &shift[0], &shift[1]);
+	j[0] = -1;
+	while (++j[0] < data->y.arrlen)
+	{
+		j[1] = -1;
+		while (++j[1] < data->x.strlen)
+		{
+			temp = (data->x.map[j[0]][j[1]] + shift[0]);
+			data->x.map[j[0]][j[1]] = temp;
+			temp = (data->y.map[j[0]][j[1]] + shift[1]);
+			data->y.map[j[0]][j[1]] = temp;
+		}
+	}
+}
+
 void	fdf_iter(t_data *data, double *i, int *j)
 {
 	i[3] = i[0] / i[2];
@@ -23,7 +45,7 @@ void	fdf_iter(t_data *data, double *i, int *j)
 	{
 		i[0] += i[3];
 		i[1] += i[4];
-		my_put_pixel(data, (int)i[0], (int)i[1], 0x0000FF);
+		my_put_pixel(data, ((int)i[0]), ((int)i[1]), 0x0000FF);
 	}
 }
 
@@ -86,13 +108,12 @@ void	connect_dots2(t_data *data)
 	}
 }
 
-int	make_dots(t_data *data, int ac, char *av[])
+void	draw_img(t_data *data, int ac, char *av[])
 {
 	int		i[2];
 
-	if (!get_map(ac, av, &data->map, data) || !get_map(ac, av, &data->x, data)
-	|| !get_map(ac, av, &data->y, data))
-		return (0);
+	(void)ac;
+	(void)av;
 	i[0] = -1;
 	while (++i[0] < data->y.arrlen)
 	{
@@ -101,13 +122,13 @@ int	make_dots(t_data *data, int ac, char *av[])
 		{
 			data->x.map[i[0]][i[1]] = ((i[1] * (cos(145))) + (i[0]
 						* (cos(145 + 2))) + (data->map.map[i[0]][i[1]]
-						* cos(145 - 2)));
+						* cos(145 - 2)))  * data->scale;
 			data->y.map[i[0]][i[1]] = ((i[1] * (sin(145))) + (i[0]
 						* (sin(145 + 2))) + (data->map.map[i[0]][i[1]]
-						* sin(145 - 2)));
+						* sin(145 - 2)))  * data->scale;
 		}
 	}
+	shift_img(data);//temp
 	connect_dots(data);
 	connect_dots2(data);
-	return (1);
 }
