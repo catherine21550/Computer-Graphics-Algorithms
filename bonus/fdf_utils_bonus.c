@@ -6,11 +6,11 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 17:02:04 by khuk              #+#    #+#             */
-/*   Updated: 2024/08/25 13:27:14 by khuk             ###   ########.fr       */
+/*   Updated: 2024/08/25 22:39:25 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "fdf_bonus.h"
 
 int	str_isnum(char	*str)
 {

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   fdf_bonus.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 13:55:17 by khuk              #+#    #+#             */
-/*   Updated: 2024/08/25 13:21:28 by khuk             ###   ########.fr       */
+/*   Updated: 2024/08/26 00:33:44 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,10 @@
 # include <errno.h>
 # include <stddef.h>
 # include <string.h>
-# include "GNL/get_next_line_bonus.h"
+# include "../GNL/get_next_line_bonus.h"
 # include <X11/keysym.h>
+
+# define Pi 3.14159265358979323846
 
 typedef struct s_map
 {
@@ -58,7 +60,6 @@ typedef struct s_data
 	t_map	y;
 }			t_data;
 
-//Count of lines and q-ty of the numbers in line
 int		ft_isspace(char c);
 int		ft_isendornewl(char c);
 long	str_width(char *str);
@@ -81,10 +82,13 @@ void	draw_img(t_data *data, int ac, char *av[]);
 void	fdf_center(t_data *data, int *shift_x, int *shift_y);
 void	fdf_redraw_img(t_data *data, int ac, char *av[]);
 void	shift_img(t_data *data);
-//Helper functions
+void	fdf_rotate_y(t_data *data);
 int		ft_abs(int i);
 int		str_isnum(char	*str);
-//
 void	input_check(int ac, char *av[]);
 void	init_func(t_data *data, int ac, char *av[]);
+//Mouse or key handling
+int		mouse_handling(int button, int x, int y, t_data *data);
+int		key_function(int key, t_data *data);
+int		exit_function(t_data *data);
 #endif
