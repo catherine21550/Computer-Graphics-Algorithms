@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 17:02:04 by khuk              #+#    #+#             */
-/*   Updated: 2024/08/23 17:02:14 by khuk             ###   ########.fr       */
+/*   Updated: 2024/08/25 13:27:14 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,14 @@ void	my_put_pixel(t_data *d, int x, int y, int color)
 void	solid_color(t_data *d, int x, int y)
 {
 	int		i[2];
-
+	int		colors[] = {0x000000, 0xffffff, 0x222222, 0x333333};
+	
 	i[0] = -1;
 	while (++i[0] < y)
 	{
 		i[1] = -1;
 		while (++i[1] < x)
-			my_put_pixel(d, i[1], i[0], 0x000000);
+			my_put_pixel(d, i[1], i[0], colors[d->color]);
 	}
 }
 

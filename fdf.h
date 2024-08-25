@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 13:55:17 by khuk              #+#    #+#             */
-/*   Updated: 2024/08/24 01:54:45 by khuk             ###   ########.fr       */
+/*   Updated: 2024/08/25 13:21:28 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_data
 	void	*win_ptr;
 	int		win_w;
 	int		win_h;
+	int		color;
 	int		scale;
 	int		ac;
 	char	**av;

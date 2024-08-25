@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 13:42:19 by khuk              #+#    #+#             */
-/*   Updated: 2024/08/24 01:55:03 by khuk             ###   ########.fr       */
+/*   Updated: 2024/08/25 14:16:04 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,13 @@ int	mouse_handling(int button, int x, int y, t_data *data)
 	if (button == 4)
 	{
 		data->scale += 1;
+		fdf_redraw_img(data, data->ac, data->av);
+	}
+	else if (button == 5)
+	{
+		data->scale -= 1;
+		if (data->scale <= 0)
+			data->scale = 1;
 		fdf_redraw_img(data, data->ac, data->av);
 	}
 	return (0);
@@ -34,6 +41,16 @@ int	key_function(int key, t_data *data)
 {
 	if (key == XK_Escape)
 		mlx_loop_end (data->mlx_ptr);
+	else if (key == XK_Left)
+		ft_putstr_fd("Left", 1);
+	else if (key == XK_Right)
+		ft_putstr_fd("Right", 1);
+	else if (key == XK_Return)
+	{
+		if (++data->color == 4)
+			data->color = 0;
+		fdf_redraw_img(data, data->ac, data->av);
+	}
 	return (0);
 }
 
@@ -79,7 +96,7 @@ int	main(int ac, char *av[])
 		return (destroy_evrth(&data), 1);
 	draw_img(&data, ac, av);
 	mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, data.img.img_ptr, 0, 0);
-//	mlx_mouse_hook(data.win_ptr, &mouse_handling, &data);
+	mlx_mouse_hook(data.win_ptr, &mouse_handling, &data);
 	mlx_hook(data.win_ptr, 17, (1L<<0), &exit_function, &data);
 	mlx_hook(data.win_ptr, 2, (1L<<0), &key_function, &data);
 	mlx_loop(data.mlx_ptr);

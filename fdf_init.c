@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 01:52:19 by khuk              #+#    #+#             */
-/*   Updated: 2024/08/24 01:54:51 by khuk             ###   ########.fr       */
+/*   Updated: 2024/08/25 13:35:46 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,9 @@ void	init_func(t_data *data, int ac, char *av[])
 	input_check(ac, av);
 	data->win_w = ft_atoi(av[2]);
 	data->win_h = ft_atoi(av[3]);
-	data->scale = 2;
+	data->scale = 15;
 	data->mlx_ptr = mlx_init();
+	data->color = 0;
 	if (!data->mlx_ptr)
 		exit (1);
 	data->win_ptr = mlx_new_window(data->mlx_ptr, ft_atoi(av[2]),
