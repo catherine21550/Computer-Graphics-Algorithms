@@ -31,7 +31,7 @@ void	input_check(int ac, char *av[])
 		ft_putstr_fd("./fdf <map.fdf> <window width> <window height>\n", 2);
 		exit (1);
 	}
-	if (ft_atoi(av[2]) < 50 || ft_atoi(av[3]) < 50) 
+	if (ft_atoi(av[2]) < 50 || ft_atoi(av[3]) < 50)
 	{
 		ft_putstr_fd("Error: width or height is too small\n", 2);
 		exit (1);
@@ -46,10 +46,12 @@ void	init_func(t_data *data, int ac, char *av[])
 	data->scale = 15;
 	data->mlx_ptr = mlx_init();
 	data->color = 0;
+	data->color_pic = 0;
+	data->ang = 145;
 	if (!data->mlx_ptr)
 		exit (1);
 	data->win_ptr = mlx_new_window(data->mlx_ptr, ft_atoi(av[2]),
-				ft_atoi(av[3]), "FdF");
+			ft_atoi(av[3]), "FdF");
 	if (!data->win_ptr)
 	{
 		free(data->mlx_ptr);

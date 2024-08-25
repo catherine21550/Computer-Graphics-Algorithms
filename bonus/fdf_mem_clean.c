@@ -43,6 +43,7 @@ void	free_map(t_map *map)
 	}
 	free(map->map);
 }
+
 void	free_data(t_data *data)
 {
 	free_map(&data->map);
@@ -61,4 +62,12 @@ void	cl_gnl(int fd)
 		tmp = get_next_line(fd);
 		free (tmp);
 	}
+}
+
+void	destroy_evrth(t_data *data)
+{
+	mlx_destroy_image(data->mlx_ptr, data->img.img_ptr);
+	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+	mlx_destroy_display(data->mlx_ptr);
+	free(data->mlx_ptr);
 }

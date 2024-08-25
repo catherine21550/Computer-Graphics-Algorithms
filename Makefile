@@ -12,14 +12,15 @@
 
 NAME= fdf
 
-SRCS= main.c fdf_count.c fdf_get_map.c fdf_mem_clean.c fdf_utils.c \
-	fdf_draw_img.c fdf_init.c \
+SRCS= mandatory/main.c mandatory/fdf_count.c mandatory/fdf_get_map.c \
+	mandatory/fdf_mem_clean.c mandatory/fdf_utils.c mandatory/fdf_handling.c \
+	mandatory/fdf_draw_img.c mandatory/fdf_init.c mandatory/fdf_shift.c \
 
 OBJS= $(SRCS:.c=.o)
 
 MLXFLAGS= -lmlx -lXext -lX11 -lm
 
-CFLAGS= -g -Wall -Wextra -Werror
+CFLAGS= -Wall -Wextra -Werror
 
 CC= cc 
 
@@ -34,7 +35,7 @@ $(NAME): $(OBJS) $(LIB)
 		$(CC) $(CFLAGS) $(MLXFLAGS) $(OBJS) $(LIB) -o $(NAME)
 
 %.o: %.c
-	cc -c $(CFLAGS) -Imlx -I$(LIB) -o $@ -c $<
+	cc -c $(CFLAGS) -Imlx -Imandatory -I$(LIB) -o $@ -c $<
 
 clean:
 	make clean -C GNL/

@@ -12,30 +12,18 @@
 
 #include "fdf.h"
 
-void	shift_img(t_data *data)
-{
-	int	shift[2];
-	int	j[2];
-	int temp;
-
-	temp = 0;
-	fdf_center(data, &shift[0], &shift[1]);
-	j[0] = -1;
-	while (++j[0] < data->y.arrlen)
-	{
-		j[1] = -1;
-		while (++j[1] < data->x.strlen)
-		{
-			temp = (data->x.map[j[0]][j[1]] + shift[0]);
-			data->x.map[j[0]][j[1]] = temp;
-			temp = (data->y.map[j[0]][j[1]] + shift[1]);
-			data->y.map[j[0]][j[1]] = temp;
-		}
-	}
-}
-
 void	fdf_iter(t_data *data, double *i, int *j)
 {
+	int	col[8];
+
+	col[0] = 0xFFFFFF;
+	col[1] = 0x0000FF;
+	col[2] = 0xFF0000;
+	col[3] = 0xC0C0C0;
+	col[4] = 0xADD8E6;
+	col[5] = 0xDA33BF;
+	col[6] = 0x843BDB;
+	col[7] = 0x000000;
 	i[3] = i[0] / i[2];
 	i[4] = i[1] / i[2];
 	i[0] = data->x.map[j[0]][j[1] - 1];
@@ -45,12 +33,22 @@ void	fdf_iter(t_data *data, double *i, int *j)
 	{
 		i[0] += i[3];
 		i[1] += i[4];
-		my_put_pixel(data, ((int)i[0]), ((int)i[1]), 0x0000FF);
+		my_put_pixel(data, ((int)i[0]), ((int)i[1]), col[data->color_pic]);
 	}
 }
 
 void	fdf_iter2(t_data *data, double *i, int *j)
 {
+	int	col[8];
+
+	col[0] = 0xFFFFFF;
+	col[1] = 0xFF0000;
+	col[2] = 0x0000FF;
+	col[3] = 0xFFD700;
+	col[4] = 0xFFC0CB;
+	col[5] = 0x237CBF;
+	col[6] = 0x75E6DF;
+	col[7] = 0x000000;
 	i[3] = i[0] / i[2];
 	i[4] = i[1] / i[2];
 	i[0] = data->x.map[j[0] - 1][j[1]];
@@ -60,7 +58,7 @@ void	fdf_iter2(t_data *data, double *i, int *j)
 	{
 		i[0] += i[3];
 		i[1] += i[4];
-		my_put_pixel(data, (int)i[0], (int)i[1], 0xFF0000);
+		my_put_pixel(data, (int)i[0], (int)i[1], col[data->color_pic]);
 	}
 }
 
@@ -120,15 +118,15 @@ void	draw_img(t_data *data, int ac, char *av[])
 		i[1] = -1;
 		while (++i[1] < data->x.strlen)
 		{
-			data->x.map[i[0]][i[1]] = ((i[1] * (cos(145))) + (i[0]
-						* (cos(145 + 2))) + (data->map.map[i[0]][i[1]]
-						* cos(145 - 2)))  * data->scale;
-			data->y.map[i[0]][i[1]] = ((i[1] * (sin(145))) + (i[0]
-						* (sin(145 + 2))) + (data->map.map[i[0]][i[1]]
-						* sin(145 - 2)))  * data->scale;
+			data->x.map[i[0]][i[1]] = ((i[1] * (cos(data->ang))) + (i[0]
+						* (cos(data->ang + 2))) + (data->map.map[i[0]][i[1]]
+						* cos(data->ang - 2))) * data->scale;
+			data->y.map[i[0]][i[1]] = ((i[1] * (sin(data->ang))) + (i[0]
+						* (sin(data->ang + 2))) + (data->map.map[i[0]][i[1]]
+						* sin(data->ang - 2))) * data->scale;
 		}
 	}
-	shift_img(data);//temp
+	shift_img(data);
 	connect_dots(data);
 	connect_dots2(data);
 }

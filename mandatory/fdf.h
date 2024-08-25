@@ -19,7 +19,7 @@
 # include <errno.h>
 # include <stddef.h>
 # include <string.h>
-# include "GNL/get_next_line_bonus.h"
+# include "../GNL/get_next_line_bonus.h"
 # include <X11/keysym.h>
 
 typedef struct s_map
@@ -47,6 +47,8 @@ typedef struct s_data
 	int		win_w;
 	int		win_h;
 	int		color;
+	int		color_pic;
+	int		ang;
 	int		scale;
 	int		ac;
 	char	**av;
@@ -78,10 +80,14 @@ void	solid_color(t_data *d, int x, int y);
 void	draw_img(t_data *data, int ac, char *av[]);
 void	fdf_center(t_data *data, int *shift_x, int *shift_y);
 void	fdf_redraw_img(t_data *data, int ac, char *av[]);
+void	shift_img(t_data *data);
 //Helper functions
 int		ft_abs(int i);
 int		str_isnum(char	*str);
-//
 void	input_check(int ac, char *av[]);
 void	init_func(t_data *data, int ac, char *av[]);
+//Mouse or key handling
+int		mouse_handling(int button, int x, int y, t_data *data);
+int		key_function(int key, t_data *data);
+int		exit_function(t_data *data);
 #endif
