@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 17:44:21 by khuk              #+#    #+#             */
-/*   Updated: 2024/08/25 22:38:22 by khuk             ###   ########.fr       */
+/*   Updated: 2024/08/26 21:37:48 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,8 @@ long	lines_number(int ac, char *av[], long *nums, t_data *data)
 	long	lines;
 
 	(void)ac;
-	if ((fd = open(av[1], O_RDONLY)) == -1)
+	fd = open(av[1], O_RDONLY);
+	if ((fd) == -1)
 	{
 		ft_printf("Error occurred: %s\n", strerror(errno));
 		destroy_evrth(data);

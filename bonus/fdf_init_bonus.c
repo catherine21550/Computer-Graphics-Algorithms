@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 01:52:19 by khuk              #+#    #+#             */
-/*   Updated: 2024/08/25 22:38:52 by khuk             ###   ########.fr       */
+/*   Updated: 2024/08/26 21:15:05 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,10 @@ void	init_func(t_data *data, int ac, char *av[])
 	data->mlx_ptr = mlx_init();
 	data->color = 0;
 	data->color_pic = 0;
-	data->ang = 145;
+	data->alpha = 0;
+	data->betta = 0;
+	data->tr = 1;
+	data->tr_num = 40;
 	if (!data->mlx_ptr)
 		exit (1);
 	data->win_ptr = mlx_new_window(data->mlx_ptr, ft_atoi(av[2]),

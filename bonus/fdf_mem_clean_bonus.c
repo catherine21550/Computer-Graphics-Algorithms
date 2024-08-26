@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 14:48:17 by khuk              #+#    #+#             */
-/*   Updated: 2024/08/25 22:39:03 by khuk             ###   ########.fr       */
+/*   Updated: 2024/08/26 21:21:02 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,12 @@ void	free_map(t_map *map)
 
 void	free_data(t_data *data)
 {
+	int	i;
+
+	i = -1;
+	while (data->xyz[++i])
+		free(data->xyz[i]);
+	free(data->xyz);
 	free_map(&data->map);
 	free_map(&data->x);
 	free_map(&data->y);

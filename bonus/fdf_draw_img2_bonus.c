@@ -1,18 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf_draw_img_bonus.c                               :+:      :+:    :+:   */
+/*   fdf_draw_img2_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 17:12:07 by khuk              #+#    #+#             */
-/*   Updated: 2024/08/26 17:59:00 by khuk             ###   ########.fr       */
+/*   Updated: 2024/08/26 21:37:04 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf_bonus.h"
 
-void	fdf_iter(t_data *data, double *i, int *j)
+void	draw_img2(t_data *data)
+{
+	int		i[2];
+
+	i[0] = -1;
+	while (++i[0] < data->y.arrlen)
+	{
+		i[1] = -1;
+		while (++i[1] < data->x.strlen)
+		{
+			data->x.map[i[0]][i[1]] = ((data->xyz[i[0]][i[1]].x
+						- data->xyz[i[0]][i[1]].y) * cos(0.523599)
+					* data->scale);
+			data->y.map[i[0]][i[1]] = ((data->xyz[i[0]][i[1]].x
+						+ data->xyz[i[0]][i[1]].y) * sin(0.523599)
+					- data->xyz[i[0]][i[1]].z) * data->scale;
+		}
+	}
+	shift_img(data);
+	connect_dots(data);
+	connect_dots2(data);
+}
+
+/* void	fdf_iter(t_data *data, double *i, int *j)
 {
 	int	col[8];
 
@@ -104,23 +127,4 @@ void	connect_dots2(t_data *data)
 				fdf_iter2(data, i, j);
 		}
 	}
-}
-
-void	draw_img(t_data *data)
-{
-	int		i[2];
-
-	xyz_alloc(data);
-	i[0] = -1;
-	while (++i[0] < data->y.arrlen)
-	{
-		i[1] = -1;
-		while (++i[1] < data->x.strlen)
-		{
-			data->xyz[i[0]][i[1]].x = i[1];
-			data->xyz[i[0]][i[1]].y = i[0];
-			data->xyz[i[0]][i[1]].z = data->map.map[i[0]][i[1]];
-		}
-	}
-	draw_img2(data);
-}
+} */

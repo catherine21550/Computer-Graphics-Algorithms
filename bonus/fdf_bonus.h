@@ -6,12 +6,12 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 13:55:17 by khuk              #+#    #+#             */
-/*   Updated: 2024/08/26 00:33:44 by khuk             ###   ########.fr       */
+/*   Updated: 2024/08/26 21:41:58 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
+#ifndef FDF_BONUS_H
+# define FDF_BONUS_H
 
 # include <mlx.h>
 # include <math.h>
@@ -22,7 +22,18 @@
 # include "../GNL/get_next_line_bonus.h"
 # include <X11/keysym.h>
 
-# define Pi 3.14159265358979323846
+# define PI 3.14159265358979323846
+# define L 65361
+# define R 65363
+# define A 65362
+# define D 65364
+
+typedef struct s_coord
+{
+	double	x;
+	double	y;
+	double	z;
+}	t_coord;
 
 typedef struct s_map
 {
@@ -50,14 +61,19 @@ typedef struct s_data
 	int		win_h;
 	int		color;
 	int		color_pic;
-	int		ang;
+	int		alpha;
+	int		betta;
+	int		a;
 	int		scale;
 	int		ac;
 	char	**av;
+	double	tr;
+	int		tr_num;
 	t_img	img;
 	t_map	map;
 	t_map	x;
 	t_map	y;
+	t_coord	**xyz;
 }			t_data;
 
 int		ft_isspace(char c);
@@ -78,17 +94,25 @@ void	free_data(t_data *data);
 //Drawing functions
 void	my_put_pixel(t_data *d, int x, int y, int color);
 void	solid_color(t_data *d, int x, int y);
-void	draw_img(t_data *data, int ac, char *av[]);
+void	draw_img(t_data *data);
+void	draw_img2(t_data *data);
 void	fdf_center(t_data *data, int *shift_x, int *shift_y);
-void	fdf_redraw_img(t_data *data, int ac, char *av[]);
+void	fdf_redraw_img(t_data *data);
 void	shift_img(t_data *data);
-void	fdf_rotate_y(t_data *data);
+void	fdf_rotate_z(t_data *data);
+void	fdf_translate(t_data *data);
 int		ft_abs(int i);
 int		str_isnum(char	*str);
 void	input_check(int ac, char *av[]);
 void	init_func(t_data *data, int ac, char *av[]);
+void	connect_dots(t_data *data);
+void	connect_dots2(t_data *data);
 //Mouse or key handling
 int		mouse_handling(int button, int x, int y, t_data *data);
 int		key_function(int key, t_data *data);
+void	key_translate(int key, t_data *data);
+void	key_rotate(int key, t_data *data);
 int		exit_function(t_data *data);
+//Helper
+void	xyz_alloc(t_data *data);
 #endif
