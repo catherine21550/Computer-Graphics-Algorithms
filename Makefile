@@ -19,10 +19,10 @@ SRCS= mandatory/main.c mandatory/fdf_count.c mandatory/fdf_get_map.c \
 	mandatory/fdf_draw_img.c mandatory/fdf_init.c mandatory/fdf_shift.c \
 
 B_SRCS= bonus/main_bonus.c bonus/fdf_count_bonus.c bonus/fdf_get_map_bonus.c \
-        bonus/fdf_mem_clean_bonus.c bonus/fdf_utils_bonus.c \
-        bonus/fdf_handling_bonus.c bonus/fdf_draw_img_bonus.c \
-        bonus/fdf_init_bonus.c bonus/fdf_shift_bonus.c \
-        bonus/fdf_draw_img2_bonus.c \
+	bonus/fdf_mem_clean_bonus.c bonus/fdf_utils_bonus.c \
+	bonus/fdf_handling_bonus.c bonus/fdf_draw_img_bonus.c \
+	bonus/fdf_init_bonus.c bonus/fdf_shift_bonus.c \
+	bonus/fdf_draw_img2_bonus.c \
 
 B_OBJS= $(B_SRCS:.c=.o)
 
@@ -41,23 +41,23 @@ all: $(NAME)
 bonus: $(B_NAME)
 
 $(LIB):
-	make -C GNL/ re
+	@make -C GNL/ re
 
 $(NAME): $(OBJS) $(LIB)
-		@ $(CC) $(CFLAGS) $(MLXFLAGS) $(OBJS) $(LIB) -o $(NAME)
+		$(CC) $(CFLAGS) $(MLXFLAGS) $(OBJS) $(LIB) -o $(NAME)
 
 $(B_NAME): $(B_OBJS) $(LIB)
-                $(CC) $(B_OBJS) $(CFLAGS) $(MLXFLAGS) $(LIB) -o $(B_NAME)
+		$(CC) $(B_OBJS) $(CFLAGS) $(MLXFLAGS) $(LIB) -o $(B_NAME)
 
 %.o: %.c
-	@ cc -c $(CFLAGS) -Imlx -Imandatory -I$(LIB) -o $@ -c $<
+	@$(CC) -c $(CFLAGS) -Imlx -Imandatory -I$(LIB) -o $@ -c $<
 
 clean:
-	make clean -C GNL/
-	rm -f $(OBJS) $(B_OBJS)
+	@make clean -C GNL/
+	@rm -f $(OBJS) $(B_OBJS)
 
 fclean: clean
-	make fclean -C GNL/
+	@make fclean -C GNL/
 	rm -f $(NAME) $(B_NAME)
 
 re: fclean all

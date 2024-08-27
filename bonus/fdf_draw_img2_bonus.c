@@ -23,10 +23,10 @@ void	draw_img2(t_data *data)
 		while (++i[1] < data->x.strlen)
 		{
 			data->x.map[i[0]][i[1]] = ((data->xyz[i[0]][i[1]].x
-						- data->xyz[i[0]][i[1]].y) * cos(0.523599)
+						- data->xyz[i[0]][i[1]].y) * cos(0.5)
 					* data->scale);
 			data->y.map[i[0]][i[1]] = ((data->xyz[i[0]][i[1]].x
-						+ data->xyz[i[0]][i[1]].y) * sin(0.523599)
+						+ data->xyz[i[0]][i[1]].y) * sin(0.5)
 					- data->xyz[i[0]][i[1]].z) * data->scale;
 		}
 	}

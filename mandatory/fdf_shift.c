@@ -18,7 +18,6 @@ void	shift_img(t_data *data)
 	int	j[2];
 	int	temp;
 
-	temp = 0;
 	fdf_center(data, &shift[0], &shift[1]);
 	j[0] = -1;
 	while (++j[0] < data->y.arrlen)

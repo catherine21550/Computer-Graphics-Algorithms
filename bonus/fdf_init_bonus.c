@@ -33,7 +33,7 @@ void	input_check(int ac, char *av[])
 	}
 	if (ft_atoi(av[2]) < 50 || ft_atoi(av[3]) < 50)
 	{
-		ft_putstr_fd("Error: width or height is too small\n", 2);
+		ft_putstr_fd("Error: The window needs to be larger!\n", 2);
 		exit (1);
 	}
 }
