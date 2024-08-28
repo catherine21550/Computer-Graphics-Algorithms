@@ -14,7 +14,7 @@
 
 void	input_check(int ac, char *av[])
 {
-	if (ac < 2 || ac > 4)
+	if (ac < 2 || ac > 4 || ac == 3)
 	{
 		ft_putstr_fd("Error: wrong number of arguments\n", 2);
 		ft_putstr_fd("./fdf <map.fdf> <window width> <window height>\n", 2);
@@ -31,9 +31,10 @@ void	input_check(int ac, char *av[])
 		ft_putstr_fd("./fdf <map.fdf> <window width> <window height>\n", 2);
 		exit (1);
 	}
-	if (ft_atoi(av[2]) < 50 || ft_atoi(av[3]) < 50)
+	if (ft_atoi(av[2]) < 50 || ft_atoi(av[3]) < 50
+		|| ft_atoi(av[2]) > 1920 || ft_atoi(av[3]) > 1080)
 	{
-		ft_putstr_fd("Error: The window needs to be larger!\n", 2);
+		ft_putstr_fd("Error: The window needs to be smaller/larger!\n", 2);
 		exit (1);
 	}
 }
