@@ -49,9 +49,8 @@ typedef struct  s_game
  */
 //libft
 void	ft_putendl_fd(char *s, int fd);
-void    ft_putstr_fd(char *s, int fd);
-char	*ft_strchr(const char *str, int c);
 char    *ft_strnstr(const char *big, const char *little, size_t len);
 size_t	ft_strlen(const char *str);
+char	*get_next_line(int fd);
 
 #endif

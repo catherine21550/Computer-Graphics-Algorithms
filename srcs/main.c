@@ -14,7 +14,7 @@
 
 void exit_error(char *str)
 {
-    ft_putstr_fd("Error: ", 2);
+    ft_putendl_fd("Error", 2);
     ft_putendl_fd(str, 2);
     exit (EXIT_FAILURE);
 }
@@ -30,14 +30,19 @@ void check_arg(int argc, char *map)
         exit_error("file format must be .cub");
 }
 
-int save_data(char **argv, t_data *data)
+int save_data(char *arg, t_data *data)
 {
-    int fd;
+    int     fd;
+    int     i;
     (void)data;
 
-    fd = open(argv[1], O_RDONLY);
+    fd = open(arg, O_RDONLY);
     if (fd == -1)
         exit_error(strerror(errno));
+    i = 0;
+    //read byte by byte
+    if (close(fd) == -1)
+        exit_error("Failed to close file");
     return (0);
 }
 
@@ -46,6 +51,6 @@ int main(int argc, char **argv)
     t_data data;
 
     check_arg(argc, argv[1]);
-    save_data(argv, &data);
+    save_data(argv[1], &data);
     return (0);
 }
