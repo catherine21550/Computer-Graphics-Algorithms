@@ -26,7 +26,7 @@
 #  define BUFFER_SIZE 1024
 # endif
 
-char	*ft_strchr(const char *str, int c);
+char	*ft_strchr_gnl(const char *str, int c);
 size_t	ft_strlen_gnl(const char *str);
 char	*ft_strndup(const char *str, size_t size);
 void	*ft_calloc_gnl(size_t nmemb, size_t size);

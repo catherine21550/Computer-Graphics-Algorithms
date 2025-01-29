@@ -4,7 +4,7 @@
 
 # Source file directories
 SRCS_DIR			= ./srcs/
-#PARSING_DIR			= ./srcs/parsing/
+PARSING_DIR			= ./srcs/parsing/
 #RAYCAST_DIR			= ./srcs/raycasting/
 
 # Other directories
@@ -15,12 +15,12 @@ INCLUDES_DIR			= ./includes/
 # Source files
 CFILES_ROOT			= main.c \
 
-#CFILES_PARCING			= \
+CFILES_PARCING			= parse_data.c \
 
 #CFILES_RAYCAST			= \
 
 OBJ_FILES 			:= $(CFILES_ROOT:.c=.o) \
-#			  	   $(CFILES_PARCING:.c=.o) \
+			  	   $(CFILES_PARCING:.c=.o) \
 #			  	   $(CFILES_RAYCAST:.c=.o) \
 
 OBJS				:= $(addprefix $(OBJS_DIR), $(OBJ_FILES))
@@ -65,9 +65,9 @@ $(OBJS_DIR)%.o: $(SRCS_DIR)%.c
 	@mkdir -p $(OBJS_DIR)
 	$(CC) $(CFLAGS) -c $< $(INCLUDES) -o $@
 
-#$(OBJS_DIR)%.o: $(PARSING_DIR)%.c
-#	@mkdir -p $(OBJS_DIR)
-#	$(CC) $(CFLAGS) -c $< $(INCLUDES) -o $@
+$(OBJS_DIR)%.o: $(PARSING_DIR)%.c
+	@mkdir -p $(OBJS_DIR)
+	$(CC) $(CFLAGS) -c $< $(INCLUDES) -o $@
 	
 #$(OBJS_DIR)%.o: $(RAYCAST_DIR)%.c
 #	@mkdir -p $(OBJS_DIR)

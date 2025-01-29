@@ -23,6 +23,7 @@
 # include <fcntl.h>
 # include <mlx.h>
 # include <math.h>
+# include "../libft/libft.h"
 
 typedef struct  s_data
 {
@@ -47,10 +48,8 @@ typedef struct  s_game
 	void	*win_ptr;
 }               t_data;
  */
-//libft
-void	ft_putendl_fd(char *s, int fd);
-char    *ft_strnstr(const char *big, const char *little, size_t len);
-size_t	ft_strlen(const char *str);
-char	*get_next_line(int fd);
+//parsing
+void	save_data(char *arg, t_data *data);
+void    exit_error(char *str);
 
 #endif

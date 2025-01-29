@@ -14,43 +14,48 @@
 
 void exit_error(char *str)
 {
-    ft_putendl_fd("Error", 2);
-    ft_putendl_fd(str, 2);
-    exit (EXIT_FAILURE);
+	ft_putendl_fd("Error", 2);
+	ft_putendl_fd(str, 2);
+	exit (EXIT_FAILURE);
 }
 
 void check_arg(int argc, char *map)
 {
-    char    *format;
+	char    *format;
 
-    if (argc != 2)
-        exit_error("use one argument");
-    format = ft_strnstr(map, ".cub", ft_strlen(map));
-    if (!format || format[4] != '\0')
-        exit_error("file format must be .cub");
+	if (argc != 2)
+		exit_error("use one argument");
+	format = ft_strnstr(map, ".cub", ft_strlen(map));
+	if (!format || format[4] != '\0')
+		exit_error("file format must be .cub");
 }
 
-int save_data(char *arg, t_data *data)
+void	cleanup(t_data *data)
 {
-    int     fd;
-    int     i;
-    (void)data;
+	int	i;
 
-    fd = open(arg, O_RDONLY);
-    if (fd == -1)
-        exit_error(strerror(errno));
-    i = 0;
-    //read byte by byte
-    if (close(fd) == -1)
-        exit_error("Failed to close file");
-    return (0);
+	i = 0;
+	while (data->content[i])
+	{
+		free(data->content[i]);
+		i++;
+	}
+	if (data->content)
+		free(data->content);
 }
 
 int main(int argc, char **argv)
 {
-    t_data data;
+	t_data data;
 
-    check_arg(argc, argv[1]);
-    save_data(argv[1], &data);
-    return (0);
+	check_arg(argc, argv[1]);
+	save_data(argv[1], &data);
+	int i = 0;
+	while (data.content[i])
+	{
+		printf("%s\n", data.content[i]);
+		i++;
+	}
+	cleanup(&data);
+	return (0);
 }

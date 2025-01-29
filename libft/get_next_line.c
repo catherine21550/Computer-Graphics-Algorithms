@@ -56,7 +56,7 @@ static char	*ft_clean_buffer(char *buffer)
 
 	if (!buffer)
 		return (buffer = NULL, NULL);
-	newline = ft_strchr(buffer, '\n');
+	newline = ft_strchr_gnl(buffer, '\n');
 	if (newline)
 	{
 		newline++;
@@ -82,7 +82,7 @@ char	*get_next_line(int fd)
 	if (fd < 0 || BUFFER_SIZE < 1 || fd >= 1024)
 		return (free(readbuffs[fd]), readbuffs[fd] = NULL, NULL);
 	readres = BUFFER_SIZE;
-	while (!ft_strchr(readbuffs[fd], '\n') && (readres == BUFFER_SIZE))
+	while (!ft_strchr_gnl(readbuffs[fd], '\n') && (readres == BUFFER_SIZE))
 	{
 		readbuffs[fd] = ft_createnewbuff(fd, &readbuffs[fd], &readres);
 		if (readbuffs[fd] == NULL)
