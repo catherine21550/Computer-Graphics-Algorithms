@@ -19,11 +19,14 @@
 # include <errno.h>
 # include <string.h>
 # include <sys/time.h>
+# include <sys/stat.h>
+# include <fcntl.h>
 # include <mlx.h>
 # include <math.h>
 
-typedef struct  s_input
+typedef struct  s_data
 {
+    char    **content;
     char    **map;
     int     rows;
     int     cols;
@@ -35,15 +38,15 @@ typedef struct  s_input
     char    **floor;
     char    **ceiling;
 
-}               t_input;
-
+}               t_data;
+/* 
 typedef struct  s_game
 {
-    t_input *input;
+    t_data  *data;
     void	*mlx_ptr;
 	void	*win_ptr;
 }               t_data;
-
+ */
 //libft
 void	ft_putendl_fd(char *s, int fd);
 void    ft_putstr_fd(char *s, int fd);

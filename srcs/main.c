@@ -19,7 +19,7 @@ void exit_error(char *str)
     exit (EXIT_FAILURE);
 }
 
-int check_arg(int argc, char *map)
+void check_arg(int argc, char *map)
 {
     char    *format;
 
@@ -27,12 +27,25 @@ int check_arg(int argc, char *map)
         exit_error("use one argument");
     format = ft_strnstr(map, ".cub", ft_strlen(map));
     if (!format || format[4] != '\0')
-        exit_error("map format must be .cub");
+        exit_error("file format must be .cub");
+}
+
+int save_data(char **argv, t_data *data)
+{
+    int fd;
+    (void)data;
+
+    fd = open(argv[1], O_RDONLY);
+    if (fd == -1)
+        exit_error(strerror(errno));
     return (0);
 }
 
 int main(int argc, char **argv)
 {
+    t_data data;
+
     check_arg(argc, argv[1]);
+    save_data(argv, &data);
     return (0);
 }
