@@ -17,6 +17,7 @@
 # include <stddef.h>
 # include <stdio.h>
 # include <stdint.h>
+#include "get_next_line_bonus.h"
 
 typedef struct s_list
 {
