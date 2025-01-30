@@ -53,4 +53,3 @@ void	save_data(char *arg, t_data *data)
 		data->content[i] = get_next_line(fd);
 	}
 }
-

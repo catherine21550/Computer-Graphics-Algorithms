@@ -33,6 +33,7 @@ typedef struct  s_data
     int     rows;
     int     cols;
     int     player_pos[2];
+    char    player_dir;
     char    *no;
     char    *so;
     char    *we;
@@ -52,6 +53,6 @@ typedef struct  s_game
 //parsing
 void	save_data(char *arg, t_data *data);
 void    exit_error(char *str);
-void	parse_input(t_data *data);
+void	parser(t_data *data);
 
 #endif

@@ -69,6 +69,35 @@ bool	is_map(char *str)
 	return (false);
 }
 
+void	get_player_location(t_data *data)
+{
+	int		i;
+	int		j;
+	bool	found;
+
+	found = false;
+	i = 0;
+	while (data->map[i])
+	{
+		j = 0;
+		while (data->map[i][j] != '\n' && data->map[i][j])
+		{
+			if (data->map[i][j] == 'N' || data->map[i][j] == 'S'
+				|| data->map[i][j] == 'W' || data->map[i][j] == 'E')
+			{
+				data->player_dir = data->map[i][j];
+				data->player_pos[0] = i;
+				data->player_pos[1] = j;
+				found = true;
+			}
+			j++;
+		}
+		i++;
+	}
+	if (!found)
+		exit_error("No player found");
+}
+
 void	parse_input(t_data *data)
 {
 	int	i;
@@ -91,8 +120,17 @@ void	parse_input(t_data *data)
 		else if (is_map(data->content[i]))
 		{
 			data->map = &data->content[i];
-			break;
+			break ;
 		}
 		i++;
 	}
+	get_player_location(data);
+}
+
+void	parser(t_data *data)
+{
+	parse_input(data);
+	printf("player is at row: %d column: %d, direction: %c", data->player_pos[0], data->player_pos[1], data->player_dir);
+	//TO DO:
+	//check_map(data);
 }
