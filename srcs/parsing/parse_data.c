@@ -130,7 +130,6 @@ void	parse_input(t_data *data)
 void	parser(t_data *data)
 {
 	parse_input(data);
-	printf("player is at row: %d column: %d, direction: %c", data->player_pos[0], data->player_pos[1], data->player_dir);
 	//TO DO:
 	//check_map(data);
 }
