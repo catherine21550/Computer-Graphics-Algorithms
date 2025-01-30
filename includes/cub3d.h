@@ -23,6 +23,7 @@
 # include <fcntl.h>
 # include <mlx.h>
 # include <math.h>
+# include <stdbool.h>
 # include "../libft/libft.h"
 
 typedef struct  s_data

@@ -55,6 +55,19 @@ static int	get_color(char *str)
 	free(rgb);
 	return (color);
 }
+bool	is_map(char *str)
+{
+	if (ft_strnstr(str, " ", 1) ||
+		ft_strnstr(str, "1", 1) ||
+		ft_strnstr(str, "0", 1) ||
+		ft_strnstr(str, " ", 1) ||
+		(ft_strnstr(str, "N", 1) && !ft_strnstr (str, "NO", 2)) ||
+		(ft_strnstr(str, "S", 1) && !ft_strnstr (str, "SO", 2)) ||
+		(ft_strnstr(str, "E", 1) && !ft_strnstr (str, "EA", 2)) ||
+		(ft_strnstr(str, "W", 1) && !ft_strnstr (str, "WE", 2)) )
+		return (true);
+	return (false);
+}
 
 void	parse_input(t_data *data)
 {
@@ -75,6 +88,11 @@ void	parse_input(t_data *data)
 			data->floor = get_color(data->content[i]);
 		else if (ft_strnstr(data->content[i], "C", 1))
 			data->ceiling = get_color(data->content[i]);
+		else if (is_map(data->content[i]))
+		{
+			data->map = &data->content[i];
+			break;
+		}
 		i++;
 	}
 }
