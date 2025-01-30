@@ -36,8 +36,8 @@ typedef struct  s_data
     char    *so;
     char    *we;
     char    *ea;
-    char    **floor;
-    char    **ceiling;
+    int     floor;
+    int     ceiling;
 
 }               t_data;
 /* 
@@ -51,5 +51,6 @@ typedef struct  s_game
 //parsing
 void	save_data(char *arg, t_data *data);
 void    exit_error(char *str);
+void	parse_input(t_data *data);
 
 #endif

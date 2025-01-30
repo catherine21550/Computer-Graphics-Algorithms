@@ -50,12 +50,7 @@ int main(int argc, char **argv)
 
 	check_arg(argc, argv[1]);
 	save_data(argv[1], &data);
-	int i = 0;
-	while (data.content[i])
-	{
-		printf("%s\n", data.content[i]);
-		i++;
-	}
+	parse_input(&data);
 	cleanup(&data);
 	return (0);
 }
