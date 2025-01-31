@@ -29,6 +29,7 @@ OBJS				:= $(addprefix $(OBJS_DIR), $(OBJ_FILES))
 NAME				= cub3D
 CC 				= cc
 CFLAGS 				= -g -Wall -Werror -Wextra
+MLXFLAGS			= -lmlx -lXext -lX11 -lm
 RM 				= rm -rf
 LINKFLAGS			:= -L$(LIBFT_DIR) -lft -lreadline
 INCLUDES			:= -I$(INCLUDES_DIR) -I$(LIBFT_DIR)
@@ -42,7 +43,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	@make all -C $(LIBFT_DIR)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LINKFLAGS)
+	$(CC) $(CFLAGS) $(MLXFLAGS) -o $(NAME) $(OBJS) $(LINKFLAGS)
 
 clean:
 	@make clean -C $(LIBFT_DIR)
@@ -63,12 +64,12 @@ re: fclean all
 
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.c
 	@mkdir -p $(OBJS_DIR)
-	$(CC) $(CFLAGS) -c $< $(INCLUDES) -o $@
+	$(CC) $(CFLAGS) $(MLXFLAGS) -c $< $(INCLUDES) -o $@
 
 $(OBJS_DIR)%.o: $(PARSING_DIR)%.c
 	@mkdir -p $(OBJS_DIR)
-	$(CC) $(CFLAGS) -c $< $(INCLUDES) -o $@
+	$(CC) $(CFLAGS) $(MLXFLAGS) -c $< $(INCLUDES) -o $@
 	
 #$(OBJS_DIR)%.o: $(RAYCAST_DIR)%.c
 #	@mkdir -p $(OBJS_DIR)
-#	$(CC) $(CFLAGS) -c $< $(INCLUDES) -o $@
+#	$(CC) $(CFLAGS) $(MLXFLAGS) -c $< $(INCLUDES) -o $@
