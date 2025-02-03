@@ -3,59 +3,78 @@
 /*                                                        :::      ::::::::   */
 /*   parse_data.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: teesmaa <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: triinueesmaa <triinueesmaa@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:16:40 by teesmaa           #+#    #+#             */
-/*   Updated: 2025/01/30 12:36:12 by teesmaa          ###   ########.fr       */
+/*   Updated: 2025/02/03 13:06:18 by triinueesma      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
-char	*get_texture_path(char *str)
+static void    is_one_player(t_data *data)
 {
-	int	i = 0;
+    int	i;
+	int	j;
+    int	count;
 
-	str += 2;
-	while ((*str >= 9 && *str <= 13) || *str == 32)
-		str++;
-	while (str[i++])
-		if (str[i] == '\n')
-			str[i] = '\0';
-	return (str);
+    i = 0;
+	count = 0;
+    while (data->map[i])
+    {
+		j = 0;
+		while (data->map[i][j] != '\n' && data->map[i][j])
+		{
+			if (ft_strchr(DIRECTIONS, data->map[i][j]))
+				count++;
+			j++;
+		}
+		i++;
+    }
+	if (count != 1)
+	{
+		cleanup(data);
+		exit_error("Wrong number of players");
+	}
 }
 
-int rgb_to_int(char **rgb)
+static void	get_player_position(t_data *data)
 {
-	int	r;
-	int	g;
-	int	b;
-
-	r = ft_atoi(rgb[0]);
-	g = ft_atoi(rgb[1]);
-	b = ft_atoi(rgb[2]);
-	return ((r << 16) | (g << 8) | b);
-}
-
-static int	get_color(char *str)
-{
-	int		color;
-	char 	**rgb;
 	int		i;
+	int		j;
 
-	color = 0;
-	str++;
-	while ((*str >= 9 && *str <= 13) || *str == 32)
-		str++;
-	rgb = ft_split(str, ',');
-	color = rgb_to_int(rgb);
+	is_one_player(data);
 	i = 0;
-	while (rgb[i])
-		free(rgb[i++]);
-	free(rgb);
-	return (color);
+	while (data->map[i++])
+	{
+		j = 0;
+		while (data->map[i][j] != '\n' && data->map[i][j])
+		{
+			if (ft_strchr(DIRECTIONS, data->map[i][j]))
+			{
+				data->player_dir = data->map[i][j];
+				data->player_pos[0] = i;
+				data->player_pos[1] = j;
+				return ;
+			}
+			j++;
+		}
+	}
+	cleanup(data);
+	exit_error("No player found");
 }
-bool	is_map(char *str)
+
+static void	count_rows(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (data->map[i])
+		i++;
+	data->rows = i;
+}
+
+static bool	is_map(char *str)
 {
 	if (ft_strnstr(str, " ", 1) ||
 		ft_strnstr(str, "1", 1) ||
@@ -67,35 +86,6 @@ bool	is_map(char *str)
 		(ft_strnstr(str, "W", 1) && !ft_strnstr (str, "WE", 2)) )
 		return (true);
 	return (false);
-}
-
-void	get_player_location(t_data *data)
-{
-	int		i;
-	int		j;
-	bool	found;
-
-	found = false;
-	i = 0;
-	while (data->map[i])
-	{
-		j = 0;
-		while (data->map[i][j] != '\n' && data->map[i][j])
-		{
-			if (data->map[i][j] == 'N' || data->map[i][j] == 'S'
-				|| data->map[i][j] == 'W' || data->map[i][j] == 'E')
-			{
-				data->player_dir = data->map[i][j];
-				data->player_pos[0] = i;
-				data->player_pos[1] = j;
-				found = true;
-			}
-			j++;
-		}
-		i++;
-	}
-	if (!found)
-		exit_error("No player found");
 }
 
 void	parse_input(t_data *data)
@@ -124,12 +114,12 @@ void	parse_input(t_data *data)
 		}
 		i++;
 	}
-	get_player_location(data);
 }
 
 void	parser(t_data *data)
 {
 	parse_input(data);
-	//TO DO:
-	//check_map(data);
+	get_player_position(data);
+    count_rows(data);
+	check_map(data);
 }

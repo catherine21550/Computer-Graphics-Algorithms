@@ -34,11 +34,28 @@ static int	count_lines(char *arg)
 	return (lines);
 }
 
+static void	init_data(t_data *data)
+{
+	data->content = NULL;
+	data->map = NULL;
+	data->rows = 0;
+	data->player_pos[0] = 0;
+	data->player_pos[1] = 0;
+	data->player_dir = 0;
+	data->no = NULL;
+	data->so = NULL;
+	data->we = NULL;
+	data->ea = NULL;
+	data->floor = 0;
+	data->ceiling = 0;
+}
+
 void	save_data(char *arg, t_data *data)
 {
 	int		fd;
 	int		i;
 
+	init_data(data);
 	fd = open(arg, O_RDONLY);
 	if (fd == -1)
 		exit_error(strerror(errno));
