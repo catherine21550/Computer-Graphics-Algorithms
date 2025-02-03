@@ -16,6 +16,10 @@ INCLUDES_DIR			= ./includes/
 CFILES_ROOT			= main.c \
 
 CFILES_PARCING			= parse_data.c \
+							store_content.c \
+							map_checking.c \
+							parse_utils.c \
+							visual_info.c \
 
 #CFILES_RAYCAST			= \
 
