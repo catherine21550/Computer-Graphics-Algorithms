@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khuk <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 19:24:49 by khuk              #+#    #+#             */
-/*   Updated: 2024/08/12 16:40:18 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/04 22:22:42 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,6 @@ char	*ft_strndup(const char *str, size_t size);
 void	*ft_calloc_gnl(size_t nmemb, size_t size);
 char	*ft_strjoin_new(char *s1, char *s2);
 char	*get_next_line(int fd);
+void	clean_gnl(int fd);
 
 #endif
