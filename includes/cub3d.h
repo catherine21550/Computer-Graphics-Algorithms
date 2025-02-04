@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 09:43:26 by teesmaa           #+#    #+#             */
-/*   Updated: 2025/02/04 15:31:44 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/04 15:44:50 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,15 @@
 # include <sys/time.h>
 # include <sys/stat.h>
 # include <fcntl.h>
-# include <mlx.h>
+//# include <mlx.h>
 # include <math.h>
+# include <stdbool.h>
 # include <stdbool.h>
 
 # include "../libft/libft.h"
+
+# define DIRECTIONS "NSWE"
+# define INSIDE_MAP "0NSWE"
 
 typedef struct  s_data
 {
