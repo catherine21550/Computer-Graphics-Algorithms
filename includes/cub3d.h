@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: teesmaa <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 09:43:26 by teesmaa           #+#    #+#             */
-/*   Updated: 2025/01/29 09:49:07 by teesmaa          ###   ########.fr       */
+/*   Updated: 2025/02/04 15:31:44 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,33 +23,45 @@
 # include <fcntl.h>
 # include <mlx.h>
 # include <math.h>
+# include <stdbool.h>
+
 # include "../libft/libft.h"
 
 typedef struct  s_data
 {
-    char    **content;
-    char    **map;
-    int     rows;
-    int     cols;
-    int     player_pos[2];
-    char    *no;
-    char    *so;
-    char    *we;
-    char    *ea;
-    char    **floor;
-    char    **ceiling;
+	char	**content;
+	char	**map;
+	int		rows;
+	int		cols;
+	int		player_pos[2];
+	char	player_dir;
+	char	*no;
+	char	*so;
+	char	*we;
+	char	*ea;
+	int		floor;
+	int		ceiling;
 
-}               t_data;
-/* 
+}	t_data;
+
 typedef struct  s_game
 {
-    t_data  *data;
-    void	*mlx_ptr;
+	t_data	*data;
+	void	*mlx_ptr;
 	void	*win_ptr;
-}               t_data;
- */
-//parsing
+}	t_game;
+
+
+// ################# //
+//      Parcing      //
+// ################# //
 void	save_data(char *arg, t_data *data);
-void    exit_error(char *str);
+bool	ft_isspace(char c);
+void	exit_error(char *str);
+void	parser(t_data *data);
+void	cleanup(t_data *data);
+void	check_map(t_data *data);
+char	*get_texture_path(char *str);
+int		get_color(char *str);
 
 #endif
