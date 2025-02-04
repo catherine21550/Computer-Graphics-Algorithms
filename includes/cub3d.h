@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 09:43:26 by teesmaa           #+#    #+#             */
-/*   Updated: 2025/02/04 18:59:07 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/04 22:18:53 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ bool	ft_isspace(char c);
 void	exit_error(char *str);
 void	parser(t_data *data);
 void	cleanup(t_data *data);
+void	clean_gnl(int fd);
 void	check_map(t_data *data);
 char	*get_texture_path(char *str);
 int		get_color(char *str);
