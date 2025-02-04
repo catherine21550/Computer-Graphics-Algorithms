@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 09:49:45 by teesmaa           #+#    #+#             */
-/*   Updated: 2025/02/04 22:19:02 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/04 22:21:26 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,19 +64,6 @@ void	cleanup(t_data *data)
 	}
 	if (data->content)
 		free(data->content);
-}
-
-void	clean_gnl(int fd)
-{
-	char	*tmp;
-
-	tmp = get_next_line(fd);
-	free (tmp);
-	while (tmp != NULL)
-	{
-		tmp = get_next_line(fd);
-		free (tmp);
-	}
 }
 
 void	handle_graphics(t_game *main)

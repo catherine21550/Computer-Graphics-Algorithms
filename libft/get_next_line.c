@@ -1,16 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khuk <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 18:14:30 by khuk              #+#    #+#             */
-/*   Updated: 2024/08/12 16:41:30 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/04 22:21:58 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
+
+void	clean_gnl(int fd)
+{
+	char	*tmp;
+
+	tmp = get_next_line(fd);
+	free (tmp);
+	while (tmp != NULL)
+	{
+		tmp = get_next_line(fd);
+		free (tmp);
+	}
+}
 
 static char	*ft_createnewbuff(int fd, char **buff, ssize_t *readchr)
 {
