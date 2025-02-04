@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: triinueesmaa <triinueesmaa@student.42.f    +#+  +:+       +#+        */
+/*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 09:49:45 by teesmaa           #+#    #+#             */
-/*   Updated: 2025/02/03 12:11:18 by triinueesma      ###   ########.fr       */
+/*   Updated: 2025/02/04 20:06:00 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-/* 
+
 void	print_data(t_data *data)
 {
 	int	i;
@@ -33,7 +33,7 @@ void	print_data(t_data *data)
 	printf("%d\n", data->floor);
 	printf("%d\n", data->ceiling);
 }
- */
+
 void exit_error(char *str)
 {
 	ft_putendl_fd("Error", 2);
@@ -66,14 +66,28 @@ void	cleanup(t_data *data)
 		free(data->content);
 }
 
+void	handle_graphics(t_game *main)
+{
+	main->mlx_ptr = mlx_init();
+	if (!main->mlx_ptr)
+		return (cleanup(main->data), exit_error("mlx_init failed\n"));
+	main->win_ptr = mlx_new_window(main->mlx_ptr, 1920, 1080, "Cub3D");
+	if (!main->win_ptr)
+		return (cleanup(main->data), exit_error("mlx_new_window failed\n"));
+	mlx_loop(main->mlx_ptr);
+}
+
 int main(int argc, char **argv)
 {
 	t_data data;
+	t_game	main;
 
+	main.data = &data;
 	check_arg(argc, argv[1]);
 	save_data(argv[1], &data);
 	parser(&data);
-	//print_data(&data);
+	print_data(&data);
+	handle_graphics(&main);
 	cleanup(&data);
 	return (0);
 }
