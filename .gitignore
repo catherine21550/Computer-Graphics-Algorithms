@@ -5,3 +5,5 @@ libft/*.o
 libft/printf/*.o
 libft/libft.a
 objs/
+cub3D
+mlx_linux/
