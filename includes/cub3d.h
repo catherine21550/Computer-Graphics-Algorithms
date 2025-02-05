@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
+/*   By: triinueesmaa <triinueesmaa@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 09:43:26 by teesmaa           #+#    #+#             */
-/*   Updated: 2025/02/04 22:22:09 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/05 12:55:42 by triinueesma      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,14 @@ typedef struct  s_game
 //      Parcing      //
 // ################# //
 void	save_data(char *arg, t_data *data);
-bool	ft_isspace(char c);
-void	exit_error(char *str);
+bool    ft_isspace(char c);
+void    exit_error(char *str);
 void	parser(t_data *data);
 void	cleanup(t_data *data);
-void	check_map(t_data *data);
+void    check_map(t_data *data);
 char	*get_texture_path(char *str);
-int		get_color(char *str);
+int     get_color(char *str, t_data *data);
+void	free_array(char **str);
+int     count_digits(char *str);
 
 #endif

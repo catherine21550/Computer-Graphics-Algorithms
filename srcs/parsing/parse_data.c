@@ -6,7 +6,7 @@
 /*   By: triinueesmaa <triinueesmaa@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:16:40 by teesmaa           #+#    #+#             */
-/*   Updated: 2025/02/03 13:06:18 by triinueesma      ###   ########.fr       */
+/*   Updated: 2025/02/05 12:56:59 by triinueesma      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,9 +104,9 @@ void	parse_input(t_data *data)
 		else if (ft_strnstr(data->content[i], "EA", 2))
 			data->ea = get_texture_path(data->content[i]);
 		else if (ft_strnstr(data->content[i], "F", 1))
-			data->floor = get_color(data->content[i]);
+			data->floor = get_color(data->content[i], data);
 		else if (ft_strnstr(data->content[i], "C", 1))
-			data->ceiling = get_color(data->content[i]);
+			data->ceiling = get_color(data->content[i], data);
 		else if (is_map(data->content[i]))
 		{
 			data->map = &data->content[i];

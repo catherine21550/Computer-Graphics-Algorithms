@@ -13,7 +13,7 @@ char	*get_texture_path(char *str)
 	return (str);
 }
 
-static int rgb_to_int(char **rgb)
+static int rgb_to_int(char **rgb, t_data *data)
 {
 	int	r;
 	int	g;
@@ -22,24 +22,58 @@ static int rgb_to_int(char **rgb)
 	r = ft_atoi(rgb[0]);
 	g = ft_atoi(rgb[1]);
 	b = ft_atoi(rgb[2]);
+	if (r < 0 || r > 255 || g < 0 
+		|| g > 255 || b < 0 || b > 255)
+	{
+		free_array(rgb);
+		cleanup(data);
+		exit_error("Invalid color value");
+	}
 	return ((r << 16) | (g << 8) | b);
 }
 
-int	get_color(char *str)
+static void	color_check(char **rgb, t_data *data)
+{
+	int	i;
+	int	digits;
+
+	i = 0;
+	while (rgb[i])
+	{
+		digits = count_digits(rgb[i]);
+		if (i > 2 || digits < 1 || digits > 3)
+		{
+			free_array(rgb);
+			cleanup(data);
+			exit_error("Invalid color value");
+		}
+		i++;
+	}
+	if (i < 3)
+	{
+		free_array(rgb);
+		cleanup(data);
+		exit_error("Invalid color value");
+	}
+}
+
+int	get_color(char *str, t_data *data)
 {
 	int		color;
 	char 	**rgb;
-	int		i;
 
 	color = 0;
 	str++;
 	while (ft_isspace(*str))
 		str++;
 	rgb = ft_split(str, ',');
-	color = rgb_to_int(rgb);
-	i = 0;
-	while (rgb[i])
-		free(rgb[i++]);
-	free(rgb);
+	if (!rgb)
+	{
+		cleanup(data);
+		exit_error("ft_split() failed");
+	}
+	color_check(rgb, data);
+	color = rgb_to_int(rgb, data);
+	free_array(rgb);
 	return (color);
 }
