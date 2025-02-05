@@ -1,15 +1,33 @@
 #include "../../includes/cub3d.h"
 
-char	*get_texture_path(char *str)
+int	start_index(char *str, char *type)
 {
-	int	i = 0;
+	int i;
+	int	len;
 
-	str += 2;
-	while (ft_isspace(*str))
-		str++;
-	while (str[i++])
+	len = ft_strlen(type);
+	i = 0;
+	while (ft_isspace(str[i]))
+		i++;
+	if (ft_strncmp(type, str + i, len) == 0)
+		i += len;
+	while (ft_isspace(str[i]))
+		i++;
+	return (i);
+}
+
+char	*get_texture_path(char *str, char *type)
+{
+	int	i;
+
+	str += start_index(str, type);
+	i = 0;
+	while (str[i])
+	{
 		if (str[i] == '\n')
 			str[i] = '\0';
+		i++;
+	}
 	return (str);
 }
 
@@ -57,15 +75,13 @@ static void	color_check(char **rgb, t_data *data)
 	}
 }
 
-int	get_color(char *str, t_data *data)
+int	get_color(char *str, t_data *data, char *type)
 {
 	int		color;
 	char 	**rgb;
 
 	color = 0;
-	str++;
-	while (ft_isspace(*str))
-		str++;
+	str += start_index(str, type);
 	rgb = ft_split(str, ',');
 	if (!rgb)
 	{

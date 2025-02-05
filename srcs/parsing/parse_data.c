@@ -6,7 +6,7 @@
 /*   By: triinueesmaa <triinueesmaa@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:16:40 by teesmaa           #+#    #+#             */
-/*   Updated: 2025/02/05 12:56:59 by triinueesma      ###   ########.fr       */
+/*   Updated: 2025/02/05 15:00:22 by triinueesma      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,16 +76,35 @@ static void	count_rows(t_data *data)
 
 static bool	is_map(char *str)
 {
-	if (ft_strnstr(str, " ", 1) ||
-		ft_strnstr(str, "1", 1) ||
+	if (ft_strnstr(str, "1", 1) ||
 		ft_strnstr(str, "0", 1) ||
-		ft_strnstr(str, " ", 1) ||
 		(ft_strnstr(str, "N", 1) && !ft_strnstr (str, "NO", 2)) ||
 		(ft_strnstr(str, "S", 1) && !ft_strnstr (str, "SO", 2)) ||
 		(ft_strnstr(str, "E", 1) && !ft_strnstr (str, "EA", 2)) ||
 		(ft_strnstr(str, "W", 1) && !ft_strnstr (str, "WE", 2)) )
 		return (true);
 	return (false);
+}
+
+int	information_type(char *str)
+{
+	while (ft_isspace(*str))
+		str++;
+	if (ft_strnstr(str, "NO", 2))
+		return (NORTH);
+	if (ft_strnstr(str, "SO", 2))
+		return (SOUTH);
+	if (ft_strnstr(str, "WE", 2))
+		return (WEST);
+	if (ft_strnstr(str, "EA", 2))
+		return (EAST);
+	if (ft_strnstr(str, "F", 1))
+		return (FLOOR);
+	if (ft_strnstr(str, "C", 1))
+		return (CEILING);
+	if (is_map(str))
+		return (MAP);
+	return (-1);
 }
 
 void	parse_input(t_data *data)
@@ -95,19 +114,19 @@ void	parse_input(t_data *data)
 	i = 0;
 	while (data->content[i])
 	{
-		if (ft_strnstr(data->content[i], "NO", 2))
-			data->no = get_texture_path(data->content[i]);
-		else if (ft_strnstr(data->content[i], "SO", 2))
-			data->so = get_texture_path(data->content[i]);
-		else if (ft_strnstr(data->content[i], "WE", 2))
-			data->we = get_texture_path(data->content[i]);
-		else if (ft_strnstr(data->content[i], "EA", 2))
-			data->ea = get_texture_path(data->content[i]);
-		else if (ft_strnstr(data->content[i], "F", 1))
-			data->floor = get_color(data->content[i], data);
-		else if (ft_strnstr(data->content[i], "C", 1))
-			data->ceiling = get_color(data->content[i], data);
-		else if (is_map(data->content[i]))
+		if (information_type(data->content[i]) == NORTH)
+			data->no = get_texture_path(data->content[i], "NO");
+		else if (information_type(data->content[i]) == SOUTH)
+			data->so = get_texture_path(data->content[i], "SO");
+		else if (information_type(data->content[i]) == WEST)
+			data->we = get_texture_path(data->content[i], "WE");
+		else if (information_type(data->content[i]) == EAST)
+			data->ea = get_texture_path(data->content[i], "EA");
+		else if (information_type(data->content[i]) == FLOOR)
+			data->floor = get_color(data->content[i], data, "F");
+		else if (information_type(data->content[i]) == CEILING)
+			data->ceiling = get_color(data->content[i], data, "C");
+		else if (information_type(data->content[i]) == MAP)
 		{
 			data->map = &data->content[i];
 			break ;

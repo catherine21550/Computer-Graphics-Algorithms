@@ -6,7 +6,7 @@
 /*   By: triinueesmaa <triinueesmaa@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 09:43:26 by teesmaa           #+#    #+#             */
-/*   Updated: 2025/02/05 12:55:42 by triinueesma      ###   ########.fr       */
+/*   Updated: 2025/02/05 15:04:48 by triinueesma      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,17 @@
 
 # define DIRECTIONS "NSWE"
 # define INSIDE_MAP "0NSWE"
+
+typedef enum s_info
+{
+	NORTH,
+	SOUTH,
+	WEST,
+	EAST,
+	FLOOR,
+    CEILING,
+    MAP
+}			t_info;
 
 typedef struct  s_data
 {
@@ -65,8 +76,8 @@ void    exit_error(char *str);
 void	parser(t_data *data);
 void	cleanup(t_data *data);
 void    check_map(t_data *data);
-char	*get_texture_path(char *str);
-int     get_color(char *str, t_data *data);
+char	*get_texture_path(char *str, char *type);
+int     get_color(char *str, t_data *data, char *type);
 void	free_array(char **str);
 int     count_digits(char *str);
 
