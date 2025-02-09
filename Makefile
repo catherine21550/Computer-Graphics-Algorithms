@@ -6,14 +6,14 @@
 #    By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/04 15:02:26 by khuk              #+#    #+#              #
-#    Updated: 2025/02/04 20:21:14 by khuk             ###   ########.fr        #
+#    Updated: 2025/02/09 13:28:14 by khuk             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Compilation variables
 NAME				= cub3D
 CC 					= cc
-CFLAGS 				= -Wall -Werror -Wextra
+CFLAGS 				= -Wall -Werror -Wextra -g
 RM 					= rm -rf
 
 # Directories
@@ -28,7 +28,7 @@ MLX_DIR				= ./mlx_linux/
 # Source files
 CFILES_ROOT			= main.c
 CFILES_PARSING		= parse_data.c store_content.c map_checking.c parse_utils.c visual_info.c
-CFILES_GRAPHIC		= # graphic-related .c files will be here
+CFILES_GRAPHIC		= graphic.c graphic_utils.c key_handling.c cleanup.c scene_coordinates.c
 
 OBJ_FILES 			:= $(CFILES_ROOT:.c=.o) $(CFILES_PARSING:.c=.o) $(CFILES_GRAPHIC:.c=.o)
 OBJS				:= $(addprefix $(OBJS_DIR), $(OBJ_FILES))

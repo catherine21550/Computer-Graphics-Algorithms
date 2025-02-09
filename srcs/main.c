@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 09:49:45 by teesmaa           #+#    #+#             */
-/*   Updated: 2025/02/04 22:21:26 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/07 22:37:31 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,17 +64,6 @@ void	cleanup(t_data *data)
 	}
 	if (data->content)
 		free(data->content);
-}
-
-void	handle_graphics(t_game *main)
-{
-	main->mlx_ptr = mlx_init();
-	if (!main->mlx_ptr)
-		return (cleanup(main->data), exit_error("mlx_init failed\n"));
-	main->win_ptr = mlx_new_window(main->mlx_ptr, 1920, 1080, "Cub3D");
-	if (!main->win_ptr)
-		return (cleanup(main->data), exit_error("mlx_new_window failed\n"));
-	mlx_loop(main->mlx_ptr);
 }
 
 int main(int argc, char **argv)

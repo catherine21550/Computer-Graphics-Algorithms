@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 09:43:26 by teesmaa           #+#    #+#             */
-/*   Updated: 2025/02/04 22:22:09 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/09 13:48:03 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@
 # include <mlx.h>
 # include <math.h>
 # include <stdbool.h>
-# include <stdbool.h>
-
+# include <X11/keysym.h>
 # include "../libft/libft.h"
 
 # define DIRECTIONS "NSWE"
@@ -48,13 +47,40 @@ typedef struct  s_data
 
 }	t_data;
 
+typedef	struct s_square
+{
+	int	x;
+	int	y;
+	int	type;
+	int	color;
+}	t_square;
+
+typedef struct	s_scene
+{
+	t_square	**coord;
+	size_t		x_size;
+	size_t		y_size;
+	t_square	*player;
+}	t_scene;
+
 typedef struct  s_game
 {
 	t_data	*data;
 	void	*mlx_ptr;
 	void	*win_ptr;
+	t_scene *scene;
+	int		win_width;
+	int		win_height;
 }	t_game;
 
+enum	e_elements
+{
+	NONE = -1,
+	FLOOR,
+	WALL,
+	PLAY,
+	SPRITE
+};
 
 // ################# //
 //      Parcing      //
@@ -67,5 +93,10 @@ void	cleanup(t_data *data);
 void	check_map(t_data *data);
 char	*get_texture_path(char *str);
 int		get_color(char *str);
+
+// ################# //
+//      Graphic      //
+// ################# //
+void	handle_graphics(t_game *main);
 
 #endif
