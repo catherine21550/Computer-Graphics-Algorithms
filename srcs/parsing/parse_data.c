@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_data.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: triinueesmaa <triinueesmaa@student.42.f    +#+  +:+       +#+        */
+/*   By: teesmaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/29 15:16:40 by teesmaa           #+#    #+#             */
-/*   Updated: 2025/02/05 15:00:22 by triinueesma      ###   ########.fr       */
+/*   Created: 2025/02/10 11:31:37 by teesmaa           #+#    #+#             */
+/*   Updated: 2025/02/10 11:31:43 by teesmaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void    is_one_player(t_data *data)
 	if (count != 1)
 	{
 		cleanup(data);
-		exit_error("One player needed");
+		exit_error("Map should contain one player");
 	}
 }
 
