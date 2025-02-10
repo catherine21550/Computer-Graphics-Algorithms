@@ -34,7 +34,7 @@ static void    is_one_player(t_data *data)
 	if (count != 1)
 	{
 		cleanup(data);
-		exit_error("Wrong number of players");
+		exit_error("One player needed");
 	}
 }
 
@@ -60,8 +60,6 @@ static void	get_player_position(t_data *data)
 			j++;
 		}
 	}
-	cleanup(data);
-	exit_error("No player found");
 }
 
 static void	count_rows(t_data *data)
@@ -138,6 +136,12 @@ void	parse_input(t_data *data)
 void	parser(t_data *data)
 {
 	parse_input(data);
+	if (!data->no || !data->so || !data->we || !data->ea
+		|| !data->map || data->floor == -1 || data->ceiling == -1)
+	{
+		cleanup(data);
+		exit_error("Missing data");
+	}
 	get_player_position(data);
     count_rows(data);
 	check_map(data);

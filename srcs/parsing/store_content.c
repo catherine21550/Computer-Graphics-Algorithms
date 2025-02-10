@@ -46,8 +46,8 @@ static void	init_data(t_data *data)
 	data->so = NULL;
 	data->we = NULL;
 	data->ea = NULL;
-	data->floor = 0;
-	data->ceiling = 0;
+	data->floor = -1;
+	data->ceiling = -1;
 }
 
 void	save_data(char *arg, t_data *data)

@@ -9,7 +9,7 @@ void    char_check(t_data *data)
     j = 0;
     while (data->map[i])
     {
-		if (data->map[i][0] == '\0' || data->map[i][0] != '\n')
+        if (data->map[i][0] == '\0' || data->map[i][0] == '\n')
 		{
             cleanup(data);
             exit_error("Map has empty lines");
