@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 19:34:42 by khuk              #+#    #+#             */
-/*   Updated: 2025/02/09 13:28:37 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/10 13:35:09 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ enum	e_key
 };
 
 size_t	size_of_map_x(t_data *data);
-void	fill_coordinates(t_game *main, t_scene *scene);
+void	fill_coordinates(t_game *main);
 int		key_function(int key, t_game *data);
 int 	mouse_move_function(int x, int y, void *param);
 int		exit_function(t_game *data);

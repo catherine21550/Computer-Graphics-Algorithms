@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 19:44:46 by khuk              #+#    #+#             */
-/*   Updated: 2025/02/09 13:44:16 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/10 13:33:30 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	print_square_map(t_scene *scene)
 
 void	handle_graphics(t_game *main)
 {
-	fill_coordinates(main, main->scene);
+	fill_coordinates(main);
 	main->mlx_ptr = mlx_init();
 	if (!main->mlx_ptr)
 		return (cleanup(main->data), exit_error("mlx_init failed\n"));

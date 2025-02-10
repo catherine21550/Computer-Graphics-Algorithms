@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 13:25:25 by khuk              #+#    #+#             */
-/*   Updated: 2025/02/09 13:50:19 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/10 13:34:32 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void	fill_coord_node(t_game *main, t_square *node, int j, int i)
 		node->type = SPRITE;
 }
 
-void	fill_coordinates(t_game *main, t_scene *scene)
+void	fill_coordinates(t_game *main)
 {
 	int	i;
 	int	j;
@@ -64,16 +64,16 @@ void	fill_coordinates(t_game *main, t_scene *scene)
 	if (!main->scene->coord)
 		return (cleanup(main->data), free(main->scene), exit_error("malloc failed\n"));
 	main->scene->x_size = size_of_map_x(main->data);
-	while (++j < (int)scene->y_size)
+	while (++j < (int)main->scene->y_size)
 	{
-		scene->coord[j] = ft_calloc(sizeof(t_square), scene->x_size);
-		if (!scene->coord[j])
-			return (ft_free_coord(&scene, j), cleanup(main->data),
+		main->scene->coord[j] = ft_calloc(sizeof(t_square), main->scene->x_size);
+		if (!main->scene->coord[j])
+			return (ft_free_coord(&main->scene, j), cleanup(main->data),
 					exit_error("malloc failed\n"));
 		i = 0;
 		while (main->data->map[j][i] && main->data->map[j][i] != '\n')
 		{
-			fill_coord_node(main, &scene->coord[j][i], j, i);
+			fill_coord_node(main, &main->scene->coord[j][i], j, i);
 			i++;
 		}
 	}
