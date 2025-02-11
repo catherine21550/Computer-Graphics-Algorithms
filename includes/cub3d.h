@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 09:43:26 by teesmaa           #+#    #+#             */
-/*   Updated: 2025/02/10 17:08:51 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/11 21:57:33 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,13 @@ typedef struct	s_scene
 	size_t		x_size;
 	size_t		y_size;
 	t_square	*player;
-    double      x_dir;
-    double      y_dirY;
-    double      x_plane;
-    double      y_plane;
-    double      time;
-    double      old_time;
-    //double      move_speed;
+	double		x_dir;
+	double		y_dir;
+	double		x_plane;
+	double		y_plane;
+	double		time;
+	double		old_time;
+	//double      move_speed;
 }	t_scene;
 
 typedef struct  s_game

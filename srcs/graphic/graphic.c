@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 19:44:46 by khuk              #+#    #+#             */
-/*   Updated: 2025/02/10 13:33:30 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/11 14:32:49 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,21 @@ void	print_square_map(t_scene *scene)
 		int	x = 0;
 		while (x < (int)scene->x_size)
 		{
-			printf("X:%d Y:%d, Type: %d, Color:%d\n", scene->coord[y][x].x,
+			printf("X:%f Y:%f, Type: %d, Color:%d\n", scene->coord[y][x].x,
 					scene->coord[y][x].y, scene->coord[y][x].type, scene->coord[y][x].color);
 			x++;
 		}
 		y++;
 	}
+	printf("Player's location: x %f y %f\n", scene->player->x, scene->player->y);
+	printf("Direction of player/scene: %f %f\n", scene->x_dir, scene->y_dir);
+	printf("Plane of scene: %f %f\n", scene->x_plane, scene->y_plane);
+
 }
 
 void	handle_graphics(t_game *main)
 {
-	fill_coordinates(main);
+	scene_init(main);
 	main->mlx_ptr = mlx_init();
 	if (!main->mlx_ptr)
 		return (cleanup(main->data), exit_error("mlx_init failed\n"));

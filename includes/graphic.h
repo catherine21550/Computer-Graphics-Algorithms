@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 19:34:42 by khuk              #+#    #+#             */
-/*   Updated: 2025/02/10 13:35:09 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/11 14:33:15 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,6 @@ int 	mouse_move_function(int x, int y, void *param);
 int		exit_function(t_game *data);
 void	destroy_graphics(t_game *data);
 void	ft_free_coord(t_scene **scene, int size);
+void	scene_init(t_game *main);
 
 #endif
