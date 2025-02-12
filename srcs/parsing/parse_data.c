@@ -113,17 +113,17 @@ void	parse_input(t_data *data)
 	while (data->content[i])
 	{
 		if (information_type(data->content[i]) == NORTH)
-			data->no = get_texture_path(data->content[i], "NO");
+			data->no = get_texture_path(data->content[i], "NO", data, data->no);
 		else if (information_type(data->content[i]) == SOUTH)
-			data->so = get_texture_path(data->content[i], "SO");
+			data->so = get_texture_path(data->content[i], "SO", data, data->so);
 		else if (information_type(data->content[i]) == WEST)
-			data->we = get_texture_path(data->content[i], "WE");
+			data->we = get_texture_path(data->content[i], "WE", data, data->we);
 		else if (information_type(data->content[i]) == EAST)
-			data->ea = get_texture_path(data->content[i], "EA");
+			data->ea = get_texture_path(data->content[i], "EA", data, data->ea);
 		else if (information_type(data->content[i]) == FLOOR)
-			data->floor = get_color(data->content[i], data, "F");
+			data->floor = get_color(data->content[i], data, "F", data->floor);
 		else if (information_type(data->content[i]) == CEILING)
-			data->ceiling = get_color(data->content[i], data, "C");
+			data->ceiling = get_color(data->content[i], data, "C", data->ceiling);
 		else if (information_type(data->content[i]) == MAP)
 		{
 			data->map = &data->content[i];

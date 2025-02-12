@@ -76,8 +76,8 @@ void    exit_error(char *str);
 void	parser(t_data *data);
 void	cleanup(t_data *data);
 void    check_map(t_data *data);
-char	*get_texture_path(char *str, char *type);
-int     get_color(char *str, t_data *data, char *type);
+char	*get_texture_path(char *str, char *type, t_data *data, char *path);
+int     get_color(char *str, t_data *data, char *type, int oldcolor);
 void	free_array(char **str);
 int     count_digits(char *str);
 

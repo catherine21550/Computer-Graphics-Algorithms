@@ -28,10 +28,15 @@ int	start_index(char *str, char *type)
 	return (i);
 }
 
-char	*get_texture_path(char *str, char *type)
+char	*get_texture_path(char *str, char *type, t_data *data, char *path)
 {
 	int	i;
 
+	if (path)
+	{
+		cleanup(data);
+		exit_error("More than one file per direction");
+	}
 	str += start_index(str, type);
 	i = 0;
 	while (str[i])
@@ -87,11 +92,16 @@ static void	color_check(char **rgb, t_data *data)
 	}
 }
 
-int	get_color(char *str, t_data *data, char *type)
+int	get_color(char *str, t_data *data, char *type, int oldcolor)
 {
 	int		color;
 	char 	**rgb;
 
+	if (oldcolor != -1)
+	{
+		cleanup(data);
+		exit_error("More than one color per surface");
+	}
 	color = 0;
 	str += start_index(str, type);
 	rgb = ft_split(str, ',');
