@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 09:43:26 by teesmaa           #+#    #+#             */
-/*   Updated: 2025/02/11 21:57:33 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/12 21:18:00 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,18 @@ typedef	struct s_square
 	int		color;
 }	t_square;
 
+
+typedef struct s_img
+{
+	void	*img_ptr;
+	int		size_line;
+	int		width;
+	int		height;
+	int		endian;
+	int		bits_per_pixel;
+	char	*ptr_imgbit;
+}			t_img;
+
 typedef struct	s_scene
 {
 	t_square	**coord;
@@ -78,6 +90,7 @@ typedef struct  s_game
 	t_scene *scene;
 	int		win_width;
 	int		win_height;
+	t_img	img;
 }	t_game;
 
 enum	e_elements
