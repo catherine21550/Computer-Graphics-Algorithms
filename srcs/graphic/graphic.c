@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 19:44:46 by khuk              #+#    #+#             */
-/*   Updated: 2025/02/12 21:29:22 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/13 15:44:24 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,13 @@ void	my_put_pixel(t_game *main, int x, int y, int color)
 	if (!main->img.ptr_imgbit)
 	{
 		fprintf(stderr, "Error: Image buffer is NULL\n");
-		return;
+		return;//debug
 	}
 	if (x > main->img.width || y > main->img.height || x < 0 || y < 0)
 		return ;
 	i = (main->img.size_line * y) + ((main->img.bits_per_pixel / 8) * x);
 	fprintf(stderr, "Writing pixel at index: %d (x: %d, y: %d), buffer address: %p\n",
-	        i, x, y, main->img.ptr_imgbit);
+	        i, x, y, main->img.ptr_imgbit);//debug
 	*((unsigned int *)(i + main->img.ptr_imgbit)) = color;
 }
 
@@ -75,13 +75,6 @@ bool	rendering_process(t_game *main)
 	double	rey[2];
 	int		x;
 
-	main->img.img_ptr = mlx_new_image(main->mlx_ptr, main->win_width, main->win_height);
-	if (!main->img.img_ptr)
-		return (fprintf(stderr, "Error: Failed to create new image\n"), false);//protect if fails
-	main->img.ptr_imgbit = mlx_get_data_addr(main->img.img_ptr,
-			&main->img.bits_per_pixel, &main->img.size_line, &main->img.endian);
-	if (!main->img.ptr_imgbit)
-		return (false);//protect if fails
 	x = -1;
 	main->img.width = main->win_width;
 	main->img.height = main->win_height;
@@ -102,7 +95,7 @@ bool	rendering_process(t_game *main)
 		// determining the line height (lineHeight)
 		// determining the color/texture
 		// Drawing the line
-		draw_line(main, x, 0, 10, 0xFFFFFF); // Or another drawing function
+		//draw_line(main, x, 0, 10, 0xFFFFFF); // Or another drawing function
 	}
 	return (true);
 }
@@ -116,6 +109,13 @@ void	handle_graphics(t_game *main)
 	main->win_ptr = mlx_new_window(main->mlx_ptr, W_WIDTH, W_HEIGHT, "Cub3D");
 	if (!main->win_ptr)
 		return (cleanup(main->data), exit_error("mlx_new_window failed\n"));
+	main->img.img_ptr = mlx_new_image(main->mlx_ptr, main->win_width, main->win_height);
+	if (!main->img.img_ptr)
+		return (fprintf(stderr, "Error: Failed to create new image\n"), false);//protect if fails
+	main->img.ptr_imgbit = mlx_get_data_addr(main->img.img_ptr,
+			&main->img.bits_per_pixel, &main->img.size_line, &main->img.endian);
+	if (!main->img.ptr_imgbit)
+		return (false);//protect if fails
 	print_square_map(main->scene);//temp
 	rendering_process(main);
 	mlx_hook(main->win_ptr, 17, (1L << 0), &exit_function, main);
