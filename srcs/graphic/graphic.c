@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 19:44:46 by khuk              #+#    #+#             */
-/*   Updated: 2025/02/13 15:44:24 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/15 00:31:29 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,42 +38,94 @@ void	my_put_pixel(t_game *main, int x, int y, int color)
 {
 	int		i;
 	
-	color = 0xFFFF00;
 	if (!main->img.ptr_imgbit)
 	{
 		fprintf(stderr, "Error: Image buffer is NULL\n");
-		return;//debug
+		return ;//debug
 	}
 	if (x > main->img.width || y > main->img.height || x < 0 || y < 0)
 		return ;
 	i = (main->img.size_line * y) + ((main->img.bits_per_pixel / 8) * x);
-	fprintf(stderr, "Writing pixel at index: %d (x: %d, y: %d), buffer address: %p\n",
-	        i, x, y, main->img.ptr_imgbit);//debug
 	*((unsigned int *)(i + main->img.ptr_imgbit)) = color;
 }
 
-void	draw_line(t_game *main, int x, int y, int linehight, int color)
+void	draw_line(t_game *main, double	x, double *line_param, int color)
 {
-	int	i[2];
+	double	i;
 
-	i[0] = -1;
-	i[1] = y;
-	while (++i[0] < linehight)
+	i = line_param[0] - 1;
+	while (++i <= line_param[1])
 	{
-		my_put_pixel(main, x, i[1], color);
-		i[1]++;
+		my_put_pixel(main, x, i, color);
+		i++;
 	}
 }
-// k[0] - ray_x_offset;
+
+void	ft_dda_util(t_dda *d, double *delta, char c)
+{
+	if (c == 'x')
+	{
+		d->x_dist_wall = d->x_dist_wall + delta[0];
+		d->x_map += d->x_step;
+		d->side = 0;
+	}
+	else
+	{
+		d->y_dist_wall = d->y_dist_wall + delta[1];
+		d->y_map += d->y_step;
+		d->side = 1;
+	}
+}
+
+void	ft_dda(t_game *main, t_dda *d, double *delta, double *k)
+{
+	if (k[1] > 0)
+		d->x_dist_wall = (d->x_map + 1.0 - main->scene->player->x) * delta[0];
+	else
+		d->x_dist_wall = (main->scene->player->x - d->x_map) * delta[0];
+	if (k[2] > 0)
+		d->y_dist_wall = (d->y_map + 1.0 - main->scene->player->y) * delta[1];
+	else
+		d->y_dist_wall = (main->scene->player->y - d->y_map) * delta[1];
+	d->x_step = ft_sign_dda(k[1]);
+	d->y_step = ft_sign_dda(k[2]);
+	d->side = 0;
+	while (true)
+	{
+		if (d->x_dist_wall < d->y_dist_wall)
+			ft_dda_util(d, delta, 'x');
+		else
+			ft_dda_util(d, delta, 'y');
+		if (main->scene->coord[(int)d->x_map][(int)d->y_map].type != FLOOR)
+			break ;
+	}
+}
+
+void	rendering_prep_calculation(t_game *main, double *k, double *delta, t_dda *d)
+{
+		k[1] = main->scene->x_dir + main->scene->x_plane * k[0];
+		k[2] = main->scene->y_dir + main->scene->y_plane * k[0];
+		delta[0] = 0;
+		delta[1] = 0;
+		if (k[1] != 0)
+			delta[0] = ft_abs(1 / k[1]);
+		if (k[2] != 0)
+			delta[1] = ft_abs(1 / k[1]);
+		d->x_map = main->scene->player->x;
+		d->y_map = main->scene->player->y;
+}
+
+// k[0] - ray_x_offset, х coordinate of the camera and position of player
 // k[1] - raydir_x;
 // k[2] - raydir_y;
 // rey[0] - dist of rey from one x side to another x side of square;
 // rey[1] - same for y.
 bool	rendering_process(t_game *main)
 {
-	double	k[3];
-	double	rey[2];
+	double	k[4];
+	double	delta_rey[2];
 	int		x;
+	t_dda	d;
 
 	x = -1;
 	main->img.width = main->win_width;
@@ -81,21 +133,34 @@ bool	rendering_process(t_game *main)
 	while (++x <= main->win_width)
 	{
 		// prep calculation
-		k[0] = (double)(2 * x / main->win_width - 1);
-		k[1] = main->scene->x_dir + main->scene->x_plane * k[0];
-		k[2] = main->scene->y_dir + main->scene->y_plane * k[0];
-		rey[0] = 0;
-		rey[1] = 0;
-		if (k[1] != 0)
-			rey[0] = ft_abs(1 / k[1]);
-		if (k[2] != 0)
-			rey[1] = ft_abs(1 / k[2]);
+		k[0] = (double)(2 * x / (double)main->win_width - 1);
+		rendering_prep_calculation(main, k, delta_rey, &d);
 		// DDA algorithm
-		// calculation of perpWallDist
+		ft_dda(main, &d, delta_rey, k);
+		// calculation of perpWallDist(fisheye)
+		
+		if (d.side == 0)
+			k[3] = (d.x_map - main->scene->player->x + (1 - d.x_step) / 2) / k[1];
+		else
+			k[3] = (d.y_map - main->scene->player->y + (1 - d.y_step) / 2) / k[1];
 		// determining the line height (lineHeight)
+		double	vert_line = main->win_height / k[3];
 		// determining the color/texture
+		/* Якщо side == 0:
+		color = базовий колір стіни
+		Якщо крок по X негативний (дивимося вліво), затемнюємо колір
+		Інакше:
+		color = базовий колір стіни
+		Затемнюємо колір, бо це горизонтальна стіна.
+		Якщо використовувати текстури:
+		Визначаємо точку удару (wall_x).
+		Визначаємо текстурний індекс (tex_x).
+		Беремо піксель із текстури. */
 		// Drawing the line
-		//draw_line(main, x, 0, 10, 0xFFFFFF); // Or another drawing function
+		double	draw[2];
+		draw[0] = fmax(0, (main->win_height / 2 - vert_line / 2));
+		draw[1] = fmin((main->win_height - 1), (main->win_height / 2 + vert_line / 2));
+		draw_line(main, x, draw, 0xFFFFFF); // Or another drawing function
 	}
 	return (true);
 }
@@ -111,11 +176,11 @@ void	handle_graphics(t_game *main)
 		return (cleanup(main->data), exit_error("mlx_new_window failed\n"));
 	main->img.img_ptr = mlx_new_image(main->mlx_ptr, main->win_width, main->win_height);
 	if (!main->img.img_ptr)
-		return (fprintf(stderr, "Error: Failed to create new image\n"), false);//protect if fails
+		return (fprintf(stderr, "Error: Failed to create new image\n"), (void)0);//protect if fails
 	main->img.ptr_imgbit = mlx_get_data_addr(main->img.img_ptr,
 			&main->img.bits_per_pixel, &main->img.size_line, &main->img.endian);
 	if (!main->img.ptr_imgbit)
-		return (false);//protect if fails
+		return ;//protect if fails
 	print_square_map(main->scene);//temp
 	rendering_process(main);
 	mlx_hook(main->win_ptr, 17, (1L << 0), &exit_function, main);

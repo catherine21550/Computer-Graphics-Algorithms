@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 19:34:42 by khuk              #+#    #+#             */
-/*   Updated: 2025/02/12 21:17:11 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/15 00:29:04 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,18 @@
 # ifndef W_HEIGHT
 #  define W_HEIGHT 768
 # endif
+
+typedef	struct s_dda
+{
+	int			x_map;
+	int			y_map;
+	double		x_dist_wall;
+	double		y_dist_wall;
+	double		x_step;
+	double		y_step;
+	int			side;
+}	t_dda;
+
 
 enum	e_key
 {
@@ -45,5 +57,6 @@ void	destroy_graphics(t_game *data);
 void	ft_free_coord(t_scene **scene, int size);
 void	scene_init(t_game *main);
 int		ft_abs(int i);
+int		ft_sign_dda(double i);
 
 #endif
