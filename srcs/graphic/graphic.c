@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 19:44:46 by khuk              #+#    #+#             */
-/*   Updated: 2025/02/15 00:31:29 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/15 23:36:12 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,16 +79,28 @@ void	ft_dda_util(t_dda *d, double *delta, char c)
 
 void	ft_dda(t_game *main, t_dda *d, double *delta, double *k)
 {
-	if (k[1] > 0)
+	if (k[1] >= 0)
+	{
 		d->x_dist_wall = (d->x_map + 1.0 - main->scene->player->x) * delta[0];
+		d->x_step = 1;
+	}
 	else
+	{
 		d->x_dist_wall = (main->scene->player->x - d->x_map) * delta[0];
-	if (k[2] > 0)
+		d->x_step = -1;
+	}
+	if (k[2] >= 0)
+	{
 		d->y_dist_wall = (d->y_map + 1.0 - main->scene->player->y) * delta[1];
+		d->y_step = 1;
+	}
 	else
+	{
 		d->y_dist_wall = (main->scene->player->y - d->y_map) * delta[1];
-	d->x_step = ft_sign_dda(k[1]);
-	d->y_step = ft_sign_dda(k[2]);
+		d->y_step = -1;
+	}
+	// d->x_step = ft_sign_dda(k[1]);
+	// d->y_step = ft_sign_dda(k[2]);
 	d->side = 0;
 	while (true)
 	{
@@ -96,7 +108,7 @@ void	ft_dda(t_game *main, t_dda *d, double *delta, double *k)
 			ft_dda_util(d, delta, 'x');
 		else
 			ft_dda_util(d, delta, 'y');
-		if (main->scene->coord[(int)d->x_map][(int)d->y_map].type != FLOOR)
+		if (main->scene->coord[(int)d->y_map][(int)d->x_map].type != FLOOR)
 			break ;
 	}
 }
@@ -105,12 +117,16 @@ void	rendering_prep_calculation(t_game *main, double *k, double *delta, t_dda *d
 {
 		k[1] = main->scene->x_dir + main->scene->x_plane * k[0];
 		k[2] = main->scene->y_dir + main->scene->y_plane * k[0];
+		if (k[1] == 0)
+			k[1] = 0.0001;
+		if (k[2] == 0)
+			k[2] = 0.0001;
 		delta[0] = 0;
 		delta[1] = 0;
 		if (k[1] != 0)
 			delta[0] = ft_abs(1 / k[1]);
 		if (k[2] != 0)
-			delta[1] = ft_abs(1 / k[1]);
+			delta[1] = ft_abs(1 / k[2]);
 		d->x_map = main->scene->player->x;
 		d->y_map = main->scene->player->y;
 }
@@ -160,7 +176,8 @@ bool	rendering_process(t_game *main)
 		double	draw[2];
 		draw[0] = fmax(0, (main->win_height / 2 - vert_line / 2));
 		draw[1] = fmin((main->win_height - 1), (main->win_height / 2 + vert_line / 2));
-		draw_line(main, x, draw, 0xFFFFFF); // Or another drawing function
+		printf("x = %d, k[0] = %f, k[1] = %f, k[2] = %f, k[3] = %f\n draw[0] = %f, draw[1] = %f\n", x, k[0], k[1], k[2], k[3], draw[0], draw[1]);
+		draw_line(main, x, draw, 0x000000); // Or another drawing function
 	}
 	return (true);
 }
@@ -183,6 +200,7 @@ void	handle_graphics(t_game *main)
 		return ;//protect if fails
 	print_square_map(main->scene);//temp
 	rendering_process(main);
+	mlx_put_image_to_window(main->mlx_ptr, main->win_ptr, main->img.img_ptr, 0, 0);
 	mlx_hook(main->win_ptr, 17, (1L << 0), &exit_function, main);
 	mlx_hook(main->win_ptr, 2, (1L << 0), &key_function, main);
 	mlx_hook(main->win_ptr, 6, (1L << 6), &mouse_move_function, NULL);
