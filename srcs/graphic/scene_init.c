@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 13:56:16 by khuk              #+#    #+#             */
-/*   Updated: 2025/02/15 22:41:18 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/16 13:57:09 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void	scene_init(t_game *main)
 	fill_coordinates(main);
 	main->win_width = W_WIDTH;
 	main->win_height = W_HEIGHT;
+	main->img.width = main->win_width;
+	main->win_height = main->win_height;
 	main->scene->x_dir = 0.0;
 	main->scene->y_dir = 1.0;//looking up
 	main->scene->x_plane = 0.0;

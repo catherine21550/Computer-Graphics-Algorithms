@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 19:34:42 by khuk              #+#    #+#             */
-/*   Updated: 2025/02/15 22:34:14 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/16 13:38:08 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,7 @@ void	ft_free_coord(t_scene **scene, int size);
 void	scene_init(t_game *main);
 double	ft_abs(double i);
 int		ft_sign_dda(double i);
+void	solid_color(t_game *d, int x, int y);
+void	my_put_pixel(t_game *main, int x, int y, int color);
 
 #endif

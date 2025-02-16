@@ -6,14 +6,14 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 19:44:46 by khuk              #+#    #+#             */
-/*   Updated: 2025/02/15 23:36:12 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/16 14:24:13 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/graphic.h"
 
 /* For visual representation */
-void	print_square_map(t_scene *scene)
+void	print_square_map(t_game *m, t_scene *scene)
 {
 	int	y = 0;
 	
@@ -31,6 +31,8 @@ void	print_square_map(t_scene *scene)
 	printf("Player's location: x %f y %f\n", scene->player->x, scene->player->y);
 	printf("Direction of player/scene: %f %f\n", scene->x_dir, scene->y_dir);
 	printf("Plane of scene: %f %f\n", scene->x_plane, scene->y_plane);
+	printf("bits_per_pixel: %d, size_line: %d, endian: %d\n", m->img.bits_per_pixel, m->img.size_line, m->img.endian);
+
 
 }
 
@@ -198,12 +200,13 @@ void	handle_graphics(t_game *main)
 			&main->img.bits_per_pixel, &main->img.size_line, &main->img.endian);
 	if (!main->img.ptr_imgbit)
 		return ;//protect if fails
-	print_square_map(main->scene);//temp
+	print_square_map(main, main->scene);//temp
+	solid_color(main, main->win_width, main->win_height);
 	rendering_process(main);
 	mlx_put_image_to_window(main->mlx_ptr, main->win_ptr, main->img.img_ptr, 0, 0);
 	mlx_hook(main->win_ptr, 17, (1L << 0), &exit_function, main);
 	mlx_hook(main->win_ptr, 2, (1L << 0), &key_function, main);
-	mlx_hook(main->win_ptr, 6, (1L << 6), &mouse_move_function, NULL);
+	//mlx_hook(main->win_ptr, 6, (1L << 6), &mouse_move_function, NULL);
 	mlx_loop(main->mlx_ptr);
 	destroy_graphics(main);
 }
