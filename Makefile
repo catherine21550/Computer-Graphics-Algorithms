@@ -6,7 +6,7 @@
 #    By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/04 15:02:26 by khuk              #+#    #+#              #
-#    Updated: 2025/02/15 00:33:53 by khuk             ###   ########.fr        #
+#    Updated: 2025/02/16 23:51:32 by khuk             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,8 @@ CFILES_GRAPHIC		= graphic.c \
 					  key_handling.c \
 					  cleanup.c \
 					  scene_coordinates.c \
-					  scene_init.c
+					  scene_init.c \
+					  dda_algorithm.c
 					  
 OBJ_FILES 			:= $(CFILES_ROOT:.c=.o) $(CFILES_PARSING:.c=.o) $(CFILES_GRAPHIC:.c=.o)
 OBJS				:= $(addprefix $(OBJS_DIR), $(OBJ_FILES))

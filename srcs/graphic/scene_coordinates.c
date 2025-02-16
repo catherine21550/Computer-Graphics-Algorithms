@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 13:25:25 by khuk              #+#    #+#             */
-/*   Updated: 2025/02/10 13:34:32 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/17 00:07:45 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,20 @@
 
 size_t	size_of_map_x(t_data *data)
 {
-	size_t	size;
+	size_t	size[2];
+	int		y;
 
-	size = 0;
-	while (data->map[0][size] && data->map[0][size] != '\n')
+	y = -1;
+	size[0] = 0;
+	while (++y < data->rows)
 	{
-			size++;
+		size[1] = 0;
+		while (data->map[y][size[1]] && data->map[y][size[1]] != '\n')
+				size[1]++;
+		if (size[1] > size[0])
+			size[0] = size[1];
 	}
-	return (size);
+	return (size[0]);
 }
 
 static void	fill_coord_node(t_game *main, t_square *node, int j, int i)
@@ -66,7 +72,8 @@ void	fill_coordinates(t_game *main)
 	main->scene->x_size = size_of_map_x(main->data);
 	while (++j < (int)main->scene->y_size)
 	{
-		main->scene->coord[j] = ft_calloc(sizeof(t_square), main->scene->x_size);
+		//main->scene->coord[j] = ft_calloc(sizeof(t_square), main->scene->x_size);
+		main->scene->coord[j] = calloc(sizeof(t_square), main->scene->x_size);
 		if (!main->scene->coord[j])
 			return (ft_free_coord(&main->scene, j), cleanup(main->data),
 					exit_error("malloc failed\n"));

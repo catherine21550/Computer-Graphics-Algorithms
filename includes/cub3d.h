@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 09:43:26 by teesmaa           #+#    #+#             */
-/*   Updated: 2025/02/12 21:18:00 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/17 00:23:52 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ typedef struct	s_scene
 	double		y_dir;
 	double		x_plane;
 	double		y_plane;
+	double		angle;
 	double		time;
 	double		old_time;
 	//double      move_speed;
