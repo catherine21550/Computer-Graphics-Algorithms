@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 09:43:26 by teesmaa           #+#    #+#             */
-/*   Updated: 2025/02/17 00:23:52 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/17 15:26:39 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,10 @@ typedef struct	s_scene
 	double		angle;
 	double		time;
 	double		old_time;
+	int			color_wall;
+	int			color_wall2;
+	int			color_ceiling;
+	int			color_floor;
 	//double      move_speed;
 }	t_scene;
 

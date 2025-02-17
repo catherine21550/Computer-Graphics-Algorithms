@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 19:44:46 by khuk              #+#    #+#             */
-/*   Updated: 2025/02/17 00:27:18 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/17 16:04:14 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,19 @@ void	rendering_process(t_game *main)
 			k[3] = d.x_dist_wall - delta_rey[0];
 		else
 			k[3] = d.y_dist_wall - delta_rey[1];
-		draw[3] = main->win_height / k[3];
+		draw[2] = main->win_height / k[3];
+		draw[0] = fmax(0, (main->win_height / 2 - draw[2] / 2));
+		draw[1] = fmin((main->win_height - 1),
+				(main->win_height / 2 + draw[2] / 2));
+		printf("x = %d, k[0] = %f, k[1] = %f, k[2] = %f, k[3] = %f\n draw[0] = %f, \
+				draw[1] = %f, side = %d\n", x, k[0], k[1], k[2], k[3], draw[0], draw[1], d.side);
+		if (d.side == 0)
+			draw_line(main, x, draw, main->scene->color_wall);
+		else
+			draw_line(main, x, draw, main->scene->color_wall2);
+	}
+}
+
 		// determining the color/texture
 		/* Якщо side == 0:
 		color = базовий колір стіни
@@ -93,14 +105,6 @@ void	rendering_process(t_game *main)
 		Визначаємо текстурний індекс (tex_x).
 		Беремо піксель із текстури. */
 		// Drawing the line
-		draw[0] = fmax(0, (main->win_height / 2 - draw[3] / 2));
-		draw[1] = fmin((main->win_height - 1),
-				(main->win_height / 2 + draw[3] / 2));
-		printf("x = %d, k[0] = %f, k[1] = %f, k[2] = %f, k[3] = %f\n draw[0] = %f, \
-				draw[1] = %f\n", x, k[0], k[1], k[2], k[3], draw[0], draw[1]);
-		draw_line(main, x, draw, 0x000000);
-	}
-}
 
 void	draw_img(t_game *main)
 {

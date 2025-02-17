@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 13:56:16 by khuk              #+#    #+#             */
-/*   Updated: 2025/02/17 00:28:58 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/17 15:58:27 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,13 @@ void	scene_init(t_game *main)
 	main->img.height = main->win_height;
 	main->scene->x_dir = (double)E_DIRX;
 	main->scene->y_dir = (double)E_DIRY;
-	main->scene->angle = atan2(E_DIRX, E_DIRY);
+	main->scene->angle = 90;//atan2(E_DIRX, E_DIRY);
 	main->scene->x_plane = 0.0;
 	main->scene->y_plane = 2 * atan(0.66 / 1.0);
+	main->scene->color_wall = BLACK;
+	main->scene->color_wall2 = GREY;
+	main->scene->color_ceiling = main->data->ceiling;
+	main->scene->color_floor = main->data->floor;
 	if (gettimeofday(&tmp, NULL) == -1)
 		return;//clean everything!!!!
 	//main->scene->old_time = (double)(tmp.tv_sec * 1000000 + tmp.tv_usec);

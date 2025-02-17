@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 19:34:42 by khuk              #+#    #+#             */
-/*   Updated: 2025/02/17 00:36:29 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/17 15:43:45 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,13 @@ enum	e_dir
 	Y_RIGHT = 0,
 	X_LEFT = -1,
 	Y_LEFT = 0
+};
+
+enum	e_color
+{
+	WHITE = 0xFFFFFF,
+	BLACK = 0x000000,
+	GREY = 0x262626
 };
 
 # ifndef E_DIRX
