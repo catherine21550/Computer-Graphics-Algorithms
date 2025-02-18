@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 13:11:40 by khuk              #+#    #+#             */
-/*   Updated: 2025/02/16 23:49:59 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/18 22:40:50 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,14 @@ void	solid_color(t_game *d, int x, int y)
 	int		i[2];
 	int		color;
 
-	//color = d->data->ceiling;
-	color = 0x0000FF;
 	i[0] = -1;
 	printf("Printirn solid color size %dx%d\n", x, y);
 	while (++i[0] < y)
 	{
+		if (i[0] < d->win_height / 2)
+			color = d->scene->color_floor;
+		else
+			color = d->scene->color_ceiling;
 		i[1] = -1;
 		while (++i[1] < x)
 			my_put_pixel(d, i[1], i[0], color);
