@@ -39,7 +39,8 @@ CFILES_GRAPHIC		= graphic.c \
 					  cleanup.c \
 					  scene_coordinates.c \
 					  scene_init.c \
-					  dda_algorithm.c
+					  dda_algorithm.c \
+					  minimap.c
 
 OBJ_FILES 			:= $(CFILES_ROOT:.c=.o) \
 			  		   $(CFILES_PARCING:.c=.o) \

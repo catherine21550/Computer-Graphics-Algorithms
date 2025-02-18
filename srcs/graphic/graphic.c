@@ -131,7 +131,9 @@ void	handle_graphics(t_game *main)
 	//print_square_map(main, main->scene);//temp
 	draw_img(main);
 	mlx_put_image_to_window(main->mlx_ptr, main->win_ptr, main->img.img_ptr, 0, 0);
-	mlx_hook(main->win_ptr, 17, (1L << 0), &exit_function, main);
+	draw_minimap(main);
+	mlx_put_image_to_window(main->mlx_ptr, main->win_ptr, main->minimap.img_ptr, 600, 0);
+	//mlx_hook(main->win_ptr, 17, (1L << 0), &exit_function, main);
 	mlx_hook(main->win_ptr, 2, (1L << 0), &key_function, main);
 	//mlx_hook(main->win_ptr, 6, (1L << 6), &mouse_move_function, NULL);
 	mlx_loop(main->mlx_ptr);

@@ -91,4 +91,6 @@ void	draw_line(t_game *main, double	x, double *line_param, int color);
 void	draw_img(t_game *main);
 void	ft_dda(t_game *main, t_dda *d, double *delta, double *k);
 
+void	draw_minimap(t_game *main);
+
 #endif

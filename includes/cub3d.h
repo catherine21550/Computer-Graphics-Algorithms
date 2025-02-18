@@ -36,7 +36,7 @@ typedef enum s_info
 	SOUTH,
 	WEST,
 	EAST,
-	FLOOR,
+	GROUND,
     CEILING,
     MAP
 }			t_info;
@@ -107,6 +107,7 @@ typedef struct  s_game
 	int		win_width;
 	int		win_height;
 	t_img	img;
+	t_img	minimap;
 }	t_game;
 
 enum	e_elements

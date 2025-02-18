@@ -97,7 +97,7 @@ int	information_type(char *str)
 	if (ft_strnstr(str, "EA", 2))
 		return (EAST);
 	if (ft_strnstr(str, "F", 1))
-		return (FLOOR);
+		return (GROUND);
 	if (ft_strnstr(str, "C", 1))
 		return (CEILING);
 	if (is_map(str))
@@ -120,7 +120,7 @@ void	parse_input(t_data *data)
 			data->we = get_texture_path(data->content[i], "WE", data, data->we);
 		else if (information_type(data->content[i]) == EAST)
 			data->ea = get_texture_path(data->content[i], "EA", data, data->ea);
-		else if (information_type(data->content[i]) == FLOOR)
+		else if (information_type(data->content[i]) == GROUND)
 			data->floor = get_color(data->content[i], data, "F", data->floor);
 		else if (information_type(data->content[i]) == CEILING)
 			data->ceiling = get_color(data->content[i], data, "C", data->ceiling);
