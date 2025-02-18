@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 09:43:26 by teesmaa           #+#    #+#             */
-/*   Updated: 2025/02/18 20:53:12 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/18 23:26:24 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ typedef struct	s_scene
 	double		y_plane;
 	double		angle;
 	double		radians;
-	double		plane_lenght;
+	double		plane_length;
 	double		time;
 	double		old_time;
 	int			color_wall;
