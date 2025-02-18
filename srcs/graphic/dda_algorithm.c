@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 23:49:31 by khuk              #+#    #+#             */
-/*   Updated: 2025/02/16 23:51:06 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/18 16:56:21 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ static void	ft_dda_util(t_dda *d, double *delta, char c)
 	if (c == 'x')
 	{
 		d->x_dist_wall = d->x_dist_wall + delta[0];
-		d->x_map += d->x_step;
+		d->x_map = d->x_map + d->x_step;
 		d->side = 0;
 	}
 	else
 	{
 		d->y_dist_wall = d->y_dist_wall + delta[1];
-		d->y_map += d->y_step;
+		d->y_map = d->y_map + d->y_step;
 		d->side = 1;
 	}
 }

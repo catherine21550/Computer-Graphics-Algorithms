@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 19:34:42 by khuk              #+#    #+#             */
-/*   Updated: 2025/02/17 15:43:45 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/18 19:03:36 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,12 @@
 #  define W_HEIGHT 600
 # endif
 
+#define CUB_PI	3.14159265358979323846264338327950288
+
 typedef	struct s_dda
 {
-	int			x_map;
-	int			y_map;
+	double		x_map;
+	double		y_map;
 	double		x_dist_wall;
 	double		y_dist_wall;
 	double		x_step;

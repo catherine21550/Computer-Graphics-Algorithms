@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: triinueesmaa <triinueesmaa@student.42.f    +#+  +:+       +#+        */
+/*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 09:43:26 by teesmaa           #+#    #+#             */
-/*   Updated: 2025/02/17 15:26:39 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/18 20:53:12 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ typedef struct	s_scene
 	double		x_plane;
 	double		y_plane;
 	double		angle;
+	double		radians;
+	double		plane_lenght;
 	double		time;
 	double		old_time;
 	int			color_wall;

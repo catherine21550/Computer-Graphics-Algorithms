@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 19:44:46 by khuk              #+#    #+#             */
-/*   Updated: 2025/02/17 16:04:14 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/18 21:10:52 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,18 +39,23 @@
 void	rendering_prep_calculation(t_game *main, double *k,
 		double *delta, t_dda *d)
 {
-	k[1] = main->scene->x_dir + main->scene->x_plane * k[0];
-	k[2] = main->scene->y_dir + main->scene->y_plane * k[0];
-	if (k[1] == 0)
+	k[1] = cos(main->scene->angle * CUB_PI / 180) + main->scene->x_plane * k[0];
+	k[2] = sin(main->scene->angle * CUB_PI / 180) + main->scene->y_plane * k[0];
+	double ray_length = sqrt(k[1] * k[1] + k[2] * k[2]);
+	if (ray_length == 0)
+	{
 		k[1] = 0.0001;
-	if (k[2] == 0)
 		k[2] = 0.0001;
-	delta[0] = 0;
-	delta[1] = 0;
-	if (k[1] != 0)
-		delta[0] = ft_abs(1 / k[1]);
-	if (k[2] != 0)
-		delta[1] = ft_abs(1 / k[2]);
+	}
+	else if (ray_length < 1e-6)
+		ray_length = 1e-6;	
+	else
+	{
+		k[1] = k[1] / ray_length;
+		k[2] = k[2] / ray_length;
+	}
+	delta[0] = ft_abs(1 / k[1]);
+	delta[1] = ft_abs(1 / k[2]);
 	d->x_map = main->scene->player->x;
 	d->y_map = main->scene->player->y;
 }
@@ -73,33 +78,32 @@ void	rendering_process(t_game *main)
 	x = -1;
 	while (++x <= main->win_width)
 	{
-		k[0] = (2 * (x / (main->win_width) - 1));
+		k[0] = (2 * x / (double)main->win_width - 1);
 		rendering_prep_calculation(main, k, delta_rey, &d);
 		ft_dda(main, &d, delta_rey, k);
-		if (d.side == 0)
+/*  		if (d.side == 0)
 			k[3] = d.x_dist_wall - delta_rey[0];
 		else
-			k[3] = d.y_dist_wall - delta_rey[1];
+			k[3] = d.y_dist_wall - delta_rey[1];  */
+ 		if (d.side == 0)
+			k[3] = (d.x_dist_wall - delta_rey[0]);
+		else
+			k[3] = (d.y_dist_wall - delta_rey[1]); 
 		draw[2] = main->win_height / k[3];
 		draw[0] = fmax(0, (main->win_height / 2 - draw[2] / 2));
 		draw[1] = fmin((main->win_height - 1),
 				(main->win_height / 2 + draw[2] / 2));
-		printf("x = %d, k[0] = %f, k[1] = %f, k[2] = %f, k[3] = %f\n draw[0] = %f, \
-				draw[1] = %f, side = %d\n", x, k[0], k[1], k[2], k[3], draw[0], draw[1], d.side);
+/* 		if (x == 0 || x == W_WIDTH)
+			printf("x = %d, k[0] = %f, k[1] = %f, k[2] = %f, k[3] = %f\n draw[0] = %f, \
+				draw[1] = %f, side = %d\n Wall position: x %f y %f\n", x, k[0], k[1], 
+				k[2], k[3], draw[0], draw[1], d.side, d.x_map, d.y_map); */
 		if (d.side == 0)
 			draw_line(main, x, draw, main->scene->color_wall);
 		else
 			draw_line(main, x, draw, main->scene->color_wall2);
 	}
 }
-
-		// determining the color/texture
-		/* Якщо side == 0:
-		color = базовий колір стіни
-		Якщо крок по X негативний (дивимося вліво), затемнюємо колір
-		Інакше:
-		color = базовий колір стіни
-		Затемнюємо колір, бо це горизонтальна стіна.
+/*
 		Якщо використовувати текстури:
 		Визначаємо точку удару (wall_x).
 		Визначаємо текстурний індекс (tex_x).
