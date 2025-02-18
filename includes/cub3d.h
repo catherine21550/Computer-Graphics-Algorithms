@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
+/*   By: triinueesmaa <triinueesmaa@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 09:43:26 by teesmaa           #+#    #+#             */
 /*   Updated: 2025/02/17 15:26:39 by khuk             ###   ########.fr       */
@@ -29,6 +29,17 @@
 
 # define DIRECTIONS "NSWE"
 # define INSIDE_MAP "0NSWE"
+
+typedef enum s_info
+{
+	NORTH,
+	SOUTH,
+	WEST,
+	EAST,
+	FLOOR,
+    CEILING,
+    MAP
+}			t_info;
 
 typedef struct  s_data
 {
@@ -111,13 +122,15 @@ enum	e_elements
 //      Parcing      //
 // ################# //
 void	save_data(char *arg, t_data *data);
-bool	ft_isspace(char c);
-void	exit_error(char *str);
+bool    ft_isspace(char c);
+void    exit_error(char *str);
 void	parser(t_data *data);
 void	cleanup(t_data *data);
-void	check_map(t_data *data);
-char	*get_texture_path(char *str);
-int		get_color(char *str);
+void    check_map(t_data *data);
+char	*get_texture_path(char *str, char *type, t_data *data, char *path);
+int     get_color(char *str, t_data *data, char *type, int oldcolor);
+void	free_array(char **str);
+int     count_digits(char *str);
 
 // ################# //
 //      Graphic      //

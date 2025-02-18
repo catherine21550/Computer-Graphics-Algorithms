@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_data.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: triinueesmaa <triinueesmaa@student.42.f    +#+  +:+       +#+        */
+/*   By: teesmaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/29 15:16:40 by teesmaa           #+#    #+#             */
-/*   Updated: 2025/02/03 13:06:18 by triinueesma      ###   ########.fr       */
+/*   Created: 2025/02/10 11:31:37 by teesmaa           #+#    #+#             */
+/*   Updated: 2025/02/10 11:31:43 by teesmaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void    is_one_player(t_data *data)
 	if (count != 1)
 	{
 		cleanup(data);
-		exit_error("Wrong number of players");
+		exit_error("Map should contain one player");
 	}
 }
 
@@ -60,8 +60,6 @@ static void	get_player_position(t_data *data)
 			j++;
 		}
 	}
-	cleanup(data);
-	exit_error("No player found");
 }
 
 static void	count_rows(t_data *data)
@@ -76,16 +74,35 @@ static void	count_rows(t_data *data)
 
 static bool	is_map(char *str)
 {
-	if (ft_strnstr(str, " ", 1) ||
-		ft_strnstr(str, "1", 1) ||
+	if (ft_strnstr(str, "1", 1) ||
 		ft_strnstr(str, "0", 1) ||
-		ft_strnstr(str, " ", 1) ||
 		(ft_strnstr(str, "N", 1) && !ft_strnstr (str, "NO", 2)) ||
 		(ft_strnstr(str, "S", 1) && !ft_strnstr (str, "SO", 2)) ||
 		(ft_strnstr(str, "E", 1) && !ft_strnstr (str, "EA", 2)) ||
 		(ft_strnstr(str, "W", 1) && !ft_strnstr (str, "WE", 2)) )
 		return (true);
 	return (false);
+}
+
+int	information_type(char *str)
+{
+	while (ft_isspace(*str))
+		str++;
+	if (ft_strnstr(str, "NO", 2))
+		return (NORTH);
+	if (ft_strnstr(str, "SO", 2))
+		return (SOUTH);
+	if (ft_strnstr(str, "WE", 2))
+		return (WEST);
+	if (ft_strnstr(str, "EA", 2))
+		return (EAST);
+	if (ft_strnstr(str, "F", 1))
+		return (FLOOR);
+	if (ft_strnstr(str, "C", 1))
+		return (CEILING);
+	if (is_map(str))
+		return (MAP);
+	return (-1);
 }
 
 void	parse_input(t_data *data)
@@ -95,19 +112,19 @@ void	parse_input(t_data *data)
 	i = 0;
 	while (data->content[i])
 	{
-		if (ft_strnstr(data->content[i], "NO", 2))
-			data->no = get_texture_path(data->content[i]);
-		else if (ft_strnstr(data->content[i], "SO", 2))
-			data->so = get_texture_path(data->content[i]);
-		else if (ft_strnstr(data->content[i], "WE", 2))
-			data->we = get_texture_path(data->content[i]);
-		else if (ft_strnstr(data->content[i], "EA", 2))
-			data->ea = get_texture_path(data->content[i]);
-		else if (ft_strnstr(data->content[i], "F", 1))
-			data->floor = get_color(data->content[i]);
-		else if (ft_strnstr(data->content[i], "C", 1))
-			data->ceiling = get_color(data->content[i]);
-		else if (is_map(data->content[i]))
+		if (information_type(data->content[i]) == NORTH)
+			data->no = get_texture_path(data->content[i], "NO", data, data->no);
+		else if (information_type(data->content[i]) == SOUTH)
+			data->so = get_texture_path(data->content[i], "SO", data, data->so);
+		else if (information_type(data->content[i]) == WEST)
+			data->we = get_texture_path(data->content[i], "WE", data, data->we);
+		else if (information_type(data->content[i]) == EAST)
+			data->ea = get_texture_path(data->content[i], "EA", data, data->ea);
+		else if (information_type(data->content[i]) == FLOOR)
+			data->floor = get_color(data->content[i], data, "F", data->floor);
+		else if (information_type(data->content[i]) == CEILING)
+			data->ceiling = get_color(data->content[i], data, "C", data->ceiling);
+		else if (information_type(data->content[i]) == MAP)
 		{
 			data->map = &data->content[i];
 			break ;
@@ -119,6 +136,12 @@ void	parse_input(t_data *data)
 void	parser(t_data *data)
 {
 	parse_input(data);
+	if (!data->no || !data->so || !data->we || !data->ea
+		|| !data->map || data->floor == -1 || data->ceiling == -1)
+	{
+		cleanup(data);
+		exit_error("Missing data");
+	}
 	get_player_position(data);
     count_rows(data);
 	check_map(data);
