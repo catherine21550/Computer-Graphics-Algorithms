@@ -36,7 +36,7 @@ typedef enum s_info
 	SOUTH,
 	WEST,
 	EAST,
-	FLOOR,
+	GROUND,
     CEILING,
     MAP
 }			t_info;
