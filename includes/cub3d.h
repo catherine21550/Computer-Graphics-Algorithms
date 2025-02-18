@@ -6,7 +6,7 @@
 /*   By: triinueesmaa <triinueesmaa@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 09:43:26 by teesmaa           #+#    #+#             */
-/*   Updated: 2025/02/05 15:04:48 by triinueesma      ###   ########.fr       */
+/*   Updated: 2025/02/17 15:26:39 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@
 # include <mlx.h>
 # include <math.h>
 # include <stdbool.h>
-# include <stdbool.h>
-
+# include <X11/keysym.h>
 # include "../libft/libft.h"
 
 # define DIRECTIONS "NSWE"
@@ -59,13 +58,65 @@ typedef struct  s_data
 
 }	t_data;
 
+typedef	struct s_square
+{
+	double	x;
+	double	y;
+	int		type;
+	int		color;
+}	t_square;
+
+
+typedef struct s_img
+{
+	void	*img_ptr;
+	int		size_line;
+	int		width;
+	int		height;
+	int		endian;
+	int		bits_per_pixel;
+	char	*ptr_imgbit;
+}			t_img;
+
+typedef struct	s_scene
+{
+	t_square	**coord;
+	size_t		x_size;
+	size_t		y_size;
+	t_square	*player;
+	double		x_dir;
+	double		y_dir;
+	double		x_plane;
+	double		y_plane;
+	double		angle;
+	double		time;
+	double		old_time;
+	int			color_wall;
+	int			color_wall2;
+	int			color_ceiling;
+	int			color_floor;
+	//double      move_speed;
+}	t_scene;
+
 typedef struct  s_game
 {
 	t_data	*data;
 	void	*mlx_ptr;
 	void	*win_ptr;
+	t_scene *scene;
+	int		win_width;
+	int		win_height;
+	t_img	img;
 }	t_game;
 
+enum	e_elements
+{
+	NONE = -1,
+	FLOOR,
+	WALL,
+	PLAY,
+	SPRITE
+};
 
 // ################# //
 //      Parcing      //
@@ -80,5 +131,10 @@ char	*get_texture_path(char *str, char *type, t_data *data, char *path);
 int     get_color(char *str, t_data *data, char *type, int oldcolor);
 void	free_array(char **str);
 int     count_digits(char *str);
+
+// ################# //
+//      Graphic      //
+// ################# //
+void	handle_graphics(t_game *main);
 
 #endif
