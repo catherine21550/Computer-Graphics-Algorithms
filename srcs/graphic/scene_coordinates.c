@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 13:25:25 by khuk              #+#    #+#             */
-/*   Updated: 2025/02/17 00:07:45 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/19 16:25:50 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,7 @@ void	fill_coordinates(t_game *main)
 	main->scene->x_size = size_of_map_x(main->data);
 	while (++j < (int)main->scene->y_size)
 	{
-		//main->scene->coord[j] = ft_calloc(sizeof(t_square), main->scene->x_size);
-		main->scene->coord[j] = calloc(sizeof(t_square), main->scene->x_size);
+		main->scene->coord[j] = ft_calloc(sizeof(t_square), main->scene->x_size);
 		if (!main->scene->coord[j])
 			return (ft_free_coord(&main->scene, j), cleanup(main->data),
 					exit_error("malloc failed\n"));

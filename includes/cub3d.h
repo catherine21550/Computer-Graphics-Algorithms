@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 09:43:26 by teesmaa           #+#    #+#             */
-/*   Updated: 2025/02/18 23:26:24 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/19 20:08:32 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ typedef struct	s_scene
 	int			color_wall2;
 	int			color_ceiling;
 	int			color_floor;
-	//double      move_speed;
+	//double     move_speed;
 }	t_scene;
 
 typedef struct  s_game
@@ -109,6 +109,7 @@ typedef struct  s_game
 	int		win_width;
 	int		win_height;
 	t_img	img;
+	t_img	texture;
 }	t_game;
 
 enum	e_elements

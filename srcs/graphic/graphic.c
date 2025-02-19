@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 19:44:46 by khuk              #+#    #+#             */
-/*   Updated: 2025/02/18 22:34:01 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/19 20:28:06 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,39 +41,24 @@ void	rendering_prep_calculation(t_game *main, double *k,
 {
 	k[1] = cos(main->scene->angle * CUB_PI / 180) + main->scene->x_plane * k[0];
 	k[2] = sin(main->scene->angle * CUB_PI / 180) + main->scene->y_plane * k[0];
-/* 	double ray_length = sqrt(k[1] * k[1] + k[2] * k[2]);
-	if (ray_length == 0)
-	{
-		k[1] = 0.0001;
-		k[2] = 0.0001;
-	}
-	else if (ray_length < 1e-6)
-		ray_length = 1e-6;	
-	else
-	{
-		k[1] = k[1] / ray_length;
-		k[2] = k[2] / ray_length;
-	} */
 	if (k[1] == 0)
-        delta[0] = 1e30; // Уникаємо ділення на нуль
-    else
-        delta[0] = fabs(1 / k[1]);
-    if (k[2] == 0)
-        delta[1] = 1e30; // Уникаємо ділення на нуль
-    else
-        delta[1] = fabs(1 / k[2]);
-/* 	delta[0] = ft_abs(1 / k[1]);
-	delta[1] = ft_abs(1 / k[2]); */
+		delta[0] = 1e30;
+	else
+		delta[0] = ft_abs(1 / k[1]);
+	if (k[2] == 0)
+		delta[1] = 1e30;
+	else
+		delta[1] = ft_abs(1 / k[2]);
 	d->x_map = main->scene->player->x;
 	d->y_map = main->scene->player->y;
 }
 
 // k[0] - ray_x_offset, х coordinate of the camera and position of player
-// k[1] - raydir_x;
-// k[2] - raydir_y;
+// k[1] - raydir_x
+// k[2] - raydir_y
 // k[3] - perpWallDist
 // rey[0] - dist of rey from one x side to another x side of square;
-// rey[1] - same for y.
+// rey[1] - same for y
 // draw[3] - height of the line
 void	rendering_process(t_game *main)
 {
@@ -107,6 +92,7 @@ void	rendering_process(t_game *main)
 void	draw_img(t_game *main)
 {
 	solid_color(main, main->win_width, main->win_height);
+	get_textures(main);
 	rendering_process(main);
 }
 
@@ -121,7 +107,7 @@ void	handle_graphics(t_game *main)
 		return (cleanup(main->data), exit_error("mlx_new_window failed\n"));
 	main->img.img_ptr = mlx_new_image(main->mlx_ptr, W_WIDTH, W_HEIGHT);
 	if (!main->img.img_ptr)
-		return (fprintf(stderr, "Error: Failed to create new image\n"), (void)0);//protect if fails
+		return (fprintf(stderr, "Error: Failed to create new image\n"), (void)0);//change to some custom fprintf!!!!protect if fails
 	main->img.ptr_imgbit = mlx_get_data_addr(main->img.img_ptr,
 			&main->img.bits_per_pixel, &main->img.size_line, &main->img.endian);
 	if (!main->img.ptr_imgbit)
