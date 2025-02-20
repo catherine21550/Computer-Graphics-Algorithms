@@ -1,10 +1,10 @@
-NO /home/khuk/42Vienna/cub3D/textures/wall_1.xpm
-SO /home/khuk/42Vienna/cub3D/textures/wall_2.xpm
-WE /home/khuk/42Vienna/cub3D/textures/wall_3.xpm
-EA /home/khuk/42Vienna/cub3D/textures/wall_4.xpm
+NO /home/khuk/cub3D/textures/mossy-brick-wall.xpm
+SO /home/khuk/cub3D/textures/sky.xpm
+WE /home/khuk/cub3D/textures/wall_3.xpm
+EA /home/khuk/cub3D/textures/stone-brick-wall.xpm
 
-F 220,100,0
-C 225,30, 0
+F 58,58,58
+C 137, 207, 239
 
 11111111111111
 10001100000001

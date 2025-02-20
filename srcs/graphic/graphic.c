@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 19:44:46 by khuk              #+#    #+#             */
-/*   Updated: 2025/02/19 23:59:11 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/20 18:13:29 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void	rendering_process(t_game *main)
 	int		x;
 	double	draw[3];
 	t_dda	d;
+	double	x_wall;
 
 	x = -1;
 	while (++x <= main->win_width)
@@ -83,9 +84,14 @@ void	rendering_process(t_game *main)
 		draw[1] = fmin((main->win_height - 1),
 				(main->win_height / 2 + draw[2] / 2));
 		if (d.side == 0)
-			draw_line(main, x, draw, main->scene->color_wall);
-		else
-			draw_line(main, x, draw, main->scene->color_wall2);
+		{
+			x_wall = main->scene->player->y + k[3] * k[2];
+			x_wall = x_wall - (int)x_wall;
+			draw_line(main, x, draw, &main->no, x_wall);}
+		else{
+			x_wall = main->scene->player->x + k[3] * k[1];
+			x_wall = x_wall - (int)x_wall;
+			draw_line(main, x, draw, &main->ea, x_wall);}
 	}
 }
 

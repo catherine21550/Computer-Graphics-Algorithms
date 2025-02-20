@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 19:34:42 by khuk              #+#    #+#             */
-/*   Updated: 2025/02/19 23:37:09 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/20 18:15:51 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ double	ft_abs(double i);
 int		ft_sign_dda(double i);
 void	solid_color(t_game *d, int x, int y);
 void	my_put_pixel(t_game *main, int x, int y, int color);
-void	draw_line(t_game *main, double	x, double *line_param, int color);
+void	draw_line(t_game *main, double	x, double *line_param, t_img *text, double x_wall);
 void	draw_img(t_game *main);
 void	ft_dda(t_game *main, t_dda *d, double *delta, double *k);
 bool	get_texture(t_game *main, t_img *texture, char *path);
