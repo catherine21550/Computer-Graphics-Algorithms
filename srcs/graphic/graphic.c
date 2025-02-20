@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 19:44:46 by khuk              #+#    #+#             */
-/*   Updated: 2025/02/19 20:28:06 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/19 23:59:11 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ void	rendering_process(t_game *main)
 void	draw_img(t_game *main)
 {
 	solid_color(main, main->win_width, main->win_height);
-	get_textures(main);
 	rendering_process(main);
 }
 
@@ -112,6 +111,7 @@ void	handle_graphics(t_game *main)
 			&main->img.bits_per_pixel, &main->img.size_line, &main->img.endian);
 	if (!main->img.ptr_imgbit)
 		return ;//protect if fails
+	get_all_textures(main);
 	//print_square_map(main, main->scene);//temp
 	draw_img(main);
 	mlx_put_image_to_window(main->mlx_ptr, main->win_ptr, main->img.img_ptr, 0, 0);

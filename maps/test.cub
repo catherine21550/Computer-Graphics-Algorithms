@@ -1,14 +1,14 @@
-NO ./path_to_the_north_texture.xpm
-SO ./path_to_the_south_texture.xpm
-WE ./path_to_the_west_texture.xpm
-EA ./path_to_the_east_texture.xpm
+NO /home/khuk/42Vienna/cub3D/textures/wall_1.xpm
+SO /home/khuk/42Vienna/cub3D/textures/wall_2.xpm
+WE /home/khuk/42Vienna/cub3D/textures/wall_3.xpm
+EA /home/khuk/42Vienna/cub3D/textures/wall_4.xpm
 
 F 220,100,0
 C 225,30, 0
 
 11111111111111
-10000000000001
-10000100011001
+10001100000001
+10001100011001
 10000000011001
 10000000000001
 100000N0000001
