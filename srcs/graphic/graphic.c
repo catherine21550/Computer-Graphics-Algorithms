@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 19:44:46 by khuk              #+#    #+#             */
-/*   Updated: 2025/02/20 18:13:29 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/20 21:53:36 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,29 @@ void	rendering_prep_calculation(t_game *main, double *k,
 	d->x_map = main->scene->player->x;
 	d->y_map = main->scene->player->y;
 }
+void	draw_with_texture(t_game *main, t_dda *d, double *draw, double *k)
+{
+	t_img *texture = NULL;
+
+	if (d->side == 0)
+	{
+		if (k[1] > 0)
+			texture = &main->ea;
+		else
+			texture = &main->we;
+		draw[3] = main->scene->player->y + k[3] * k[2];
+	}
+	else
+	{
+		if (k[2] > 0)
+			texture = &main->so;
+		else
+			texture = &main->no;
+		draw[3] = main->scene->player->x + k[3] * k[1];
+	}
+	draw[3] = draw[3] - (int)draw[3];
+	draw_line(main, d->x, draw, texture);
+}
 
 // k[0] - ray_x_offset, х coordinate of the camera and position of player
 // k[1] - raydir_x
@@ -59,20 +82,18 @@ void	rendering_prep_calculation(t_game *main, double *k,
 // k[3] - perpWallDist
 // rey[0] - dist of rey from one x side to another x side of square;
 // rey[1] - same for y
-// draw[3] - height of the line
+// draw[2] - height of the line
 void	rendering_process(t_game *main)
 {
 	double	k[4];
 	double	delta_rey[2];
-	int		x;
-	double	draw[3];
+	double	draw[4];
 	t_dda	d;
-	double	x_wall;
 
-	x = -1;
-	while (++x <= main->win_width)
+	d.x = -1;
+	while (++d.x <= main->win_width)
 	{
-		k[0] = (2 * x / (double)main->win_width - 1);
+		k[0] = (2 * d.x / (double)main->win_width - 1);
 		rendering_prep_calculation(main, k, delta_rey, &d);
 		ft_dda(main, &d, delta_rey, k);
 		if (d.side == 0)
@@ -83,15 +104,7 @@ void	rendering_process(t_game *main)
 		draw[0] = fmax(0, (main->win_height / 2 - draw[2] / 2));
 		draw[1] = fmin((main->win_height - 1),
 				(main->win_height / 2 + draw[2] / 2));
-		if (d.side == 0)
-		{
-			x_wall = main->scene->player->y + k[3] * k[2];
-			x_wall = x_wall - (int)x_wall;
-			draw_line(main, x, draw, &main->no, x_wall);}
-		else{
-			x_wall = main->scene->player->x + k[3] * k[1];
-			x_wall = x_wall - (int)x_wall;
-			draw_line(main, x, draw, &main->ea, x_wall);}
+		draw_with_texture(main, &d, draw, k);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 13:11:40 by khuk              #+#    #+#             */
-/*   Updated: 2025/02/20 18:29:56 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/20 21:46:09 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	my_put_pixel(t_game *main, int x, int y, int color)
 	*((unsigned int *)(i + main->img.ptr_imgbit)) = color;
 }
 
-void	draw_line(t_game *main, double	x, double *line_param, t_img *text, double x_wall)
+void	draw_line(t_game *main, double	x, double *line_param, t_img *text)
 {
 	double	i;
 	int		x_text;
@@ -79,12 +79,7 @@ void	draw_line(t_game *main, double	x, double *line_param, t_img *text, double x
 	int		color;
 
 	i = line_param[0];
-	//x_text = (int)(x * ((double)text->width / (double)main->win_width));
-	x_text = (int)(x_wall * text->width);
-
-/*     if ((d->side == 0 && k[1] > 0) || (d->side == 1 && k[2] < 0))
-        x_text = text->width - x_text - 1 */
-
+	x_text = (int)(line_param[3] * text->width);
 	if (x_text < 0)
 		x_text = 0;
     else if (x_text >= text->width)
