@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 13:11:40 by khuk              #+#    #+#             */
-/*   Updated: 2025/02/20 21:46:09 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/21 00:27:02 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,23 +55,19 @@ void	solid_color(t_game *d, int x, int y)
 void	my_put_pixel(t_game *main, int x, int y, int color)
 {
 	int		i;
-	
+
 	if (!main->img.ptr_imgbit)
 	{
-		fprintf(stderr, "Error: Image buffer is NULL\n");
-		return ;//debug
+		exit_error("Image buffer is NULL\n");
+		return ;
 	}
 	if (x > main->img.width || y > main->img.height || x < 0 || y < 0)
-	{
-		printf("Out of range %d > %d width, %d > %d height\n", x, main->img.width, y, main->img.height);
-		return ;//debug
-	}
-		
+		return ;
 	i = (main->img.size_line * y) + ((main->img.bits_per_pixel / 8) * x);
 	*((unsigned int *)(i + main->img.ptr_imgbit)) = color;
 }
 
-void	draw_line(t_game *main, double	x, double *line_param, t_img *text)
+void	draw_line(t_game *main, double x, double *line_param, t_img *text)
 {
 	double	i;
 	int		x_text;
@@ -82,12 +78,14 @@ void	draw_line(t_game *main, double	x, double *line_param, t_img *text)
 	x_text = (int)(line_param[3] * text->width);
 	if (x_text < 0)
 		x_text = 0;
-    else if (x_text >= text->width)
+	else if (x_text >= text->width)
 		x_text = text->width - 1;
 	while (i <= line_param[1])
 	{
-		y_text = (int)((i - line_param[0]) * (double)text->height / (line_param[1] - line_param[0]));
-		color = *(int *)(text->ptr_imgbit + (y_text * text->size_line + x_text * (text->bits_per_pixel / 8)));
+		y_text = (int)((i - line_param[0]) * (double)text->height
+				/ (line_param[1] - line_param[0]));
+		color = *(int *)(text->ptr_imgbit + (y_text * text->size_line
+					+ x_text * (text->bits_per_pixel / 8)));
 		my_put_pixel(main, x, i, color);
 		i++;
 	}

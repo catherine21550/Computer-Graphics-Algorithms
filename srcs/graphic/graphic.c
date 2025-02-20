@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 19:44:46 by khuk              #+#    #+#             */
-/*   Updated: 2025/02/20 21:53:36 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/21 00:38:09 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,12 @@ void	rendering_prep_calculation(t_game *main, double *k,
 	d->x_map = main->scene->player->x;
 	d->y_map = main->scene->player->y;
 }
+
 void	draw_with_texture(t_game *main, t_dda *d, double *draw, double *k)
 {
-	t_img *texture = NULL;
+	t_img	*texture;
 
+	texture = NULL;
 	if (d->side == 0)
 	{
 		if (k[1] > 0)
@@ -99,7 +101,7 @@ void	rendering_process(t_game *main)
 		if (d.side == 0)
 			k[3] = d.x_dist_wall - delta_rey[0];
 		else
-			k[3] = d.y_dist_wall - delta_rey[1]; 
+			k[3] = d.y_dist_wall - delta_rey[1];
 		draw[2] = main->win_height / k[3];
 		draw[0] = fmax(0, (main->win_height / 2 - draw[2] / 2));
 		draw[1] = fmin((main->win_height - 1),
@@ -125,15 +127,15 @@ void	handle_graphics(t_game *main)
 		return (cleanup(main->data), exit_error("mlx_new_window failed\n"));
 	main->img.img_ptr = mlx_new_image(main->mlx_ptr, W_WIDTH, W_HEIGHT);
 	if (!main->img.img_ptr)
-		return (fprintf(stderr, "Error: Failed to create new image\n"), (void)0);//change to some custom fprintf!!!!protect if fails
+		return (exit_error(IMG_ER));
 	main->img.ptr_imgbit = mlx_get_data_addr(main->img.img_ptr,
 			&main->img.bits_per_pixel, &main->img.size_line, &main->img.endian);
 	if (!main->img.ptr_imgbit)
-		return ;//protect if fails
+		return (exit_error("mlx_get_data failed\n"));
 	get_all_textures(main);
-	//print_square_map(main, main->scene);//temp
 	draw_img(main);
-	mlx_put_image_to_window(main->mlx_ptr, main->win_ptr, main->img.img_ptr, 0, 0);
+	mlx_put_image_to_window(main->mlx_ptr, main->win_ptr,
+		main->img.img_ptr, 0, 0);
 	mlx_hook(main->win_ptr, 17, (1L << 0), &exit_function, main);
 	mlx_hook(main->win_ptr, 2, (1L << 0), &key_function, main);
 	//mlx_hook(main->win_ptr, 6, (1L << 6), &mouse_move_function, NULL);

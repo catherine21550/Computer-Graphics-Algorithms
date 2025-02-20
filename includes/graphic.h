@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 19:34:42 by khuk              #+#    #+#             */
-/*   Updated: 2025/02/20 21:47:08 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/21 00:36:05 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@
 #  define W_HEIGHT 600
 # endif
 
-#define CUB_PI	3.14159265358979323846264338327950288
+# define CUB_PI	3.14159265358979323846264338327950288
+# define M_ER "malloc failed\n"
+# define IMG_ER "Failed to create new image\n"
 
 typedef	struct s_dda
 {
