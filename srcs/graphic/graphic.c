@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 19:44:46 by khuk              #+#    #+#             */
-/*   Updated: 2025/02/21 00:38:09 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/21 19:06:53 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,15 +116,25 @@ void	draw_img(t_game *main)
 	rendering_process(main);
 }
 
-void	handle_graphics(t_game *main)
+bool	mlx_init(t_game *main)
 {
-	scene_init(main);
 	main->mlx_ptr = mlx_init();
 	if (!main->mlx_ptr)
 		return (cleanup(main->data), exit_error("mlx_init failed\n"));
 	main->win_ptr = mlx_new_window(main->mlx_ptr, W_WIDTH, W_HEIGHT, "Cub3D");
 	if (!main->win_ptr)
 		return (cleanup(main->data), exit_error("mlx_new_window failed\n"));
+}
+
+void	handle_graphics(t_game *main)
+{
+	scene_init(main);
+/* 	main->mlx_ptr = mlx_init();
+	if (!main->mlx_ptr)
+		return (cleanup(main->data), exit_error("mlx_init failed\n"));
+	main->win_ptr = mlx_new_window(main->mlx_ptr, W_WIDTH, W_HEIGHT, "Cub3D");
+	if (!main->win_ptr)
+		return (cleanup(main->data), exit_error("mlx_new_window failed\n")); */
 	main->img.img_ptr = mlx_new_image(main->mlx_ptr, W_WIDTH, W_HEIGHT);
 	if (!main->img.img_ptr)
 		return (exit_error(IMG_ER));

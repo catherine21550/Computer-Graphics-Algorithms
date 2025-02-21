@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 13:25:25 by khuk              #+#    #+#             */
-/*   Updated: 2025/02/21 00:20:54 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/21 19:10:50 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,8 @@ void	fill_coordinates(t_game *main)
 		main->scene->coord[j] = ft_calloc(sizeof(t_square),
 				main->scene->x_size);
 		if (!main->scene->coord[j])
-			return (ft_free_coord(&main->scene, j), cleanup(main->data),
-				exit_error(M_ER));
+			return (ft_free_scene(&main->scene, j), free(main->scene),
+				cleanup(main->data), exit_error(M_ER));
 		i = -1;
 		while (++i >= 0 && main->data->map[j][i]
 			&& main->data->map[j][i] != '\n')
