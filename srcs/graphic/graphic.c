@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 19:44:46 by khuk              #+#    #+#             */
-/*   Updated: 2025/02/23 23:12:22 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/24 00:24:02 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,13 @@ void	rendering_process(t_game *main)
 	draw_walls(main);
 	if (main->player.created)
 		draw_player(main);
+	//draw_minimap(main);
 }
 
 bool	handle_graphics(t_game *main)
 {
 	scene_init(main);
-	if (!ft_init_mlx(main) || !create_main_img(main))
+	if (!ft_init_mlx(main) || !create_main_img(main, &main->img, W_WIDTH, W_HEIGHT))
 		return (false);
 	if (!get_all_textures(main))
 		return (false);
