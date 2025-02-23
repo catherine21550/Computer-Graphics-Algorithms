@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 09:49:45 by teesmaa           #+#    #+#             */
-/*   Updated: 2025/02/21 18:06:55 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/23 01:06:49 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,14 @@ int main(int argc, char **argv)
 	t_game	main;
 	t_data	data;
 
+	ft_bzero(&main, sizeof(t_game));
 	main.data = &data;
 	check_arg(argc, argv[1]);
 	save_data(argv[1], main.data);
 	parser(main.data);
 	//print_data(&data);
-	handle_graphics(&main);
-	cleanup(main.data);
+	if (!handle_graphics(&main))
+		return (1);
+	//cleanup(main.data);
 	return (0);
 }

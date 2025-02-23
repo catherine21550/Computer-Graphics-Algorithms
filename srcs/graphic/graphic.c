@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 19:44:46 by khuk              #+#    #+#             */
-/*   Updated: 2025/02/21 19:06:53 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/23 00:53:52 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,33 +116,51 @@ void	draw_img(t_game *main)
 	rendering_process(main);
 }
 
-bool	mlx_init(t_game *main)
+bool	create_main_img(t_game *main)
+{
+	main->img.img_ptr = mlx_new_image(main->mlx_ptr, W_WIDTH, W_HEIGHT);
+	if (!main->img.img_ptr)
+		return (ft_free_game(main), ft_putstr_fd(IMG_ER, 2), false);
+	main->img.ptr_imgbit = mlx_get_data_addr(main->img.img_ptr,
+			&main->img.bits_per_pixel, &main->img.size_line, &main->img.endian);
+	if (!main->img.ptr_imgbit)
+		return (ft_free_game(main),
+				ft_putstr_fd("Error: mlx_get_data failed\n", 2), false);
+	return (main->img.created = true);
+}
+
+bool	ft_init_mlx(t_game *main)
 {
 	main->mlx_ptr = mlx_init();
 	if (!main->mlx_ptr)
-		return (cleanup(main->data), exit_error("mlx_init failed\n"));
+		return (ft_free_game(main), ft_putstr_fd("Error: mlx_init failed\n", 2), false);
 	main->win_ptr = mlx_new_window(main->mlx_ptr, W_WIDTH, W_HEIGHT, "Cub3D");
 	if (!main->win_ptr)
-		return (cleanup(main->data), exit_error("mlx_new_window failed\n"));
+		return (ft_free_game(main),
+				ft_putstr_fd("Error: mlx_new_window failed\n", 2), false);
+	return (true);
 }
 
-void	handle_graphics(t_game *main)
+bool	handle_graphics(t_game *main)
 {
 	scene_init(main);
+	if (!ft_init_mlx(main) || !create_main_img(main))
+		return (false);
 /* 	main->mlx_ptr = mlx_init();
 	if (!main->mlx_ptr)
 		return (cleanup(main->data), exit_error("mlx_init failed\n"));
 	main->win_ptr = mlx_new_window(main->mlx_ptr, W_WIDTH, W_HEIGHT, "Cub3D");
 	if (!main->win_ptr)
 		return (cleanup(main->data), exit_error("mlx_new_window failed\n")); */
-	main->img.img_ptr = mlx_new_image(main->mlx_ptr, W_WIDTH, W_HEIGHT);
+/* 	main->img.img_ptr = mlx_new_image(main->mlx_ptr, W_WIDTH, W_HEIGHT);
 	if (!main->img.img_ptr)
 		return (exit_error(IMG_ER));
 	main->img.ptr_imgbit = mlx_get_data_addr(main->img.img_ptr,
 			&main->img.bits_per_pixel, &main->img.size_line, &main->img.endian);
 	if (!main->img.ptr_imgbit)
-		return (exit_error("mlx_get_data failed\n"));
-	get_all_textures(main);
+		return (exit_error("mlx_get_data failed\n")); */
+	if (!get_all_textures(main))
+		return (false);
 	draw_img(main);
 	mlx_put_image_to_window(main->mlx_ptr, main->win_ptr,
 		main->img.img_ptr, 0, 0);
@@ -150,5 +168,6 @@ void	handle_graphics(t_game *main)
 	mlx_hook(main->win_ptr, 2, (1L << 0), &key_function, main);
 	//mlx_hook(main->win_ptr, 6, (1L << 6), &mouse_move_function, NULL);
 	mlx_loop(main->mlx_ptr);
-	destroy_graphics(main);
+	ft_free_game(main);
+	return (true);
 }

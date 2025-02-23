@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 20:01:27 by khuk              #+#    #+#             */
-/*   Updated: 2025/02/21 00:30:47 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/23 00:54:38 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,17 @@
 
 bool	get_texture(t_game *main, t_img *texture, char *path)
 {
-	texture->width = 64;
-	texture->height = 64;
-	texture->iter = 0;
+	texture->width = 0;
+	texture->height = 0;
 	texture->img_ptr = mlx_xpm_file_to_image(main->mlx_ptr, path,
 			&texture->width, &texture->height);
 	if (!texture->img_ptr)
-		return (exit_error("Textureload error\n"), false);
+		return (ft_putstr_fd("Error: textureload error\n", 2), false);
 	texture->ptr_imgbit = mlx_get_data_addr(texture->img_ptr,
 			&texture->bits_per_pixel, &texture->size_line, &texture->endian);
 	if (!texture->ptr_imgbit)
-		return (exit_error("Textureload data error\n"), false);
-	return (true);
+		return (ft_putstr_fd("Error: textureload data error\n", 2), false);
+	return (texture->created = true);
 }
 
 bool	get_all_textures(t_game *main)
@@ -34,6 +33,6 @@ bool	get_all_textures(t_game *main)
 		|| !get_texture(main, &main->so, main->data->so)
 		|| !get_texture(main, &main->we, main->data->we)
 		|| !get_texture(main, &main->ea, main->data->ea))
-		return (false);//clean memory if fails
+		return (ft_free_game(main), false);
 	return (true);
 }

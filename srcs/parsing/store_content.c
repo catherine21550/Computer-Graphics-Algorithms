@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   store_content.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: teesmaa <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 12:34:09 by teesmaa           #+#    #+#             */
-/*   Updated: 2025/01/30 12:34:57 by teesmaa          ###   ########.fr       */
+/*   Updated: 2025/02/23 01:10:08 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	count_lines(char *arg)
 	{
 		lines++;
 		free(str);
-		str = get_next_line(fd);
+		str = get_next_line(fd);//need to be protected if fails here
 	}
 	if (close(fd) == -1)
 		exit_error("Failed to close file");

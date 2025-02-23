@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 09:43:26 by teesmaa           #+#    #+#             */
-/*   Updated: 2025/02/21 18:05:06 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/23 00:49:21 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,8 @@ typedef struct s_img
 	int		endian;
 	int		bits_per_pixel;
 	char	*ptr_imgbit;
-	int		iter;
-}			t_img;
+	bool	created;
+}		t_img;
 
 typedef struct	s_scene
 {
@@ -142,6 +142,7 @@ int     count_digits(char *str);
 // ################# //
 //      Graphic      //
 // ################# //
-void	handle_graphics(t_game *main);
+bool	handle_graphics(t_game *main);
+void	ft_free_game(t_game *main);
 
 #endif
