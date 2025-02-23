@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 13:11:40 by khuk              #+#    #+#             */
-/*   Updated: 2025/02/21 00:27:02 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/23 20:11:55 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,5 +88,35 @@ void	draw_line(t_game *main, double x, double *line_param, t_img *text)
 					+ x_text * (text->bits_per_pixel / 8)));
 		my_put_pixel(main, x, i, color);
 		i++;
+	}
+}
+
+void draw_scaled_image(t_game *main, t_img *texture, int *dest, int *target)
+{
+	int i[2];
+	int src[2];
+	int color;
+
+	i[0] = -1;
+	while (++i[0] < target[1])
+	{
+		i[1] = -1;
+		while (++i[1] < target[0])
+		{
+			src[0] = (i[1] * texture->width) / target[0];
+			src[1] = (i[0] * texture->height) / target[1];
+			if (src[0] < 0)
+				src[0] = 0;
+			else if (src[0] >= texture->width)
+				src[0] = texture->width - 1;
+			if (src[1] < 0)
+				src[1] = 0;
+			else if (src[1] >= texture->height)
+				src[1] = texture->height - 1;
+			color = *(int *)(texture->ptr_imgbit + (src[1] * texture->size_line
+					+ src[0] * (texture->bits_per_pixel / 8)));
+			if (color > 0)
+				my_put_pixel(main, dest[0] + i[1], dest[1] + i[0], color);
+		}
 	}
 }

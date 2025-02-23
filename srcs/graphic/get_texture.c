@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 20:01:27 by khuk              #+#    #+#             */
-/*   Updated: 2025/02/23 00:54:38 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/23 20:45:36 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,21 @@ bool	get_texture(t_game *main, t_img *texture, char *path)
 	return (texture->created = true);
 }
 
+bool	get_char(t_game *main, t_img *texture, char *path)
+{
+	texture->width = 0;
+	texture->height = 0;
+	texture->img_ptr = mlx_xpm_file_to_image(main->mlx_ptr, path,
+			&texture->width, &texture->height);
+	if (!texture->img_ptr)
+		return (texture->created = false);
+	texture->ptr_imgbit = mlx_get_data_addr(texture->img_ptr,
+			&texture->bits_per_pixel, &texture->size_line, &texture->endian);
+	if (!texture->ptr_imgbit)
+		return (texture->created = false);
+	return (texture->created = true);
+}
+
 bool	get_all_textures(t_game *main)
 {
 	if (!get_texture(main, &main->no, main->data->no)
@@ -34,5 +49,6 @@ bool	get_all_textures(t_game *main)
 		|| !get_texture(main, &main->we, main->data->we)
 		|| !get_texture(main, &main->ea, main->data->ea))
 		return (ft_free_game(main), false);
+	get_char(main, &main->player, "/home/khuk/42Vienna/cub3D/textures/sword.xpm");
 	return (true);
 }

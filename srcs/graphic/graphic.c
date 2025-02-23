@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 19:44:46 by khuk              #+#    #+#             */
-/*   Updated: 2025/02/23 00:53:52 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/23 20:47:32 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,10 +110,53 @@ void	rendering_process(t_game *main)
 	}
 }
 
+/* void draw_player(t_game *main)
+{
+    // Set the drawn height to one-fifth of the window height.
+   // double player_height = main->win_height / 5;
+    // Calculate scale factor based on the original texture height.
+    //double scale = player_height / main->player.height;
+    // Apply scale to the texture width.
+   // double player_width = main->player.width * scale;
+    // Compute horizontal starting position so that the sprite is centered.
+   // double start_x = main->win_width / 2 - player_width / 2;
+  //  double end_x = start_x + player_width;
+    double x;
+
+    // Loop over every x coordinate in the drawn sprite.
+    for (x = start_x; x < end_x; x++) {
+        // Determine the relative horizontal position (0.0 to 1.0)
+        
+        // Draw a vertical line at this x coordinate.
+        // The vertical range is from (win_height - player_height) at the top,
+        // to win_height at the bottom.
+        // We pass tex_x (as line_param[3]) so that draw_line can pick the right column of the texture.
+        draw_line(main, x, (double []){main->win_height - player_height, main->win_height, 0, tex_x}, &main->player);
+    }
+} */
+void draw_scaled_image(t_game *main, t_img *texture, int *dest, int *target);
+
+void	draw_player(t_game *main)
+{
+	double	player_height;
+	double	player_width;
+	double	draw[2];
+	//double	x;
+
+	player_height = main->win_height / 3;
+	player_width = (player_height / main->player.height) * main->player.width;
+	draw[0] = main->win_width / 2 - (player_width / 2) + main->win_width / 8;
+	draw[1] = main->win_height - player_height;
+	draw_scaled_image(main, &main->player, (int []){(int)draw[0], (int)draw[1]},
+		(int []){(int)player_width, (int)player_height});
+}
+
 void	draw_img(t_game *main)
 {
 	solid_color(main, main->win_width, main->win_height);
 	rendering_process(main);
+	if (main->player.created)
+		draw_player(main);
 }
 
 bool	create_main_img(t_game *main)
@@ -146,19 +189,6 @@ bool	handle_graphics(t_game *main)
 	scene_init(main);
 	if (!ft_init_mlx(main) || !create_main_img(main))
 		return (false);
-/* 	main->mlx_ptr = mlx_init();
-	if (!main->mlx_ptr)
-		return (cleanup(main->data), exit_error("mlx_init failed\n"));
-	main->win_ptr = mlx_new_window(main->mlx_ptr, W_WIDTH, W_HEIGHT, "Cub3D");
-	if (!main->win_ptr)
-		return (cleanup(main->data), exit_error("mlx_new_window failed\n")); */
-/* 	main->img.img_ptr = mlx_new_image(main->mlx_ptr, W_WIDTH, W_HEIGHT);
-	if (!main->img.img_ptr)
-		return (exit_error(IMG_ER));
-	main->img.ptr_imgbit = mlx_get_data_addr(main->img.img_ptr,
-			&main->img.bits_per_pixel, &main->img.size_line, &main->img.endian);
-	if (!main->img.ptr_imgbit)
-		return (exit_error("mlx_get_data failed\n")); */
 	if (!get_all_textures(main))
 		return (false);
 	draw_img(main);

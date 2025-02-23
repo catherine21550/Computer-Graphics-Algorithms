@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 13:16:21 by khuk              #+#    #+#             */
-/*   Updated: 2025/02/23 00:56:10 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/23 18:08:10 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	destroy_graphics(t_game *data)
 		mlx_destroy_image(data->mlx_ptr, data->ea.img_ptr);
 	if (data->we.created)
 		mlx_destroy_image(data->mlx_ptr, data->we.img_ptr);
+	if (data->player.created)
+		mlx_destroy_image(data->mlx_ptr, data->player.img_ptr);
 	if (data->win_ptr)
 		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
 	if (data->mlx_ptr)
