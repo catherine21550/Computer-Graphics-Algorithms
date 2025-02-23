@@ -6,7 +6,7 @@
 #    By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/04 15:02:26 by khuk              #+#    #+#              #
-#    Updated: 2025/02/23 22:07:40 by khuk             ###   ########.fr        #
+#    Updated: 2025/02/23 23:09:03 by khuk             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,9 @@ CFILES_GRAPHIC		= graphic.c \
 					  get_texture.c \
 					  raycasting.c \
 					  graphic_init.c
+					  scene_init.c \
+					  dda_algorithm.c \
+					  minimap.c
 
 OBJ_FILES 			:= $(CFILES_ROOT:.c=.o) \
 			  		   $(CFILES_PARCING:.c=.o) \

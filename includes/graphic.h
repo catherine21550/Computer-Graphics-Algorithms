@@ -103,4 +103,6 @@ bool	get_all_textures(t_game *main);
 bool	create_main_img(t_game *main);
 bool	ft_init_mlx(t_game *main);
 
+void	draw_minimap(t_game *main);
+
 #endif
