@@ -6,22 +6,25 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 13:12:24 by khuk              #+#    #+#             */
-/*   Updated: 2025/02/23 18:43:44 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/23 22:20:19 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "graphic.h"
 
-void rotate_camera(t_game *main, double angle)
+void	rotate_camera(t_game *main, double angle)
 {
 	printf("Angle is: %f\n", angle);//temp
 	main->scene->radians = main->scene->angle * (CUB_PI / 180.0);
 	main->scene->x_dir = cos(main->scene->radians);
 	main->scene->y_dir = sin(main->scene->radians);
-	main->scene->x_plane = -main->scene->plane_length * sin(main->scene->radians);
-	main->scene->y_plane = main->scene->plane_length * cos(main->scene->radians);
-	draw_img(main);
-	mlx_put_image_to_window(main->mlx_ptr, main->win_ptr, main->img.img_ptr, 0, 0);
+	main->scene->x_plane = -main->scene->plane_length
+		* sin(main->scene->radians);
+	main->scene->y_plane = main->scene->plane_length
+		* cos(main->scene->radians);
+	rendering_process(main);
+	mlx_put_image_to_window(main->mlx_ptr, main->win_ptr,
+		main->img.img_ptr, 0, 0);
 }
 
 int	key_function(int key, t_game *data)
@@ -47,11 +50,11 @@ int	key_function(int key, t_game *data)
 	return (0);
 }
 
-int mouse_move_function(int x, int y, void *param)
+int	mouse_move_function(int x, int y, void *param)
 {
-    (void)param;
-    printf("Mouse moved to (%d, %d)\n", x, y);//temp
-    return (0);
+	(void)param;
+	printf("Mouse moved to (%d, %d)\n", x, y);//temp
+	return (0);
 }
 
 int	exit_function(t_game *data)

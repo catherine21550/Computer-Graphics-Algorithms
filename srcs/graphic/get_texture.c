@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 20:01:27 by khuk              #+#    #+#             */
-/*   Updated: 2025/02/23 20:45:36 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/23 22:18:42 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ bool	get_all_textures(t_game *main)
 		|| !get_texture(main, &main->we, main->data->we)
 		|| !get_texture(main, &main->ea, main->data->ea))
 		return (ft_free_game(main), false);
-	get_char(main, &main->player, "/home/khuk/42Vienna/cub3D/textures/sword.xpm");
+	get_char(main, &main->player,
+		"/home/khuk/42Vienna/cub3D/textures/sword.xpm");
 	return (true);
 }
