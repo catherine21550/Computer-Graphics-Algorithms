@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 22:04:56 by khuk              #+#    #+#             */
-/*   Updated: 2025/02/23 22:13:40 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/24 17:17:33 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ void	draw_walls(t_game *main)
 	double	draw[4];
 	t_dda	d;
 
+	main->scene->d = &d;
 	d.x = -1;
 	while (++d.x <= main->win_width)
 	{

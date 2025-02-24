@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 19:34:42 by khuk              #+#    #+#             */
-/*   Updated: 2025/02/23 23:43:48 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/24 17:15:23 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,6 @@
 # define CUB_PI	3.14159265358979323846264338327950288
 # define M_ER "malloc failed\n"
 # define IMG_ER "Failed to create new image\n"
-
-typedef	struct s_dda
-{
-	double		x_map;
-	double		y_map;
-	double		x_dist_wall;
-	double		y_dist_wall;
-	double		x_step;
-	double		y_step;
-	int			side;
-	int			x;
-}	t_dda;
-
 
 enum	e_key
 {

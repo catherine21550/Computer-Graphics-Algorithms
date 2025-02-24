@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 09:43:26 by teesmaa           #+#    #+#             */
-/*   Updated: 2025/02/23 23:06:19 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/24 17:17:07 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,18 @@ typedef struct s_img
 	bool	created;
 }		t_img;
 
+typedef	struct s_dda
+{
+	double		x_map;
+	double		y_map;
+	double		x_dist_wall;
+	double		y_dist_wall;
+	double		x_step;
+	double		y_step;
+	int			side;
+	int			x;
+}	t_dda;
+
 typedef struct	s_scene
 {
 	t_square	**coord;
@@ -98,7 +110,8 @@ typedef struct	s_scene
 	int			color_wall2;
 	int			color_ceiling;
 	int			color_floor;
-	//double     move_speed;
+	double		move_speed;
+	t_dda		*d;
 }	t_scene;
 
 typedef struct  s_game
