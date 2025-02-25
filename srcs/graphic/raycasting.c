@@ -6,14 +6,14 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 22:04:56 by khuk              #+#    #+#             */
-/*   Updated: 2025/02/24 17:17:33 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/25 19:09:32 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "graphic.h"
 
-void	raycast_prep_calculation(t_game *main, double *k,
-		double *delta, t_dda *d)
+void	raycast_prep_calculation(t_game *main, double *k, t_dda *d,
+		double *delta)
 {
 	k[1] = cos(main->scene->angle * CUB_PI / 180) + main->scene->x_plane * k[0];
 	k[2] = sin(main->scene->angle * CUB_PI / 180) + main->scene->y_plane * k[0];
@@ -94,24 +94,24 @@ void	draw_walls(t_game *main)
 	double	k[4];
 	double	delta_rey[2];
 	double	draw[4];
-	t_dda	d;
+/* 	t_dda	d;
 
-	main->scene->d = &d;
-	d.x = -1;
-	while (++d.x <= main->win_width)
+	main->scene->d = &d; */
+	main->scene->d.x = -1;
+	while (++main->scene->d.x <= main->win_width)
 	{
-		k[0] = (2 * d.x / (double)main->win_width - 1);
-		raycast_prep_calculation(main, k, delta_rey, &d);
-		ft_dda(main, &d, delta_rey, k);
-		if (d.side == 0)
-			k[3] = d.x_dist_wall - delta_rey[0];
+		k[0] = (2 * main->scene->d.x / (double)main->win_width - 1);
+		raycast_prep_calculation(main, k, &main->scene->d, delta_rey);
+		ft_dda(main, &main->scene->d, delta_rey, k);
+		if (main->scene->d.side == 0)
+			k[3] = main->scene->d.x_dist_wall - delta_rey[0];
 		else
-			k[3] = d.y_dist_wall - delta_rey[1];
+			k[3] = main->scene->d.y_dist_wall - delta_rey[1];
 		draw[2] = main->win_height / k[3];
 		draw[0] = fmax(0, (main->win_height / 2 - draw[2] / 2));
 		draw[1] = fmin((main->win_height - 1),
 				(main->win_height / 2 + draw[2] / 2));
-		draw_with_texture(main, &d, (double []){draw[0], draw[1], draw[2], 0,
+		draw_with_texture(main, &main->scene->d, (double []){draw[0], draw[1], draw[2], 0,
 			(main->win_height / 2 - draw[2] / 2),
 			(main->win_height / 2 + draw[2] / 2)}, k);
 	}

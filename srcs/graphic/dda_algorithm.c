@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 23:49:31 by khuk              #+#    #+#             */
-/*   Updated: 2025/02/24 16:51:18 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/25 19:08:15 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	scene_init(t_game *main)
 {
-	
+	struct timeval t;
 	fill_coordinates(main);
 	main->win_width = W_WIDTH;
 	main->win_height = W_HEIGHT;
@@ -33,8 +33,9 @@ void	scene_init(t_game *main)
 	main->scene->color_wall2 = GREY;
 	main->scene->color_ceiling = main->data->ceiling;
 	main->scene->color_floor = main->data->floor;
+	gettimeofday(&t, NULL);
+	main->scene->time = t.tv_sec + (t.tv_usec / 1000000);
 	main->scene->old_time = main->scene->time;
-	//main->scene->time = 0;
 }
 
 static void	ft_dda_util(t_dda *d, double *delta, char c)

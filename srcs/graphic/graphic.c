@@ -6,14 +6,14 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 19:44:46 by khuk              #+#    #+#             */
-/*   Updated: 2025/02/24 00:24:02 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/25 18:54:57 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "graphic.h"
 
 /* For visual representation */
-/* void	print_square_map(t_game *m, t_scene *scene)
+void	print_square_map(t_game *m, t_scene *scene)
 {
 	int	y = 0;
 	
@@ -34,7 +34,7 @@
 	printf("Plane of scene: %f %f\n", scene->x_plane, scene->y_plane);
 	printf("bits_per_pixel: %d, size_line: %d, endian: %d\n", 
 	m->img.bits_per_pixel, m->img.size_line, m->img.endian);
-} */
+}
 void	draw_player(t_game *main)
 {
 	double	player_height;
@@ -65,6 +65,7 @@ bool	handle_graphics(t_game *main)
 		return (false);
 	if (!get_all_textures(main))
 		return (false);
+	print_square_map(main, main->scene);
 	rendering_process(main);
 	mlx_put_image_to_window(main->mlx_ptr, main->win_ptr,
 		main->img.img_ptr, 0, 0);

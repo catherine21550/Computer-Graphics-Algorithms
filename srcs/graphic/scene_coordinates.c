@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 13:25:25 by khuk              #+#    #+#             */
-/*   Updated: 2025/02/21 19:10:50 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/25 18:48:33 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ static void	fill_coord_node(t_game *main, t_square *node, int j, int i)
 	{
 		node->type = PLAY;
 		main->scene->player = node;
+		main->scene->d.x_map = node->x;
+		main->scene->d.y_map = node->y;
 	}
 	else
 		node->type = SPRITE;
