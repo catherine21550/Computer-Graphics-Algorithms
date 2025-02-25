@@ -12,7 +12,7 @@
 
 # include "../../includes/cub3d.h"
 
-static int	count_lines(char *arg)
+static int	count_lines(char *arg, t_data *data)
 {
 	int		lines;
 	char	*str;
@@ -22,13 +22,16 @@ static int	count_lines(char *arg)
 	if (fd == -1)
 		exit_error(strerror(errno));
 	lines = 0;
-	str = get_next_line(fd);
-	while (str != 0)
+	str = get_next_line_custom(fd, data);
+	while (str != NULL)
 	{
 		lines++;
 		free(str);
-		str = get_next_line(fd);//need to be protected if fails here
+		str = get_next_line_custom(fd, data);
 	}
+	clean_gnl(fd, data);
+	if (data->gnl_error)
+		exit_error("get_next_line() failed");
 	if (close(fd) == -1)
 		exit_error("Failed to close file");
 	return (lines);
@@ -48,6 +51,7 @@ static void	init_data(t_data *data)
 	data->ea = NULL;
 	data->floor = -1;
 	data->ceiling = -1;
+	data->gnl_error = 0;
 }
 
 void	save_data(char *arg, t_data *data)
@@ -59,14 +63,22 @@ void	save_data(char *arg, t_data *data)
 	fd = open(arg, O_RDONLY);
 	if (fd == -1)
 		exit_error(strerror(errno));
-	data->content = malloc(sizeof(char *) * (count_lines(arg) + 1));
+	data->content = malloc(sizeof(char *) * (count_lines(arg, data) + 1));
 	if (!data->content)
 		exit_error("Failed to allocate memory");
 	i = 0;
-	data->content[i] = get_next_line(fd);
-	while (data->content[i])
+	data->content[i] = get_next_line_custom(fd, data);
+	while (data->content[i++] != NULL)
+		data->content[i] = get_next_line_custom(fd, data);
+	clean_gnl(fd, data);
+	if (data->gnl_error)
 	{
-		i++;
-		data->content[i] = get_next_line(fd);
+		cleanup(data);
+		exit_error("get_next_line() failed");
+	}
+	if (close(fd) == -1)
+	{
+		cleanup(data);
+		exit_error("Failed to close file");
 	}
 }
