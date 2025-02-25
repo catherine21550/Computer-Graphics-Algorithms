@@ -139,7 +139,11 @@ void    check_map(t_data *data);
 char	*get_texture_path(char *str, char *type, t_data *data, char *path);
 int     get_color(char *str, t_data *data, char *type, int oldcolor);
 void	free_array(char **str);
+void	set_directions(int directions[4][2]);
 int     count_digits(char *str);
+int		information_type(char *str);
+bool	is_map(char *str);
+void	is_one_player(t_data *data);
 
 // ################# //
 //      Graphic      //

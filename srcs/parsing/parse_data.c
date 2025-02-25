@@ -6,37 +6,11 @@
 /*   By: teesmaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:31:37 by teesmaa           #+#    #+#             */
-/*   Updated: 2025/02/10 11:31:43 by teesmaa          ###   ########.fr       */
+/*   Updated: 2025/02/25 14:36:06 by teesmaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
-
-static void    is_one_player(t_data *data)
-{
-    int	i;
-	int	j;
-    int	count;
-
-    i = 0;
-	count = 0;
-    while (data->map[i])
-    {
-		j = 0;
-		while (data->map[i][j] != '\n' && data->map[i][j])
-		{
-			if (ft_strchr(DIRECTIONS, data->map[i][j]))
-				count++;
-			j++;
-		}
-		i++;
-    }
-	if (count != 1)
-	{
-		cleanup(data);
-		exit_error("Map should contain one player");
-	}
-}
+#include "cub3d.h"
 
 static void	get_player_position(t_data *data)
 {
@@ -62,49 +36,6 @@ static void	get_player_position(t_data *data)
 	}
 }
 
-static void	count_rows(t_data *data)
-{
-	int	i;
-
-	i = 0;
-	while (data->map[i])
-		i++;
-	data->rows = i;
-}
-
-static bool	is_map(char *str)
-{
-	if (ft_strnstr(str, "1", 1) ||
-		ft_strnstr(str, "0", 1) ||
-		(ft_strnstr(str, "N", 1) && !ft_strnstr (str, "NO", 2)) ||
-		(ft_strnstr(str, "S", 1) && !ft_strnstr (str, "SO", 2)) ||
-		(ft_strnstr(str, "E", 1) && !ft_strnstr (str, "EA", 2)) ||
-		(ft_strnstr(str, "W", 1) && !ft_strnstr (str, "WE", 2)) )
-		return (true);
-	return (false);
-}
-
-int	information_type(char *str)
-{
-	while (ft_isspace(*str))
-		str++;
-	if (ft_strnstr(str, "NO", 2))
-		return (NORTH);
-	if (ft_strnstr(str, "SO", 2))
-		return (SOUTH);
-	if (ft_strnstr(str, "WE", 2))
-		return (WEST);
-	if (ft_strnstr(str, "EA", 2))
-		return (EAST);
-	if (ft_strnstr(str, "F", 1))
-		return (GROUND);
-	if (ft_strnstr(str, "C", 1))
-		return (CEILING);
-	if (is_map(str))
-		return (MAP);
-	return (-1);
-}
-
 void	parse_input(t_data *data)
 {
 	int	i;
@@ -123,7 +54,8 @@ void	parse_input(t_data *data)
 		else if (information_type(data->content[i]) == GROUND)
 			data->floor = get_color(data->content[i], data, "F", data->floor);
 		else if (information_type(data->content[i]) == CEILING)
-			data->ceiling = get_color(data->content[i], data, "C", data->ceiling);
+			data->ceiling = get_color(data->content[i], data,
+					"C", data->ceiling);
 		else if (information_type(data->content[i]) == MAP)
 		{
 			data->map = &data->content[i];
@@ -131,6 +63,16 @@ void	parse_input(t_data *data)
 		}
 		i++;
 	}
+}
+
+static void	count_rows(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (data->map[i])
+		i++;
+	data->rows = i;
 }
 
 void	parser(t_data *data)
@@ -143,6 +85,6 @@ void	parser(t_data *data)
 		exit_error("Missing data");
 	}
 	get_player_position(data);
-    count_rows(data);
+	count_rows(data);
 	check_map(data);
 }
