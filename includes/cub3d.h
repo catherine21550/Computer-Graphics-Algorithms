@@ -55,7 +55,7 @@ typedef struct  s_data
 	char	*ea;
 	int		floor;
 	int		ceiling;
-
+	int		gnl_error;
 }	t_data;
 
 typedef	struct s_square
