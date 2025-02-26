@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 22:04:56 by khuk              #+#    #+#             */
-/*   Updated: 2025/02/26 00:51:20 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/26 13:10:23 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	draw_with_texture(t_game *main, t_dda *d, double *draw, double *k)
 			texture = &main->ea;
 		else
 			texture = &main->we;
-		draw[3] = main->scene->player->y + k[3] * k[2];
+		draw[3] = main->scene->d.y_pos + k[3] * k[2];
 	}
 	else
 	{
@@ -48,7 +48,7 @@ void	draw_with_texture(t_game *main, t_dda *d, double *draw, double *k)
 			texture = &main->so;
 		else
 			texture = &main->no;
-		draw[3] = main->scene->player->x + k[3] * k[1];
+		draw[3] = main->scene->d.x_pos + k[3] * k[1];
 	}
 	draw[3] = draw[3] - (int)draw[3];
 	draw_line(main, d->x, draw, texture);
