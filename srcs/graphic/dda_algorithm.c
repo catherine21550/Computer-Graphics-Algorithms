@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 23:49:31 by khuk              #+#    #+#             */
-/*   Updated: 2025/02/26 00:59:12 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/26 02:02:21 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ void	scene_init(t_game *main)
 	gettimeofday(&t, NULL);
 	main->scene->time = t.tv_sec + (t.tv_usec / 1000000.0);
 	main->scene->old_time = main->scene->time;
-	main->scene->d.x_pos = (double)main->data->player_pos[0] + 0.5;
-	main->scene->d.y_pos = (double)main->data->player_pos[1];
+	main->scene->d.x_pos = (double)main->scene->player->x + 0.5;
+	main->scene->d.y_pos = (double)main->scene->player->y;
 }
 
 static void	ft_dda_util(t_dda *d, double *delta, char c)
