@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 09:49:45 by teesmaa           #+#    #+#             */
-/*   Updated: 2025/02/26 14:46:18 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/26 20:59:11 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int main(int argc, char **argv)
 	check_arg(argc, argv[1]);
 	save_data(argv[1], main.data);
 	parser(main.data);
-	print_data(&data);
+	//print_data(&data);
 	if (!handle_graphics(&main))
 		return (1);
 	return (0);

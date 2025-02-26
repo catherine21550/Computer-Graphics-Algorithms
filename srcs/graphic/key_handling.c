@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 13:12:24 by khuk              #+#    #+#             */
-/*   Updated: 2025/02/26 14:46:04 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/26 18:59:16 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,14 +66,6 @@ void	move_handling(t_game *data, int key)
 	data->scene->move_speed = delta_time * 1.5;
 	position_calculation(data->scene, key);
 	rendering_process(data);
-/* 	if (data->scene->player->x != data->scene->d.x_map
-		|| data->scene->player->y != data->scene->d.y_map)
-	{
-		data->scene->player->type = FLOOR;
-		data->scene->player = &data->scene->coord[(int)data->scene->d.y_map] \
-		[(int)data->scene->d.x_map];
-		data->scene->player->type = PLAY;
-	} */
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
 		data->img.img_ptr, 0, 0);
 }
@@ -98,17 +90,15 @@ int	key_function(int key, t_game *data)
 	}
 	else if (key == W || key == S || key == A || key == D)
 		move_handling(data, key);
-	else
-		printf("Key: %d is pressed\n", key);
 	return (0);
 }
 
 int	exit_function(t_game *data)
 {
 	if (!data)
-		printf("No main data\n");
+		ft_putstr_fd("No main data\n", 2);
 	if (!data->mlx_ptr)
-		printf("No mlx_ptr\n");
+		ft_putstr_fd("No mlx_ptr\n", 2);
 	mlx_loop_end (data->mlx_ptr);
 	return (0);
 }
