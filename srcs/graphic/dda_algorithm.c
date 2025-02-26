@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 23:49:31 by khuk              #+#    #+#             */
-/*   Updated: 2025/02/25 19:08:15 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/26 00:59:12 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,10 @@ void	scene_init(t_game *main)
 	main->scene->color_ceiling = main->data->ceiling;
 	main->scene->color_floor = main->data->floor;
 	gettimeofday(&t, NULL);
-	main->scene->time = t.tv_sec + (t.tv_usec / 1000000);
+	main->scene->time = t.tv_sec + (t.tv_usec / 1000000.0);
 	main->scene->old_time = main->scene->time;
+	main->scene->d.x_pos = (double)main->data->player_pos[0] + 0.5;
+	main->scene->d.y_pos = (double)main->data->player_pos[1];
 }
 
 static void	ft_dda_util(t_dda *d, double *delta, char c)
@@ -59,18 +61,18 @@ void	ft_dda(t_game *main, t_dda *d, double *delta, double *k)
 {
 	d->x_step = 1;
 	if (k[1] >= 0)
-		d->x_dist_wall = (d->x_map + 1.0 - main->scene->player->x) * delta[0];
+		d->x_dist_wall = (d->x_map + 1.0 - main->scene->d.x_pos) * delta[0];
 	else
 	{
-		d->x_dist_wall = (main->scene->player->x - d->x_map) * delta[0];
+		d->x_dist_wall = (main->scene->d.x_pos - d->x_map) * delta[0];
 		d->x_step = -1;
 	}
 	d->y_step = 1;
 	if (k[2] >= 0)
-		d->y_dist_wall = (d->y_map + 1.0 - main->scene->player->y) * delta[1];
+		d->y_dist_wall = (d->y_map + 1.0 - main->scene->d.y_pos) * delta[1];
 	else
 	{
-		d->y_dist_wall = (main->scene->player->y - d->y_map) * delta[1];
+		d->y_dist_wall = (main->scene->d.y_pos - d->y_map) * delta[1];
 		d->y_step = -1;
 	}
 	while (true)

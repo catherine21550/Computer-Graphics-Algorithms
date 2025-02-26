@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 13:12:24 by khuk              #+#    #+#             */
-/*   Updated: 2025/02/25 19:08:57 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/26 01:19:17 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,26 +48,88 @@ int	key_function(int key, t_game *data)
 	else if (key == W)
 	{
 		struct timeval t;
-		double tmp[2];
+		double tmp[3];
 		double move_speed;
 
 		data->scene->old_time = data->scene->time;
 		gettimeofday(&t, NULL);
-		data->scene->time = t.tv_sec + (t.tv_usec / 1000000);
-		move_speed = (data->scene->time - data->scene->old_time) / 1000 * 15.0;
-	
-		tmp[0] = data->scene->player->x + data->scene->x_dir * move_speed;
-		if (data->scene->coord[(int)data->scene->player->y][(int)tmp[0]].type == FLOOR
-			|| data->scene->coord[(int)data->scene->player->y][(int)tmp[0]].type == PLAY)
-			data->scene->player->x = tmp[0];
-		tmp[1] = data->scene->player->y + data->scene->y_dir * move_speed;
-		if (data->scene->coord[(int)tmp[1]][(int)data->scene->player->x].type == FLOOR
-			|| data->scene->coord[(int)tmp[1]][(int)data->scene->player->x].type == PLAY)
-			data->scene->player->y = tmp[1];
+		data->scene->time = t.tv_sec + (t.tv_usec / 1000000.0);
+		tmp[2] = (data->scene->time - data->scene->old_time);
+		if (tmp[2] > 0.1 || tmp[2] <= 0)
+			tmp[2] = 0.1;
+		move_speed = tmp[2] * 1.5;
+		tmp[0] = data->scene->d.x_pos + data->scene->x_dir * move_speed;
+		if ((int)tmp[0] < (int)data->scene->x_size && (int)tmp[0] >= 0
+			&& data->scene->x_size && (data->scene->coord[(int)data->scene->d.y_pos][(int)tmp[0]].type == FLOOR
+			|| data->scene->coord[(int)data->scene->d.y_pos][(int)tmp[0]].type == PLAY))
+			data->scene->d.x_pos = tmp[0];
+		tmp[1] = data->scene->d.y_pos + data->scene->y_dir * move_speed;
+		if ((int)tmp[1] < (int)data->scene->y_size && (int)tmp[1] >= 0
+			&& (data->scene->coord[(int)tmp[1]][(int)data->scene->d.x_pos].type == FLOOR
+			|| data->scene->coord[(int)tmp[1]][(int)data->scene->d.x_pos].type == PLAY))
+			data->scene->d.y_pos = tmp[1];
 		rendering_process(data);
 		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
 		data->img.img_ptr, 0, 0);
 	}
+/*	{
+ 		struct timeval t;
+		gettimeofday(&t, NULL);
+		double current_time = t.tv_sec + t.tv_usec / 1000000.0;
+		double delta_time = current_time - data->scene->time;
+		data->scene->old_time = data->scene->time;
+		data->scene->time = current_time;
+
+		double move_speed = delta_time / 100 * 15.0;
+
+		// Normalize direction vector
+		// double magnitude = sqrt(data->scene->x_dir * data->scene->x_dir +
+		// 						data->scene->y_dir * data->scene->y_dir);
+		// if (magnitude > 0) {
+		// 	data->scene->x_dir /= magnitude;
+		// 	data->scene->y_dir /= magnitude;
+		// }
+
+		// Attempt movement
+		double tmp_x = data->scene->player->x + data->scene->x_dir * move_speed;
+		double tmp_y = data->scene->player->y + data->scene->y_dir * move_speed;
+
+		int next_x = (int)floor(tmp_x);
+		int next_y = (int)floor(tmp_y);
+
+		printf("Checking coord[%d][%d]\n", next_y, (int)data->scene->player->x);
+
+		if (!data->scene->coord) {
+			printf("Error: coord is NULL\n");
+			return false;
+		}
+
+		if (next_y < 0 || next_y >= W_HEIGHT || (int)data->scene->player->x < 0 || (int)data->scene->player->x >= W_WIDTH) {
+			printf("Error: Out-of-bounds access at coord[%d][%d]\n", next_y, (int)data->scene->player->x);
+			return false;
+		}
+
+		if (!data->scene->coord[next_y]) {
+			printf("Error: coord[%d] is NULL\n", next_y);
+			return false;
+		}
+
+		if (!&data->scene->coord[next_y][(int)data->scene->player->x]) {
+			printf("Error: coord[%d][%d] is NULL\n", next_y, (int)data->scene->player->x);
+			return false; 
+		}
+
+		if (data->scene->coord[(int)data->scene->player->y][next_x].type == FLOOR ||
+			data->scene->coord[(int)data->scene->player->y][next_x].type == PLAY)
+			data->scene->player->x = tmp_x;
+
+		if (data->scene->coord[next_y][(int)data->scene->player->x].type == FLOOR ||
+			data->scene->coord[next_y][(int)data->scene->player->x].type == PLAY)
+			data->scene->player->y = tmp_y;
+
+		rendering_process(data);
+		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.img_ptr, 0, 0);
+	} */
 	else
 		printf("Key: %d is pressed\n", key);
 	return (0);

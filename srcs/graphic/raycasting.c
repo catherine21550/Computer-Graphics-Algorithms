@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 22:04:56 by khuk              #+#    #+#             */
-/*   Updated: 2025/02/25 19:09:32 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/26 00:51:20 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void	raycast_prep_calculation(t_game *main, double *k, t_dda *d,
 		delta[1] = 1e30;
 	else
 		delta[1] = ft_abs(1 / k[2]);
-	d->x_map = main->scene->player->x;
-	d->y_map = main->scene->player->y;
+	d->x_map = (int)main->scene->d.x_pos;
+	d->y_map = (int)main->scene->d.y_pos;
 }
 
 void	draw_with_texture(t_game *main, t_dda *d, double *draw, double *k)
@@ -94,9 +94,7 @@ void	draw_walls(t_game *main)
 	double	k[4];
 	double	delta_rey[2];
 	double	draw[4];
-/* 	t_dda	d;
 
-	main->scene->d = &d; */
 	main->scene->d.x = -1;
 	while (++main->scene->d.x <= main->win_width)
 	{

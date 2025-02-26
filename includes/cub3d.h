@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 09:43:26 by teesmaa           #+#    #+#             */
-/*   Updated: 2025/02/25 15:50:58 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/26 00:44:53 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ typedef	struct s_dda
 {
 	double		x_map;
 	double		y_map;
+	double		x_pos;
+	double		y_pos;
 	double		x_dist_wall;
 	double		y_dist_wall;
 	double		x_step;
