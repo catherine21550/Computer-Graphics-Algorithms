@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 09:49:45 by teesmaa           #+#    #+#             */
-/*   Updated: 2025/02/26 01:32:49 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/26 14:46:18 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,5 @@ int main(int argc, char **argv)
 	print_data(&data);
 	if (!handle_graphics(&main))
 		return (1);
-	//cleanup(main.data);
 	return (0);
 }

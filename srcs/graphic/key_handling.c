@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 13:12:24 by khuk              #+#    #+#             */
-/*   Updated: 2025/02/26 14:29:32 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/26 14:46:04 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	move_handling(t_game *data, int key)
 		data->scene->player->type = PLAY;
 	} */
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
-	data->img.img_ptr, 0, 0);
+		data->img.img_ptr, 0, 0);
 }
 
 int	key_function(int key, t_game *data)
@@ -100,13 +100,6 @@ int	key_function(int key, t_game *data)
 		move_handling(data, key);
 	else
 		printf("Key: %d is pressed\n", key);
-	return (0);
-}
-
-int	mouse_move_function(int x, int y, void *param)
-{
-	(void)param;
-	printf("Mouse moved to (%d, %d)\n", x, y);//temp
 	return (0);
 }
 
@@ -136,13 +129,17 @@ else if (key == W)
 		move_speed = tmp[2] * 1.5;
 		tmp[2] = data->scene->d.x_pos + data->scene->x_dir * move_speed;
 		if ((int)tmp[2] < (int)data->scene->x_size && (int)tmp[2] >= 0
-			&& data->scene->x_size && (data->scene->coord[(int)data->scene->d.y_pos][(int)tmp[2]].type == FLOOR
-			|| data->scene->coord[(int)data->scene->d.y_pos][(int)tmp[2]].type == PLAY))
+			&& (data->scene->coord[(int)data->scene->d.y_pos] \
+			[(int)tmp[2]].type == FLOOR
+			|| data->scene->coord[(int)data->scene->d.y_pos] \
+			[(int)tmp[2]].type == PLAY))
 			data->scene->d.x_pos = tmp[2];
 		tmp[3] = data->scene->d.y_pos + data->scene->y_dir * move_speed;
 		if ((int)tmp[3] < (int)data->scene->y_size && (int)tmp[3] >= 0
-			&& (data->scene->coord[(int)tmp[3]][(int)data->scene->d.x_pos].type == FLOOR
-			|| data->scene->coord[(int)tmp[3]][(int)data->scene->d.x_pos].type == PLAY))
+			&& (data->scene->coord[(int)tmp[3]] \
+			[(int)data->scene->d.x_pos].type == FLOOR
+			|| data->scene->coord[(int)tmp[3]] \
+			[(int)data->scene->d.x_pos].type == PLAY))
 			data->scene->d.y_pos = tmp[3];
 		rendering_process(data);
 		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
@@ -163,13 +160,17 @@ else if (key == W)
 		move_speed = tmp[2] * 1.5;
 		tmp[2] = data->scene->d.x_pos - data->scene->x_dir * move_speed;
 		if ((int)tmp[2] < (int)data->scene->x_size && (int)tmp[2] >= 0
-			&& data->scene->x_size && (data->scene->coord[(int)data->scene->d.y_pos][(int)tmp[2]].type == FLOOR
-			|| data->scene->coord[(int)data->scene->d.y_pos][(int)tmp[2]].type == PLAY))
+			&& (data->scene->coord[(int)data->scene->d.y_pos] \ 
+			[(int)tmp[2]].type == FLOOR
+			|| data->scene->coord[(int)data->scene->d.y_pos] \ 
+			[(int)tmp[2]].type == PLAY))
 			data->scene->d.x_pos = tmp[2];
 		tmp[3] = data->scene->d.y_pos - data->scene->y_dir * move_speed;
 		if ((int)tmp[3] < (int)data->scene->y_size && (int)tmp[3] >= 0
-			&& (data->scene->coord[(int)tmp[3]][(int)data->scene->d.x_pos].type == FLOOR
-			|| data->scene->coord[(int)tmp[3]][(int)data->scene->d.x_pos].type == PLAY))
+			&& (data->scene->coord[(int)tmp[3]] \ 
+			[(int)data->scene->d.x_pos].type == FLOOR
+			|| data->scene->coord[(int)tmp[3]] \ 
+			[(int)data->scene->d.x_pos].type == PLAY))
 			data->scene->d.y_pos = tmp[3];
 		rendering_process(data);
 		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
@@ -190,13 +191,17 @@ else if (key == W)
 		move_speed = tmp[2] * 1.5;
 		tmp[2] = data->scene->d.x_pos - data->scene->x_plane * move_speed;
 		if ((int)tmp[2] < (int)data->scene->x_size && (int)tmp[2] >= 0
-			&& data->scene->x_size && (data->scene->coord[(int)data->scene->d.y_pos][(int)tmp[2]].type == FLOOR
-			|| data->scene->coord[(int)data->scene->d.y_pos][(int)tmp[2]].type == PLAY))
+			&& (data->scene->coord[(int)data->scene->d.y_pos] \ 
+			[(int)tmp[2]].type == FLOOR
+			|| data->scene->coord[(int)data->scene->d.y_pos] \ 
+			[(int)tmp[2]].type == PLAY))
 			data->scene->d.x_pos = tmp[2];
 		tmp[3] = data->scene->d.y_pos - data->scene->y_plane * move_speed;
 		if ((int)tmp[3] < (int)data->scene->y_size && (int)tmp[3] >= 0
-			&& (data->scene->coord[(int)tmp[3]][(int)data->scene->d.x_pos].type == FLOOR
-			|| data->scene->coord[(int)tmp[3]][(int)data->scene->d.x_pos].type == PLAY))
+			&& (data->scene->coord[(int)tmp[3]] \ 
+			[(int)data->scene->d.x_pos].type == FLOOR
+			|| data->scene->coord[(int)tmp[3]] \ 
+			[(int)data->scene->d.x_pos].type == PLAY))
 			data->scene->d.y_pos = tmp[3];
 		rendering_process(data);
 		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
@@ -217,13 +222,17 @@ else if (key == W)
 		move_speed = tmp[2] * 1.5;
 		tmp[2] = data->scene->d.x_pos + data->scene->x_plane * move_speed;
 		if ((int)tmp[2] < (int)data->scene->x_size && (int)tmp[2] >= 0
-			&& data->scene->x_size && (data->scene->coord[(int)data->scene->d.y_pos][(int)tmp[2]].type == FLOOR
-			|| data->scene->coord[(int)data->scene->d.y_pos][(int)tmp[2]].type == PLAY))
+			&& (data->scene->coord[(int)data->scene->d.y_pos] \ 
+			[(int)tmp[2]].type == FLOOR
+			|| data->scene->coord[(int)data->scene->d.y_pos] \ 
+			[(int)tmp[2]].type == PLAY))
 			data->scene->d.x_pos = tmp[2];
 		tmp[3] = data->scene->d.y_pos + data->scene->y_plane * move_speed;
 		if ((int)tmp[3] < (int)data->scene->y_size && (int)tmp[3] >= 0
-			&& (data->scene->coord[(int)tmp[3]][(int)data->scene->d.x_pos].type == FLOOR
-			|| data->scene->coord[(int)tmp[3]][(int)data->scene->d.x_pos].type == PLAY))
+			&& (data->scene->coord[(int)tmp[3]] \ 
+			[(int)data->scene->d.x_pos].type == FLOOR
+			|| data->scene->coord[(int)tmp[3]] \ 
+			[(int)data->scene->d.x_pos].type == PLAY))
 			data->scene->d.y_pos = tmp[3];
 		rendering_process(data);
 		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,

@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 23:49:31 by khuk              #+#    #+#             */
-/*   Updated: 2025/02/26 02:02:21 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/26 15:46:49 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,20 +40,31 @@ void	scene_init(t_game *main)
 	main->scene->d.y_pos = (double)main->scene->player->y;
 }
 
-static void	ft_dda_util(t_dda *d, double *delta, char c)
+static void	ft_dda_util(t_game * main, t_dda *d, double *delta)
 {
-	d->side = 0;
-	if (c == 'x')
+	char	param;
+
+	while (true)
 	{
-		d->x_dist_wall = d->x_dist_wall + delta[0];
-		d->x_map = d->x_map + d->x_step;
+		param = 'y';
+		if (d->x_dist_wall < d->y_dist_wall)
+			param = 'x';
 		d->side = 0;
-	}
-	else
-	{
-		d->y_dist_wall = d->y_dist_wall + delta[1];
-		d->y_map = d->y_map + d->y_step;
-		d->side = 1;
+		if (param == 'x')
+		{
+			d->x_dist_wall = d->x_dist_wall + delta[0];
+			d->x_map = d->x_map + d->x_step;
+			d->side = 0;
+		}
+		else
+		{
+			d->y_dist_wall = d->y_dist_wall + delta[1];
+			d->y_map = d->y_map + d->y_step;
+			d->side = 1;
+		}
+		if (main->scene->coord[(int)d->y_map][(int)d->x_map].type == WALL
+			|| main->scene->coord[(int)d->y_map][(int)d->x_map].type == NONE)
+			break ;
 	}
 }
 
@@ -75,13 +86,5 @@ void	ft_dda(t_game *main, t_dda *d, double *delta, double *k)
 		d->y_dist_wall = (main->scene->d.y_pos - d->y_map) * delta[1];
 		d->y_step = -1;
 	}
-	while (true)
-	{
-		if (d->x_dist_wall < d->y_dist_wall)
-			ft_dda_util(d, delta, 'x');
-		else
-			ft_dda_util(d, delta, 'y');
-		if (main->scene->coord[(int)d->y_map][(int)d->x_map].type != FLOOR)
-			break ;
-	}
+	ft_dda_util(main, d, delta);
 }
