@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 22:04:56 by khuk              #+#    #+#             */
-/*   Updated: 2025/02/26 13:10:23 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/27 19:32:44 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void	raycast_prep_calculation(t_game *main, double *k, t_dda *d,
 		delta[1] = ft_abs(1 / k[2]);
 	d->x_map = (int)main->scene->d.x_pos;
 	d->y_map = (int)main->scene->d.y_pos;
+	main->data->player_pos[0] = (int)d->x_map;
+	main->data->player_pos[1] = (int)d->y_map;
 }
 
 void	draw_with_texture(t_game *main, t_dda *d, double *draw, double *k)

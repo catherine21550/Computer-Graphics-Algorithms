@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 14:14:51 by teesmaa           #+#    #+#             */
-/*   Updated: 2025/02/27 16:38:17 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/27 21:50:30 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,70 +22,100 @@ void	my_put_pixel_to_image(t_img *img, int x, int y, int color)
 	*((unsigned int *)(img->ptr_imgbit + pixel_index)) = color;
 }
 
+void	mini_solid_color(t_game *d, int x, int y, int size)
+{
+	int		color;
+	int		i;
+	int		j;
+	int		border = 4;
+
+	color = d->scene->color_floor;
+	i = y - border;
+	while (i < y + size + border)
+	{
+		j = x - border;
+		while (j < x + size + border)
+		{
+			if (i < y || j < x || i >= y + size || j >= x + size)
+				my_put_pixel_to_image(&d->img, j, i, 0x000000);
+			else
+				my_put_pixel_to_image(&d->img, j, i, color);
+			j++;
+		}
+		i++;
+	}
+}
+
 void	draw_square_in_image(t_game *main, int x, int y, int color, int size)
 {
 	int	i;
 	int	j;
 
-	i = 0;
-	while (i < size)
+	i = y;
+	while (i < size + y)
 	{
-		j = 0;
-		while (j < size)
+		j = x;
+		while (j < size + x)
 		{
-			my_put_pixel_to_image(&main->img, x + j, y + i, color);
-			my_put_pixel_to_image(&main->img, x + j, y + i, color);
+			my_put_pixel_to_image(&main->img, i, j, color);
 			j++;
 		}
 		i++;
 	}
 }
 
-void	minimap_pixels(t_game *main)
+void	minimap_pixels(t_game *main, int x_offset, int y_offset)
 {
-	int	i;
-	int	j;
+	int	i[2];
+	int	j[2];
 	int	size;
-	int	offset;
+	int initial_x_offset;
+	int initial_y_offset;
+	int x;
+	int y;
 
-	size = 6;
-	offset = 10;
-	i = 0;
-	while (main->data->map[i])
+	size = 12;
+	i[0] = fmax(0, main->data->player_pos[0] - 4);
+	i[1] = fmin(i[0] + 8, main->scene->y_size);
+	initial_x_offset = x_offset;
+	initial_y_offset = y_offset;
+	y = y_offset;
+	while (main->data->map[i[0]] && i[0] < i[1])
 	{
-		j = 0;
-		while (main->data->map[i][j] != '\0')
+		j[0] = fmax(0, main->data->player_pos[1] - 4);
+		j[1] = fmin(j[0] + 8, main->scene->x_size);
+		x_offset = initial_x_offset;
+		x = x_offset;
+		while (j[0] < j[1])
 		{
-			if (abs(main->data->player_pos[0] - i) < 8 && abs(main->data->player_pos[1] - j) < 8)
-			{
-				if (main->data->map[i][j] == '1')
-					draw_square_in_image(main, j * size + offset, i * size + offset, WHITE, size);
-				else if (main->data->map[i][j] == '0')
-					draw_square_in_image(main, j * size + offset, i * size + offset, GREY, size);
-			}
-			j++;
+			if (main->scene->coord[i[0]][j[0]].type == WALL)
+				draw_square_in_image(main, x, y, WHITE, size);
+			else if (main->scene->coord[i[0]][j[0]].type == FLOOR
+					|| main->scene->coord[i[0]][j[0]].type == PLAY)
+				draw_square_in_image(main, x, y, GREY, size);
+			j[0]++;
+			x += size;
 		}
-		i++;
+		i[0]++;
+		y += 10;
 	}
-	draw_square_in_image(main, main->data->player_pos[1] * size + offset,
-		main->data->player_pos[0] * size + offset, 0xFF0000, size);
-}
-
-void	draw_minimap_to_img(t_game *main)
-{
-	double	mini_size[2];
-	double	draw[2];
-
-	mini_size[0] = main->win_height / 4;
-	mini_size[1] = (mini_size[0] / main->minimap.height) * main->minimap.width;
-	draw[0] = 12 + (main->win_width / 20);
-	draw[1] = (main->win_height / 20) + mini_size[1];
-	draw_scaled_image(main, &main->minimap, (int *)draw, (int *)mini_size);
+	int player_x = (main->data->player_pos[1] - fmax(0, main->data->player_pos[1] - 4)) * size + initial_x_offset;
+	int player_y = (main->data->player_pos[0] - fmax(0, main->data->player_pos[0] - 4)) * size + initial_y_offset;
+	draw_square_in_image(main, player_x, player_y, 0xFF0000, size);
 }
 
 bool	draw_minimap(t_game *main)
 {
-	minimap_pixels(main);
-	draw_minimap_to_img(main);
+	int	x_offset;
+	int	y_offset;
+	int size;
+
+	x_offset = W_HEIGHT / 30;
+	y_offset = W_HEIGHT / 30;
+	size = 12 * 12;
+	mini_solid_color(main, x_offset, y_offset, size);
+	x_offset += (12 * 12 - 12 * 12) / 2;
+	y_offset = x_offset;
+	minimap_pixels(main, x_offset, y_offset);
 	return (true);
-}
+} 

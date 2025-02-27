@@ -6,7 +6,7 @@
 #    By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/04 15:02:26 by khuk              #+#    #+#              #
-#    Updated: 2025/02/24 11:53:16 by khuk             ###   ########.fr        #
+#    Updated: 2025/02/27 16:41:20 by khuk             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ CFILES_ROOT			= main.c \
 CFILES_PARCING		= parse_data.c \
 					  store_content.c \
 					  map_checking.c \
+					  map_checking_utils.c \
 					  parse_utils.c \
 					  visual_info.c \
 
