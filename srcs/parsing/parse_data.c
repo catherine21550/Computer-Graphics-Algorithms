@@ -24,7 +24,7 @@ static void	get_player_position(t_data *data)
 		j = 0;
 		while (data->map[i][j] != '\n' && data->map[i][j])
 		{
-			if (ft_strchr(DIRECTIONS, data->map[i][j]))
+			if (ft_strchr("NEWS", data->map[i][j]))
 			{
 				data->player_dir = data->map[i][j];
 				data->player_pos[0] = i;

@@ -25,7 +25,7 @@ void	is_one_player(t_data *data)
 		j = 0;
 		while (data->map[i][j] != '\n' && data->map[i][j])
 		{
-			if (ft_strchr(DIRECTIONS, data->map[i][j]))
+			if (ft_strchr("NEWS", data->map[i][j]))
 				count++;
 			j++;
 		}

@@ -27,7 +27,6 @@
 # include <X11/keysym.h>
 # include "../libft/libft.h"
 
-# define DIRECTIONS "NSWE"
 # define INSIDE_MAP "0NSWE"
 
 typedef enum s_info
