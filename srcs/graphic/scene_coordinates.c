@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 13:25:25 by khuk              #+#    #+#             */
-/*   Updated: 2025/02/25 18:48:33 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/27 13:21:05 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,20 @@ size_t	size_of_map_x(t_data *data)
 	return (size[0]);
 }
 
+void	update_angle_position(t_game *main, t_square *node, int j, int i)
+{
+	main->scene->d.x_map = node->x;
+	main->scene->d.y_map = node->y;
+	if (main->data->map[j][i] == 'N')
+		main->scene->angle = 90;
+	else if (main->data->map[j][i] == 'S')
+		main->scene->angle = 270;
+	else if (main->data->map[j][i] == 'W')
+		main->scene->angle = 180;
+	else if (main->data->map[j][i] == 'E')
+		main->scene->angle = 0;
+}
+
 static void	fill_coord_node(t_game *main, t_square *node, int j, int i)
 {
 	node->y = j;
@@ -47,12 +61,11 @@ static void	fill_coord_node(t_game *main, t_square *node, int j, int i)
 	}
 	else if (main->data->map[j][i] == '1')
 		node->type = WALL;
-	else if (main->data->map[j][i] == 'N')
+	else if (ft_strchr("NEWS", main->data->map[j][i]))
 	{
 		node->type = PLAY;
 		main->scene->player = node;
-		main->scene->d.x_map = node->x;
-		main->scene->d.y_map = node->y;
+		update_angle_position(main, node, j, i);
 	}
 	else
 		node->type = SPRITE;

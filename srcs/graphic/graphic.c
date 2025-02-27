@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 19:44:46 by khuk              #+#    #+#             */
-/*   Updated: 2025/02/26 14:47:39 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/27 12:28:30 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	rendering_process(t_game *main)
 	draw_walls(main);
 	if (main->player.created)
 		draw_player(main);
-	//draw_minimap(main);
+	draw_minimap(main);
 }
 
 bool	handle_graphics(t_game *main)
