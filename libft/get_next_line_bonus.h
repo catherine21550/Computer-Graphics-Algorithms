@@ -26,12 +26,14 @@
 #  define BUFFER_SIZE 1024
 # endif
 
+typedef struct s_data t_data;
+
 char	*ft_strchr_gnl(const char *str, int c);
 size_t	ft_strlen_gnl(const char *str);
 char	*ft_strndup(const char *str, size_t size);
 void	*ft_calloc_gnl(size_t nmemb, size_t size);
 char	*ft_strjoin_new(char *s1, char *s2);
-char	*get_next_line(int fd);
-void	clean_gnl(int fd);
+char	*get_next_line_custom(int fd, t_data *data);
+void	clean_gnl(int fd, t_data *data);
 
 #endif

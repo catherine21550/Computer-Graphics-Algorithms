@@ -1,0 +1,16 @@
+NO /home/khuk/42Vienna/cub3D/textures/solid-rock-wall.xpm
+SO /home/khuk/42Vienna/cub3D/textures/stone-brick-wall.xpm
+WE /home/khuk/42Vienna/cub3D/textures/mossy-brick-wall.xpm
+EA /home/khuk/42Vienna/cub3D/textures/Rocky_Wall.xpm
+
+F 58,58,58
+C 255,156,51
+
+11111111111111
+10001100000001
+10001100011001
+10000000011001
+10000000000001
+100000N0000001
+10000000000001
+11111111111111
