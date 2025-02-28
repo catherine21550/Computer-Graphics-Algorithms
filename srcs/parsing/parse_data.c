@@ -84,7 +84,7 @@ void	parser(t_data *data)
 		cleanup(data);
 		exit_error("Missing data");
 	}
-	get_player_position(data);
 	count_rows(data);
 	check_map(data);
+	get_player_position(data);
 }

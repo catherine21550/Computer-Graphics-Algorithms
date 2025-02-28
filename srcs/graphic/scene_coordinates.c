@@ -34,9 +34,9 @@ void	update_angle_position(t_game *main, t_square *node, int j, int i)
 {
 	main->scene->d.x_map = node->x;
 	main->scene->d.y_map = node->y;
-	if (main->data->map[j][i] == 'N')
+	if (main->data->map[j][i] == 'S')
 		main->scene->angle = 90;
-	else if (main->data->map[j][i] == 'S')
+	else if (main->data->map[j][i] == 'N')
 		main->scene->angle = 270;
 	else if (main->data->map[j][i] == 'W')
 		main->scene->angle = 180;

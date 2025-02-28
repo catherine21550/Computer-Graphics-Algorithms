@@ -12,22 +12,6 @@
 
 #include "cub3d.h"
 
-int	start_index(char *str, char *type)
-{
-	int	i;
-	int	len;
-
-	len = ft_strlen(type);
-	i = 0;
-	while (ft_isspace(str[i]))
-		i++;
-	if (ft_strncmp(type, str + i, len) == 0)
-		i += len;
-	while (ft_isspace(str[i]))
-		i++;
-	return (i);
-}
-
 char	*get_texture_path(char *str, char *type, t_data *data, char *path)
 {
 	int		i;
@@ -71,6 +55,29 @@ static int	rgb_to_int(char **rgb, t_data *data)
 	return ((r << 16) | (g << 8) | b);
 }
 
+void	digits_check(char **rgb, t_data *data)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (rgb[i])
+	{
+		j = 0;
+		while (rgb[i][j] != '\n' && rgb[i][j] != '\0')
+		{
+			if (!ft_isdigit(rgb[i][j]) && !ft_isspace(rgb[i][j]))
+			{
+				free_array(rgb);
+				cleanup(data);
+				exit_error("Invalid color value");
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
 static void	color_check(char **rgb, t_data *data)
 {
 	int	i;
@@ -79,6 +86,7 @@ static void	color_check(char **rgb, t_data *data)
 	i = 0;
 	while (rgb[i])
 	{
+		digits_check(rgb, data);
 		digits = count_digits(rgb[i]);
 		if (i > 2 || digits < 1 || digits > 3)
 		{

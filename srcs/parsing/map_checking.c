@@ -29,11 +29,11 @@ void	char_check(t_data *data)
 		j = 0;
 		while (data->map[i][j] && data->map[i][j] != '\n')
 		{
-			if (data->map[i][j] != '1' && data->map[i][j] != ' '
+			if (data->map[i][j] != '1' && !ft_isspace(data->map[i][j])
 				&& !ft_strchr(INSIDE_MAP, data->map[i][j]))
 			{
 				cleanup(data);
-				exit_error("Map contains forbidden characters");
+				exit_error("map contains forbidden characters");
 			}
 			j++;
 		}

@@ -58,10 +58,14 @@ void	move_handling(t_game *data, int key)
 	double			delta_time;
 
 	data->scene->old_time = data->scene->time;
-	gettimeofday(&t, NULL);
-	data->scene->time = t.tv_sec + (t.tv_usec / 1000000.0);
-	delta_time = (data->scene->time - data->scene->old_time);
-	if (delta_time > 0.1 || delta_time <= 0)
+	if (gettimeofday(&t, NULL) != -1)
+	{
+		data->scene->time = t.tv_sec + (t.tv_usec / 1000000.0);
+		delta_time = (data->scene->time - data->scene->old_time);
+		if (delta_time > 0.1 || delta_time <= 0)
+			delta_time = 0.1;
+	}
+	else
 		delta_time = 0.1;
 	data->scene->move_speed = delta_time * 1.5;
 	position_calculation(data->scene, key);

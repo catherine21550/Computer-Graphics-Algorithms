@@ -106,8 +106,6 @@ typedef struct s_scene
 	double		plane_length;
 	double		time;
 	double		old_time;
-	int			color_wall;
-	int			color_wall2;
 	int			color_ceiling;
 	int			color_floor;
 	double		move_speed;
@@ -155,6 +153,7 @@ int		count_digits(char *str);
 int		information_type(char *str);
 bool	is_map(char *str);
 void	is_one_player(t_data *data);
+int		start_index(char *str, char *type);
 
 // ################# //
 //      Graphic      //

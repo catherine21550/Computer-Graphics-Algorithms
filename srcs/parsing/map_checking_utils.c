@@ -6,7 +6,7 @@
 /*   By: teesmaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 15:17:22 by teesmaa           #+#    #+#             */
-/*   Updated: 2025/02/25 15:18:58 by teesmaa          ###   ########.fr       */
+/*   Updated: 2025/02/28 15:50:27 by teesmaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,20 @@ bool	is_map(char *str)
 		|| (ft_strnstr(str, "W", 1) && !ft_strnstr (str, "WE", 2)))
 		return (true);
 	return (false);
+}
+
+int	start_index(char *str, char *type)
+{
+	int	i;
+	int	len;
+
+	len = ft_strlen(type);
+	i = 0;
+	while (ft_isspace(str[i]))
+		i++;
+	if (ft_strncmp(type, str + i, len) == 0)
+		i += len;
+	while (ft_isspace(str[i]))
+		i++;
+	return (i);
 }

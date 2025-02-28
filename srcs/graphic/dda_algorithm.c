@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 23:49:31 by khuk              #+#    #+#             */
-/*   Updated: 2025/02/28 01:11:03 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/28 15:51:12 by teesmaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,12 @@ void	scene_init(t_game *main)
 		* cos(main->scene->radians);
 	main->scene->x_dir = cos(main->scene->radians);
 	main->scene->y_dir = sin(main->scene->radians);
-	main->scene->color_wall = BLACK;
-	main->scene->color_wall2 = GREY;
 	main->scene->color_ceiling = main->data->ceiling;
 	main->scene->color_floor = main->data->floor;
-	gettimeofday(&t, NULL);
+	if (gettimeofday(&t, NULL) == -1)
+		return (ft_free_scene(&main->scene, main->scene->y_size),
+			free(main->scene), cleanup(main->data),
+			exit_error("Get time failed"));
 	main->scene->time = t.tv_sec + (t.tv_usec / 1000000.0);
 	main->scene->old_time = main->scene->time;
 	main->scene->d.x_pos = (double)main->scene->player->x + 0.5;
