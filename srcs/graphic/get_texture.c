@@ -19,11 +19,11 @@ bool	get_texture(t_game *main, t_img *texture, char *path)
 	texture->img_ptr = mlx_xpm_file_to_image(main->mlx_ptr, path,
 			&texture->width, &texture->height);
 	if (!texture->img_ptr)
-		return (ft_putstr_fd("Error:  error\n", 2), false);
+		return (ft_putstr_fd("Error: textureload error\n", 2), false);
 	texture->ptr_imgbit = mlx_get_data_addr(texture->img_ptr,
 			&texture->bits_per_pixel, &texture->size_line, &texture->endian);
 	if (!texture->ptr_imgbit)
-		return (ft_putstr_fd("Error:  data error\n", 2), false);
+		return (ft_putstr_fd("Error: textureload data error\n", 2), false);
 	return (texture->created = true);
 }
 
