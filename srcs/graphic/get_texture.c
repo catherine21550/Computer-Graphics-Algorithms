@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 20:01:27 by khuk              #+#    #+#             */
-/*   Updated: 2025/02/26 19:06:45 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/28 01:11:41 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ bool	get_char(t_game *main, t_img *texture, char *path)
 	texture->height = 0;
 	texture->img_ptr = mlx_xpm_file_to_image(main->mlx_ptr, path,
 			&texture->width, &texture->height);
-	//printf("%s\n", strerror(errno));//temp debug
 	if (!texture->img_ptr)
 		return (texture->created = false);
 	texture->ptr_imgbit = mlx_get_data_addr(texture->img_ptr,
@@ -50,6 +49,5 @@ bool	get_all_textures(t_game *main)
 		|| !get_texture(main, &main->we, main->data->we)
 		|| !get_texture(main, &main->ea, main->data->ea))
 		return (ft_free_game(main), false);
-	get_char(main, &main->player, "./textures/main_char_2.xpm");
 	return (true);
 }

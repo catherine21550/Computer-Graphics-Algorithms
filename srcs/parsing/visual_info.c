@@ -6,15 +6,15 @@
 /*   By: teesmaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:32:17 by teesmaa           #+#    #+#             */
-/*   Updated: 2025/02/10 11:32:22 by teesmaa          ###   ########.fr       */
+/*   Updated: 2025/02/25 15:12:38 by teesmaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+#include "cub3d.h"
 
 int	start_index(char *str, char *type)
 {
-	int i;
+	int	i;
 	int	len;
 
 	len = ft_strlen(type);
@@ -52,7 +52,7 @@ char	*get_texture_path(char *str, char *type, t_data *data, char *path)
 	return (str);
 }
 
-static int rgb_to_int(char **rgb, t_data *data)
+static int	rgb_to_int(char **rgb, t_data *data)
 {
 	int	r;
 	int	g;
@@ -61,7 +61,7 @@ static int rgb_to_int(char **rgb, t_data *data)
 	r = ft_atoi(rgb[0]);
 	g = ft_atoi(rgb[1]);
 	b = ft_atoi(rgb[2]);
-	if (r < 0 || r > 255 || g < 0 
+	if (r < 0 || r > 255 || g < 0
 		|| g > 255 || b < 0 || b > 255)
 	{
 		free_array(rgb);
@@ -99,7 +99,7 @@ static void	color_check(char **rgb, t_data *data)
 int	get_color(char *str, t_data *data, char *type, int oldcolor)
 {
 	int		color;
-	char 	**rgb;
+	char	**rgb;
 
 	if (oldcolor != -1)
 	{

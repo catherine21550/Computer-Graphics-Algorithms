@@ -6,11 +6,11 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 12:34:09 by teesmaa           #+#    #+#             */
-/*   Updated: 2025/02/23 01:10:08 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/25 14:27:56 by teesmaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../../includes/cub3d.h"
+#include "cub3d.h"
 
 static int	count_lines(char *arg, t_data *data)
 {

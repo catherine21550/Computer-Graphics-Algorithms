@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 09:43:26 by teesmaa           #+#    #+#             */
-/*   Updated: 2025/02/27 12:39:31 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/28 01:14:29 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@
 # include <X11/keysym.h>
 # include "../libft/libft.h"
 
-# define DIRECTIONS "NSWE"
 # define INSIDE_MAP "0NSWE"
 
 typedef enum s_info
@@ -129,8 +128,6 @@ typedef struct  s_game
 	t_img	so;
 	t_img	we;
 	t_img	ea;
-	t_img	player;
-	t_img	minimap;
 }	t_game;
 
 enum	e_elements
@@ -154,7 +151,11 @@ void    check_map(t_data *data);
 char	*get_texture_path(char *str, char *type, t_data *data, char *path);
 int     get_color(char *str, t_data *data, char *type, int oldcolor);
 void	free_array(char **str);
+void	set_directions(int directions[4][2]);
 int     count_digits(char *str);
+int		information_type(char *str);
+bool	is_map(char *str);
+void	is_one_player(t_data *data);
 
 // ################# //
 //      Graphic      //
