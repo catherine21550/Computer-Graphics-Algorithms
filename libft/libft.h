@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 16:35:35 by khuk              #+#    #+#             */
-/*   Updated: 2024/04/21 18:35:04 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/28 11:37:22 by teesmaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stddef.h>
 # include <stdio.h>
 # include <stdint.h>
-#include "../includes/cub3d.h"
+# include "../includes/cub3d.h"
 # include "get_next_line_bonus.h"
 
 typedef struct s_list

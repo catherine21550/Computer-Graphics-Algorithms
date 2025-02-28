@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 09:43:26 by teesmaa           #+#    #+#             */
-/*   Updated: 2025/02/28 01:14:29 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/28 11:31:39 by teesmaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,11 @@ typedef enum s_info
 	WEST,
 	EAST,
 	GROUND,
-    CEILING,
-    MAP
+	CEILING,
+	MAP
 }			t_info;
 
-typedef struct  s_data
+typedef struct s_data
 {
 	char	**content;
 	char	**map;
@@ -57,14 +57,13 @@ typedef struct  s_data
 	int		gnl_error;
 }	t_data;
 
-typedef	struct s_square
+typedef struct s_square
 {
 	double	x;
 	double	y;
 	int		type;
 	int		color;
 }	t_square;
-
 
 typedef struct s_img
 {
@@ -78,7 +77,7 @@ typedef struct s_img
 	bool	created;
 }		t_img;
 
-typedef	struct s_dda
+typedef struct s_dda
 {
 	double		x_map;
 	double		y_map;
@@ -92,7 +91,7 @@ typedef	struct s_dda
 	int			x;
 }	t_dda;
 
-typedef struct	s_scene
+typedef struct s_scene
 {
 	t_square	**coord;
 	size_t		x_size;
@@ -115,12 +114,12 @@ typedef struct	s_scene
 	t_dda		d;
 }	t_scene;
 
-typedef struct  s_game
+typedef struct s_game
 {
 	t_data	*data;
 	void	*mlx_ptr;
 	void	*win_ptr;
-	t_scene *scene;
+	t_scene	*scene;
 	int		win_width;
 	int		win_height;
 	t_img	img;
@@ -143,16 +142,16 @@ enum	e_elements
 //      Parcing      //
 // ################# //
 void	save_data(char *arg, t_data *data);
-bool    ft_isspace(char c);
-void    exit_error(char *str);
+bool	ft_isspace(char c);
+void	exit_error(char *str);
 void	parser(t_data *data);
 void	cleanup(t_data *data);
-void    check_map(t_data *data);
+void	check_map(t_data *data);
 char	*get_texture_path(char *str, char *type, t_data *data, char *path);
-int     get_color(char *str, t_data *data, char *type, int oldcolor);
+int		get_color(char *str, t_data *data, char *type, int oldcolor);
 void	free_array(char **str);
 void	set_directions(int directions[4][2]);
-int     count_digits(char *str);
+int		count_digits(char *str);
 int		information_type(char *str);
 bool	is_map(char *str);
 void	is_one_player(t_data *data);

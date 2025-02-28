@@ -1,7 +1,7 @@
-NO /home/khuk/42Vienna/cub3D/textures/mossy-brick-wall.xpm
-SO /home/khuk/42Vienna/cub3D/textures/solid-rock-wall.xpm
-WE /home/khuk/42Vienna/cub3D/textures/red_brick_wall.xpm
-EA /home/khuk/42Vienna/cub3D/textures/stone-brick-wall.xpm
+NO ./textures/mossy-brick-wall.xpm
+SO ./textures/solid-rock-wall.xpm
+WE ./textures/red_brick_wall.xpm
+EA ./textures/stone-brick-wall.xpm
 
 F 58,58,58
 C 137, 207, 239

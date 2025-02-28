@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 18:14:30 by khuk              #+#    #+#             */
-/*   Updated: 2025/02/04 22:21:58 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/28 11:35:29 by teesmaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ void	clean_gnl(int fd, t_data *data)
 	}
 }
 
-static char	*ft_createnewbuff(int fd, char **buff, ssize_t *readchr, t_data *data)
+static char	*ft_createnewbuff(int fd, char **buff, ssize_t *readchr,
+			t_data *data)
 {
 	char	*tmp;
 	char	*readtmp;

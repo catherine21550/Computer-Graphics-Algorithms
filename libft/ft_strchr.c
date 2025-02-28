@@ -6,12 +6,12 @@
 /*   By: khuk <khuk@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 19:13:50 by khuk              #+#    #+#             */
-/*   Updated: 2024/04/22 20:29:24 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/28 11:34:14 by teesmaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
- 
+
 char	*ft_strchr(const char *s, int c)
 {
 	size_t	i;

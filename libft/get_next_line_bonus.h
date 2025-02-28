@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 19:24:49 by khuk              #+#    #+#             */
-/*   Updated: 2025/02/04 22:22:42 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/28 11:36:42 by teesmaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 #  define BUFFER_SIZE 1024
 # endif
 
-typedef struct s_data t_data;
+typedef struct s_data	t_data;
 
 char	*ft_strchr_gnl(const char *str, int c);
 size_t	ft_strlen_gnl(const char *str);

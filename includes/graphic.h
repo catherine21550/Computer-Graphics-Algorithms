@@ -6,12 +6,12 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 19:34:42 by khuk              #+#    #+#             */
-/*   Updated: 2025/02/24 17:15:23 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/28 11:32:45 by teesmaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GRAPHIC_H
-#define GRAPHIC_H
+# define GRAPHIC_H
 
 # include "cub3d.h"
 
@@ -70,7 +70,7 @@ enum	e_color
 size_t	size_of_map_x(t_data *data);
 void	fill_coordinates(t_game *main);
 int		key_function(int key, t_game *data);
-int 	mouse_move_function(int x, int y, void *param);
+int		mouse_move_function(int x, int y, void *param);
 int		exit_function(t_game *data);
 void	destroy_graphics(t_game *data);
 void	ft_free_scene(t_scene **scene, int size);
@@ -81,7 +81,7 @@ void	solid_color(t_game *d, int x, int y);
 void	rendering_process(t_game *main);
 void	draw_with_texture(t_game *main, t_dda *d, double *draw, double *k);
 void	my_put_pixel(t_game *main, int x, int y, int color);
-void	draw_line(t_game *main, double	x, double *line_param, t_img *text);
+void	draw_line(t_game *main, double x, double *line_param, t_img *text);
 void	draw_scaled_image(t_game *main, t_img *texture, int *dest, int *target);
 void	draw_walls(t_game *main);
 void	ft_dda(t_game *main, t_dda *d, double *delta, double *k);
