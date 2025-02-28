@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 23:49:31 by khuk              #+#    #+#             */
-/*   Updated: 2025/02/27 13:13:02 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/28 01:11:03 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	scene_init(t_game *main)
 {
-	struct timeval t;
+	struct timeval	t;
 
 	fill_coordinates(main);
 	main->win_width = W_WIDTH;
@@ -40,7 +40,7 @@ void	scene_init(t_game *main)
 	main->scene->d.y_pos = (double)main->scene->player->y;
 }
 
-static void	ft_dda_util(t_game * main, t_dda *d, double *delta)
+static void	ft_dda_util(t_game *main, t_dda *d, double *delta)
 {
 	char	param;
 

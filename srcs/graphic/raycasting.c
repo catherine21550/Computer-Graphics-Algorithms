@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 22:04:56 by khuk              #+#    #+#             */
-/*   Updated: 2025/02/27 19:32:44 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/28 01:04:16 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,17 +80,6 @@ void	draw_line(t_game *main, double x, double *line_param, t_img *text)
 	}
 }
 
-// k[0] - ray_x_offset, х coordinate of the camera and position of player
-// k[1] - raydir_x
-// k[2] - raydir_y
-// k[3] - perpWallDist
-// rey[0] - dist of rey from one x side to another x side of square;
-// rey[1] - same for y
-// draw[0] - start of line(corrected for screen size)
-// draw[1] - end of line (corrected for screen size)
-// draw[2] - height of the line
-// draw[4] - start of line real
-// draw[5] - end of line real
 void	draw_walls(t_game *main)
 {
 	double	k[4];
@@ -111,8 +100,20 @@ void	draw_walls(t_game *main)
 		draw[0] = fmax(0, (main->win_height / 2 - draw[2] / 2));
 		draw[1] = fmin((main->win_height - 1),
 				(main->win_height / 2 + draw[2] / 2));
-		draw_with_texture(main, &main->scene->d, (double []){draw[0], draw[1], draw[2], 0,
+		draw_with_texture(main, &main->scene->d,
+			(double []){draw[0], draw[1], draw[2], 0,
 			(main->win_height / 2 - draw[2] / 2),
 			(main->win_height / 2 + draw[2] / 2)}, k);
 	}
 }
+// k[0] - ray_x_offset, х coordinate of the camera and position of player
+// k[1] - raydir_x
+// k[2] - raydir_y
+// k[3] - perpWallDist
+// rey[0] - dist of rey from one x side to another x side of square;
+// rey[1] - same for y
+// draw[0] - start of line(corrected for screen size)
+// draw[1] - end of line (corrected for screen size)
+// draw[2] - height of the line
+// draw[4] - start of line real
+// draw[5] - end of line real

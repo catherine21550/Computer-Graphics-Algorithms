@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 09:43:26 by teesmaa           #+#    #+#             */
-/*   Updated: 2025/02/27 12:39:31 by khuk             ###   ########.fr       */
+/*   Updated: 2025/02/28 01:14:29 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,8 +128,6 @@ typedef struct  s_game
 	t_img	so;
 	t_img	we;
 	t_img	ea;
-	t_img	player;
-	t_img	minimap;
 }	t_game;
 
 enum	e_elements
