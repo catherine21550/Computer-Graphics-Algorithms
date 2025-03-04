@@ -32,7 +32,10 @@ char	*get_texture_path(char *str, char *type, t_data *data, char *path)
 	}
 	format = ft_strnstr(str, ".xpm", ft_strlen(str));
 	if (!format || format[4] != '\0')
+	{
+		cleanup(data);
 		exit_error("Texture file must be .xpm");
+	}
 	return (str);
 }
 
