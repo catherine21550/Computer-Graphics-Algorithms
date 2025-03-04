@@ -65,3 +65,21 @@ int	start_index(char *str, char *type)
 		i++;
 	return (i);
 }
+
+void	extra_commas_check(char *str, t_data *data)
+{
+	int	comma;
+
+	comma = 0;
+	while (*str)
+	{
+		if (*str == ',')
+			comma++;
+		str++;
+	}
+	if (comma > 2)
+	{
+		cleanup(data);
+		exit_error("Invalid color value");
+	}
+}

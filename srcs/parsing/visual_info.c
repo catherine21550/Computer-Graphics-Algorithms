@@ -69,7 +69,7 @@ void	digits_check(char **rgb, t_data *data)
 		j = 0;
 		while (rgb[i][j] != '\n' && rgb[i][j] != '\0')
 		{
-			if (!ft_isdigit(rgb[i][j]) && !ft_isspace(rgb[i][j]))
+			if ((!ft_isdigit(rgb[i][j]) && !ft_isspace(rgb[i][j])))
 			{
 				free_array(rgb);
 				cleanup(data);
@@ -118,6 +118,7 @@ int	get_color(char *str, t_data *data, char *type, int oldcolor)
 		exit_error("More than one color per surface");
 	}
 	color = 0;
+	extra_commas_check(str, data);
 	str += start_index(str, type);
 	rgb = ft_split(str, ',');
 	if (!rgb)

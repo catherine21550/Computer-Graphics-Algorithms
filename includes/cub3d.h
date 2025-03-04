@@ -154,6 +154,7 @@ int		information_type(char *str);
 bool	is_map(char *str);
 void	is_one_player(t_data *data);
 int		start_index(char *str, char *type);
+void	extra_commas_check(char *str, t_data *data);
 
 // ################# //
 //      Graphic      //
