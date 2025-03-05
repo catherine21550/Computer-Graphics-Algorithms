@@ -12,6 +12,48 @@
 
 #include "cub3d.h"
 
+static int	number_of_spaces(char *str)
+{
+	int	tab;
+
+	tab = 0;
+	while (*str)
+	{
+		if (*str == '\t')
+			tab++;
+		str++;
+	}
+	return (tab * 4);
+}
+
+char	*tab_to_spaces(char *str, t_data *data)
+{
+	char	*new;
+	int		i;
+	int		j;
+
+	new = malloc(sizeof(char) * (ft_strlen(str) + number_of_spaces(str) + 1));
+	if (!new)
+		clean_exit(data, "malloc() failed");
+	i = 0;
+	j = 0;
+	while (str[i])
+	{
+		if (str[i] == '\t')
+		{
+			new[j++] = ' ';
+			new[j++] = ' ';
+			new[j++] = ' ';
+			new[j++] = ' ';
+		}
+		else
+			new[j++] = str[i];
+		i++;
+	}
+	free(str);
+	return (new);
+}
+
 void	is_one_player(t_data *data)
 {
 	int	i;
@@ -64,22 +106,4 @@ int	start_index(char *str, char *type)
 	while (ft_isspace(str[i]))
 		i++;
 	return (i);
-}
-
-void	extra_commas_check(char *str, t_data *data)
-{
-	int	comma;
-
-	comma = 0;
-	while (*str)
-	{
-		if (*str == ',')
-			comma++;
-		str++;
-	}
-	if (comma > 2)
-	{
-		cleanup(data);
-		exit_error("Invalid color value");
-	}
 }

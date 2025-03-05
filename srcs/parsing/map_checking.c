@@ -22,19 +22,13 @@ void	char_check(t_data *data)
 	while (data->map[i])
 	{
 		if (data->map[i][0] == '\0' || data->map[i][0] == '\n')
-		{
-			cleanup(data);
-			exit_error("Map has empty lines");
-		}
+			clean_exit(data, "Map has empty lines");
 		j = 0;
 		while (data->map[i][j] && data->map[i][j] != '\n')
 		{
 			if (data->map[i][j] != '1' && !ft_isspace(data->map[i][j])
 				&& !ft_strchr(INSIDE_MAP, data->map[i][j]))
-			{
-				cleanup(data);
-				exit_error("map contains forbidden characters");
-			}
+				clean_exit(data, "Map contains forbidden characters");
 			j++;
 		}
 		i++;
@@ -97,10 +91,7 @@ void	is_map_closed(t_data *data)
 			if (ft_strchr(INSIDE_MAP, data->map[i][j]))
 			{
 				if (!find_walls(data, i, j) || next_to_space(data, i, j))
-				{
-					cleanup(data);
-					exit_error("Map is not closed by walls");
-				}
+					clean_exit(data, "Map is not closed by walls");
 			}
 			j++;
 		}
@@ -110,6 +101,15 @@ void	is_map_closed(t_data *data)
 
 void	check_map(t_data *data)
 {
+	int	i;
+
+	i = 0;
+	while (data->map[i])
+	{
+		if (ft_strchr(data->map[i], '\t'))
+			data->map[i] = tab_to_spaces(data->map[i], data);
+		i++;
+	}
 	char_check(data);
 	is_map_closed(data);
 }

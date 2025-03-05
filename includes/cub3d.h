@@ -144,6 +144,7 @@ bool	ft_isspace(char c);
 void	exit_error(char *str);
 void	parser(t_data *data);
 void	cleanup(t_data *data);
+void	clean_exit(t_data *data, char *str);
 void	check_map(t_data *data);
 char	*get_texture_path(char *str, char *type, t_data *data, char *path);
 int		get_color(char *str, t_data *data, char *type, int oldcolor);
@@ -155,6 +156,7 @@ bool	is_map(char *str);
 void	is_one_player(t_data *data);
 int		start_index(char *str, char *type);
 void	extra_commas_check(char *str, t_data *data);
+char	*tab_to_spaces(char *str, t_data *data);
 
 // ################# //
 //      Graphic      //

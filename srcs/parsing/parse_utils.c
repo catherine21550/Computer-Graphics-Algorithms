@@ -12,6 +12,24 @@
 
 #include "cub3d.h"
 
+void	extra_commas_check(char *str, t_data *data)
+{
+	int	comma;
+
+	comma = 0;
+	while (*str)
+	{
+		if (*str == ',')
+			comma++;
+		str++;
+	}
+	if (comma > 2)
+	{
+		cleanup(data);
+		exit_error("Invalid color value");
+	}
+}
+
 bool	ft_isspace(char c)
 {
 	if ((c >= '\t' && c <= '\r') || c == ' ')
@@ -29,16 +47,6 @@ void	set_directions(int directions[4][2])
 	directions[2][1] = -1;
 	directions[3][0] = 0;
 	directions[3][1] = 1;
-}
-
-void	free_array(char **str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-		free(str[i++]);
-	free(str);
 }
 
 int	count_digits(char *str)

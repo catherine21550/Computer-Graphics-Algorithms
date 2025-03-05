@@ -80,10 +80,7 @@ void	parser(t_data *data)
 	parse_input(data);
 	if (!data->no || !data->so || !data->we || !data->ea
 		|| !data->map || data->floor == -1 || data->ceiling == -1)
-	{
-		cleanup(data);
-		exit_error("Missing data");
-	}
+		clean_exit(data, "Missing data");
 	count_rows(data);
 	check_map(data);
 	get_player_position(data);

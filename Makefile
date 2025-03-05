@@ -33,6 +33,7 @@ CFILES_PARCING		= parse_data.c \
 					  map_checking_utils.c \
 					  parse_utils.c \
 					  visual_info.c \
+					  memory_handling.c
 
 CFILES_GRAPHIC		= graphic.c \
 					  graphic_utils.c \

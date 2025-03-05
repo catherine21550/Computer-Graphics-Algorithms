@@ -1,7 +1,7 @@
-NO /home/khuk/cub3D/textures/mossy-brick-wall.xpm
-SO /home/khuk/cub3D/textures/solid-rock-wall.xpm
-WE /home/khuk/cub3D/textures/grass.xpm
-EA /home/khuk/cub3D/textures/stone-brick-wall.xpm
+NO ./textures/mossy-brick-wall.xpm
+SO ./textures/solid-rock-wall.xpm
+WE ./textures/grass.xpm
+EA ./textures/stone-brick-wall.xpm
 
 F 58,58,58
 C 137, 207, 239

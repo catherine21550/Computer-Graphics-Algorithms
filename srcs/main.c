@@ -12,13 +12,6 @@
 
 #include "../includes/cub3d.h"
 
-void	exit_error(char *str)
-{
-	ft_putendl_fd("Error", 2);
-	ft_putendl_fd(str, 2);
-	exit (EXIT_FAILURE);
-}
-
 void	check_arg(int argc, char *map)
 {
 	char	*format;
@@ -28,20 +21,6 @@ void	check_arg(int argc, char *map)
 	format = ft_strnstr(map, ".cub", ft_strlen(map));
 	if (!format || format[4] != '\0')
 		exit_error("file format must be .cub");
-}
-
-void	cleanup(t_data *data)
-{
-	int	i;
-
-	i = 0;
-	while (data->content[i])
-	{
-		free(data->content[i]);
-		i++;
-	}
-	if (data->content)
-		free(data->content);
 }
 
 int	main(int argc, char **argv)
