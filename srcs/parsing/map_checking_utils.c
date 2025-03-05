@@ -74,10 +74,7 @@ void	is_one_player(t_data *data)
 		i++;
 	}
 	if (count != 1)
-	{
-		cleanup(data);
-		exit_error("Map should contain one player");
-	}
+		clean_exit(data, "Map should contain one player");
 }
 
 bool	is_map(char *str)

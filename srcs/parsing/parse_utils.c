@@ -24,10 +24,7 @@ void	extra_commas_check(char *str, t_data *data)
 		str++;
 	}
 	if (comma > 2)
-	{
-		cleanup(data);
-		exit_error("Invalid color value");
-	}
+		clean_exit(data, "Invalid color value");
 }
 
 bool	ft_isspace(char c)
