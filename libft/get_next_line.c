@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 18:14:30 by khuk              #+#    #+#             */
-/*   Updated: 2025/02/28 11:35:29 by teesmaa          ###   ########.fr       */
+/*   Updated: 2025/03/05 14:16:18 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ void	clean_gnl(int fd, t_data *data)
 	char	*tmp;
 
 	tmp = get_next_line_custom(fd, data);
-	free(tmp);
 	while (tmp != NULL)
 	{
-		tmp = get_next_line_custom(fd, data);
 		free(tmp);
+		tmp = get_next_line_custom(fd, data);
 	}
+	free(tmp);
 }
 
 static char	*ft_createnewbuff(int fd, char **buff, ssize_t *readchr,
@@ -69,7 +69,7 @@ static char	*ft_getline(char *buff, t_data *data)
 	if (!line)
 	{
 		data->gnl_error = 1;
-		return (free(line), line = NULL, buff = NULL, NULL);
+		return (line = NULL, buff = NULL, NULL);
 	}
 	return (line);
 }
@@ -91,7 +91,7 @@ static char	*ft_clean_buffer(char *buffer, t_data *data)
 		if (!tmp)
 		{
 			data->gnl_error = 1;
-			return (free(tmp), tmp = NULL, NULL);
+			return (tmp = NULL);
 		}
 		else if (*tmp == '\0')
 			return (free(tmp), tmp = NULL, NULL);

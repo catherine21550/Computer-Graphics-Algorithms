@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 09:43:26 by teesmaa           #+#    #+#             */
-/*   Updated: 2025/02/28 11:31:39 by teesmaa          ###   ########.fr       */
+/*   Updated: 2025/03/05 14:56:47 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # include "../libft/libft.h"
 
 # define INSIDE_MAP "0NSWE"
+# define GNL_ER "get_next_line() failed"
 
 typedef enum s_info
 {

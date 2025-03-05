@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 19:34:42 by khuk              #+#    #+#             */
-/*   Updated: 2025/02/28 11:32:45 by teesmaa          ###   ########.fr       */
+/*   Updated: 2025/03/04 13:26:58 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@
 # include "cub3d.h"
 
 # ifndef W_WIDTH
-#  define W_WIDTH 800
+#  define W_WIDTH 1200
 # endif
 
 # ifndef W_HEIGHT
-#  define W_HEIGHT 600
+#  define W_HEIGHT 800
 # endif
 
 # define CUB_PI	3.14159265358979323846264338327950288

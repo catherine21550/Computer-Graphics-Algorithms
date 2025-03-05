@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khuk <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 14:50:59 by khuk              #+#    #+#             */
-/*   Updated: 2024/08/12 16:42:13 by khuk             ###   ########.fr       */
+/*   Updated: 2025/03/05 14:19:24 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ char	*ft_strndup(const char *str, size_t size)
 
 	if (!str)
 		return (NULL);
-	newstr = ft_calloc_gnl(size + 1, sizeof(char));
+	newstr = ft_calloc_gnl(sizeof(char), size + 1);
 	if (!newstr)
 		return (NULL);
 	i = 0;

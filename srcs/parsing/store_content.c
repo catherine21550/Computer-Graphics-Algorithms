@@ -6,7 +6,7 @@
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 12:34:09 by teesmaa           #+#    #+#             */
-/*   Updated: 2025/02/25 14:27:56 by teesmaa          ###   ########.fr       */
+/*   Updated: 2025/03/05 14:57:10 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,29 +56,29 @@ static void	init_data(t_data *data)
 
 void	save_data(char *arg, t_data *data)
 {
-	int		fd;
+	int		fd[2];
 	int		i;
 
 	init_data(data);
-	fd = open(arg, O_RDONLY);
-	if (fd == -1)
+	fd[0] = open(arg, O_RDONLY);
+	if (fd[0] == -1)
 		exit_error(strerror(errno));
-	data->content = malloc(sizeof(char *) * (count_lines(arg, data) + 1));
+	fd[1] = count_lines(arg, data);
+	if (fd[1] > 0)
+		data->content = ft_calloc(sizeof(char *), (fd[1] + 1));
 	if (!data->content)
-		exit_error("Failed to allocate memory");
+		return (close(fd[0]), exit_error("Failed to allocate memory"));
 	i = 0;
-	data->content[i] = get_next_line_custom(fd, data);
+	data->content[i] = get_next_line_custom(fd[0], data);
 	while (data->content[i++] != NULL)
-		data->content[i] = get_next_line_custom(fd, data);
-	clean_gnl(fd, data);
+	{
+		data->content[i] = get_next_line_custom(fd[0], data);
+		if (data->gnl_error)
+			return (cleanup(data), close(fd[0]), exit_error(GNL_ER));
+	}
+	clean_gnl(fd[0], data);
 	if (data->gnl_error)
-	{
-		cleanup(data);
-		exit_error("get_next_line() failed");
-	}
-	if (close(fd) == -1)
-	{
-		cleanup(data);
-		exit_error("Failed to close file");
-	}
+		return (cleanup(data), close(fd[0]), exit_error(GNL_ER));
+	if (close(fd[0]) == -1)
+		return (cleanup(data), exit_error("Failed to close file"));
 }
