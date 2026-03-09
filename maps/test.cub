@@ -1,0 +1,16 @@
+NO ./textures/mossy-brick-wall.xpm
+SO ./textures/solid-rock-wall.xpm
+WE ./textures/grass.xpm
+EA ./textures/stone-brick-wall.xpm
+
+F 58,58,58
+C 137, 207, 239
+
+11111111111111
+10001100000001
+10001100011001
+10000000011001
+10000000000001
+100000N0000001
+10000000000001
+11111111111111
