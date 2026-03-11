@@ -23,7 +23,7 @@ AR = ar
 all: $(NAME)
 
 $(NAME): $(OBJECTS)
-	@$(AR) -r $@ $?
+	@$(AR) -rcs $@ $?
 
 
 %.o: %.c

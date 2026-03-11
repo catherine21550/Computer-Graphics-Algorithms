@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf_draw_img.c                                     :+:      :+:    :+:   */
+/*   fdf_draw_img_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: khuk <khuk@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 17:12:07 by khuk              #+#    #+#             */
-/*   Updated: 2024/08/25 14:09:26 by khuk             ###   ########.fr       */
+/*   Updated: 2024/08/26 17:59:00 by khuk             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "fdf_bonus.h"
 
 void	fdf_iter(t_data *data, double *i, int *j)
 {
@@ -23,9 +23,12 @@ void	fdf_iter(t_data *data, double *i, int *j)
 	col[4] = 0xADD8E6;
 	col[5] = 0xDA33BF;
 	col[6] = 0x843BDB;
-	col[7] = 0x000000;
-	i[3] = i[0] / i[2];
-	i[4] = i[1] / i[2];
+	col[7] = 0x003BDB;
+	if (i[2] != 0)
+	{
+		i[3] = i[0] / i[2];
+		i[4] = i[1] / i[2];
+	}
 	i[0] = data->x.map[j[0]][j[1] - 1];
 	i[1] = data->y.map[j[0]][j[1] - 1];
 	j[2] = 0;
@@ -106,27 +109,21 @@ void	connect_dots2(t_data *data)
 	}
 }
 
-void	draw_img(t_data *data, int ac, char *av[])
+void	draw_img(t_data *data)
 {
 	int		i[2];
 
-	(void)ac;
-	(void)av;
+	xyz_alloc(data);
 	i[0] = -1;
 	while (++i[0] < data->y.arrlen)
 	{
 		i[1] = -1;
 		while (++i[1] < data->x.strlen)
 		{
-			data->x.map[i[0]][i[1]] = ((i[1] * (cos(data->ang))) + (i[0]
-						* (cos(data->ang + 2))) + (data->map.map[i[0]][i[1]]
-						* cos(data->ang - 2))) * data->scale;
-			data->y.map[i[0]][i[1]] = ((i[1] * (sin(data->ang))) + (i[0]
-						* (sin(data->ang + 2))) + (data->map.map[i[0]][i[1]]
-						* sin(data->ang - 2))) * data->scale;
+			data->xyz[i[0]][i[1]].x = i[1];
+			data->xyz[i[0]][i[1]].y = i[0];
+			data->xyz[i[0]][i[1]].z = data->map.map[i[0]][i[1]];
 		}
 	}
-	shift_img(data);
-	connect_dots(data);
-	connect_dots2(data);
+	draw_img2(data);
 }

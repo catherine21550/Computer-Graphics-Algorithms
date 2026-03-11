@@ -21,10 +21,10 @@ LIBINC = -I libft/libft.h -L./libft -lft
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@make -C libft/ re
+	@make -C libft/ re --no-print-directory
 	@cp libft/libft.a $(NAME)
 	@ar -q  $(NAME) $(OBJ)
-	ranlib $(NAME)
+	@ranlib $(NAME)
 
 %.o: %.c
 	@cc $(CFLAGS) -o $@ $<
@@ -34,7 +34,7 @@ clean:
 	@make clean -C libft/
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 	@make fclean -C libft/
 
 re: fclean all
