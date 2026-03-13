@@ -6,7 +6,7 @@ _These projects are part of the 42 School curriculum and follow the 42 Norminett
 
 ## 🕹️ Featured Projects
 
-### 1. [Cub3D](./cub3d)
+### 1. [Cub3D](./cub3d) (Team project)
 A 3D raycasting engine inspired by the 1992 classic *Wolfenstein 3D*.
 - **Tech Stack:** C, MinilibX, Math library.
 - **Key Concepts:** Perspective projection, DDA (Digital Differential Analyzer) algorithm, texture mapping, and sprite rendering.
