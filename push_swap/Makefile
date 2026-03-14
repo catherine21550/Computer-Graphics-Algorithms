@@ -14,15 +14,20 @@ CC = cc
 all: $(NAME)
 
 $(NAME): $(SRC)
-	make -C printf/ re
-	$(CC) $(CFLAGS) $(SRC) $(LIB) -L printf/ -o push_swap
+	@make -C printf/ re --silent --no-print-directory
+	@$(CC) $(CFLAGS) $(SRC) $(LIB) -L printf/ -o push_swap
+	@echo "Creating a program..."
+	@echo "Program successfully compiled!"
+
+%.o: %.c
+	@$(CC) $(CFLAGS) $(LIB) -c $< -o $@
 
 clean:
-	make clean -C printf/
+	@make clean -C printf/ --no-print-directory
 
 fclean: clean
-	make fclean -C printf/
-	rm -f $(NAME)
+	@make fclean -C printf/ --no-print-directory
+	@rm -f $(NAME)
 
 re: fclean all
 
